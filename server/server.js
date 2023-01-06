@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
+const crawler = require("./crawler");
 const app = express();
 const PORT = 8001 || process.env.PORT;
 
@@ -13,10 +14,16 @@ app.use(cors());
 app.listen(PORT, () => {
     console.log(`Server at ${PORT}`);
 });
-app.get("/", async (req, res) => {
-    fetch("https://selfservice.campus-dual.de/room/json?userid=5002080&hash=a0f51c26573dbf74502666d418252988&start=1648418400&end=1649023200&_=1648473223770").then(res => {
-        console.log(res)
-    })
+app.get("/", async (req, res) =>{
+    res.send("isndlkjsxs")
+});
 
+app.get("/api/getData", async (req, res) => {
+    try {
+        const data = await crawler()
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 });
 
