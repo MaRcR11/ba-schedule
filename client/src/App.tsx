@@ -6,7 +6,7 @@ function App() {
   const testRef = useRef<any>(null);
   const [fetched, setFetched] = useState(false);
   const [scheduleData, setScheduleData] = useState<
-    { start: number; end: number; title: string }[]
+    { start: number; end: number; title: string; remarks: string }[]
   >([]);
 
   useEffect(() => {

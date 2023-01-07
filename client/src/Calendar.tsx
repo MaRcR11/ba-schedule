@@ -8,14 +8,26 @@ import {
   Week,
   WorkWeek,
   EventSettingsModel,
+  ResourcesDirective,
+  ResourceDirective,
 } from "@syncfusion/ej2-react-schedule";
 import scheduleDataFormat from "./scheduleDataFormat";
 interface Props {
-  scheduleData: { start: number; end: number; title: string }[];
+  scheduleData: {
+    start: number;
+    end: number;
+    title: string;
+    remarks: string;
+  }[];
 }
 function Calendar(props: Props) {
   const formattedScheduleData = scheduleDataFormat(props.scheduleData);
-  const localData: EventSettingsModel = { dataSource: formattedScheduleData };
+  const localData: EventSettingsModel = {
+    dataSource: formattedScheduleData,
+    allowAdding: false,
+    allowEditing: false,
+    allowDeleting: false,
+  };
 
   console.log(scheduleDataFormat(props.scheduleData));
 
