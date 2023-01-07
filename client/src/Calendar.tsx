@@ -11,7 +11,7 @@ import {
 } from "@syncfusion/ej2-react-schedule";
 import scheduleDataFormat from "./scheduleDataFormat";
 interface Props {
-  scheduleData: { start: number; end: number }[];
+  scheduleData: { start: number; end: number; title: string }[];
 }
 function Calendar(props: Props) {
   const formattedScheduleData = scheduleDataFormat(props.scheduleData);
@@ -20,7 +20,7 @@ function Calendar(props: Props) {
   console.log(scheduleDataFormat(props.scheduleData));
 
   return (
-    <ScheduleComponent eventSettings={localData}>
+    <ScheduleComponent eventSettings={localData} currentView="WorkWeek">
       <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
     </ScheduleComponent>
   );
