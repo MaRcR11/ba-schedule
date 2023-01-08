@@ -22,7 +22,6 @@ function scheduleDataFormat(
           : `BA Leipzig ${e.remarks ? `(${e.remarks})` : ""} (${e.sroom}) (${
               e.instructor
             })`,
-      Owner: e.instructor,
     });
 
     console.log(e.instructor);
