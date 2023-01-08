@@ -12,6 +12,8 @@ function App() {
       description: string;
       remarks: string;
       title: string;
+      instructor: string;
+      sroom: string;
     }[]
   >([]);
 
