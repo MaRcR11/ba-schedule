@@ -23,8 +23,6 @@ function scheduleDataFormat(
               e.instructor
             })`,
     });
-
-    console.log(e.instructor);
   });
   return formattedScheduleData;
 }
