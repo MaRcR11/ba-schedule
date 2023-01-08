@@ -113,7 +113,7 @@ function randomLoadingMessage() {
     "A kiss is like a fight, with mouths.",
     "You don’t pay taxes—they take taxes.",
     "Coffee, Chocolate, Men. The richer the better!",
-    "I am free of all prejudices. I hate everyone equally.",
+
     "git happens",
     "May the forks be with you",
     "A commit a day keeps the mobs away",
@@ -121,21 +121,19 @@ function randomLoadingMessage() {
     "Constructing additional pylons...",
     "Roping some seaturtles...",
     "Locating Jebediah Kerman...",
-    "Hello IT, have you tried turning it off and on again?",
+
     "Well, this is embarrassing.",
-    "What is the airspeed velocity of an unladen swallow?",
+
     "They just toss us away like yesterday's jam.",
-    "The Elders of the Internet would never stand for it.",
 
     "Didn't know paint dried so quickly.",
     "Everything sounds the same",
     "I'm going to walk the dog",
     "Dividing by zero...",
     "Spawn more Overlord!",
-    "If I’m not back in five minutes, just wait longer.",
+
     "Some days, you just can’t get rid of a bug!",
     "We’re going to need a bigger boat.",
-    "Chuck Norris never git push. The repo pulls before.",
     "Web developers do it with <style>",
     "I need to git pull --my-life-together",
     "Cracking military-grade encryption...",
@@ -169,14 +167,12 @@ function randomLoadingMessage() {
     "Please wait... Consulting the manual...",
     "It is dark. You're likely to be eaten by a grue.",
     "Loading funny message...",
-    "It's 10:00pm. Do you know where your children are?",
     "Waiting Daenerys say all her titles...",
     "Feel free to spin in your chair",
     "What the what?",
     "format C: ...",
 
     "What's under there?",
-    "Your computer has a virus, its name is Windows!",
     "Bored of slow loading spinner, buy more RAM!",
     "Help, I'm trapped in a loader!",
 
