@@ -19,6 +19,8 @@ interface Props {
     description: string;
     remarks: string;
     title: string;
+    instructor: string;
+    sroom: string;
   }[];
 }
 function Calendar(props: Props) {

@@ -5,6 +5,8 @@ function scheduleDataFormat(
     description: string;
     remarks: string;
     title: string;
+    instructor: string;
+    sroom: string;
   }[]
 ): any {
   const formattedScheduleData: any = [];
@@ -17,8 +19,13 @@ function scheduleDataFormat(
       Location:
         e.remarks && !e.remarks.match(regexGroup)
           ? e.remarks
-          : `BA Leipzig ${e.remarks ? `(${e.remarks})` : ""}`,
+          : `BA Leipzig ${e.remarks ? `(${e.remarks})` : ""} (${e.sroom}) (${
+              e.instructor
+            })`,
+      Owner: e.instructor,
     });
+
+    console.log(e.instructor);
   });
   return formattedScheduleData;
 }
