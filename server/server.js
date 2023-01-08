@@ -12,18 +12,17 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use(cors());
 
 app.listen(PORT, () => {
-    console.log(`Server at ${PORT}`);
+  console.log(`Server at ${PORT}`);
 });
-app.get("/", async (req, res) =>{
-    res.send("isndlkjsxs")
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "/../client/dist/index.html"));
 });
 
 app.get("/api/getData", async (req, res) => {
-    try {
-        const data = await crawler()
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+  try {
+    const data = await crawler();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
-
