@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Calendar from "./Calendar";
 import LoadingAnim from "./LoadingAnim";
 function App() {
-  const testRef = useRef<any>(null);
   const [fetched, setFetched] = useState(false);
+  const [apiAvailable, setapiAvailable] = useState(true);
   const [scheduleData, setScheduleData] = useState<
     {
       start: number;
@@ -25,12 +25,18 @@ function App() {
         setFetched(true);
       })
       .catch((err) => {
-        console.log(err);
+        setapiAvailable(false);
       });
   }, []);
 
   return (
-    <>{fetched ? <Calendar scheduleData={scheduleData} /> : <LoadingAnim />}</>
+    <>
+      {fetched ? (
+        <Calendar scheduleData={scheduleData} />
+      ) : (
+        <LoadingAnim apiAvailable={apiAvailable} />
+      )}
+    </>
   );
 }
 
