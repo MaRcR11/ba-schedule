@@ -1,29 +1,33 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import Calendar from "./Calendar";
+import LoadingAnim from "./LoadingAnim";
 function App() {
-    const testRef = useRef<any>(null);
-    const [data, setData] = useState([])
+  const testRef = useRef<any>(null);
+  const [fetched, setFetched] = useState(false);
+  const [scheduleData, setScheduleData] = useState<
+    { start: number; end: number; title: string; remarks: string }[]
+  >([]);
 
-    useEffect(() => {
-        // axios.get("https://umrecheninator.de/api/getAll").then(res => {
-        //
-        //     console.log(res.data)
-        // }).catch(err => {
-        //     console.log(err)
-        // })
-        fetch("http://localhost:8001/api/getData").then(res => res.json()).then(data => {
-            console.log(data)
-            setData(data)
-        }).catch(err => console.log(err))
+  useEffect(() => {
+    axios
+      .get("http://localhost:8001/api/getData")
+      .then((res) => {
+        setScheduleData(JSON.parse(res.data));
+        setFetched(true);
+        console.log(scheduleData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // fetch("http://localhost:8001/api/getData").then(res => res.json()).then(data => {
+    //     setScheduleData(data)
+    // }).catch(err => console.log(err))
+  }, []);
 
-    }, [])
-
-    return (
-        <>
-            hi
-            {data}
-        </>
-    );
+  return (
+    <>{fetched ? <Calendar scheduleData={scheduleData} /> : <LoadingAnim />}</>
+  );
 }
 
 export default App;
