@@ -6,7 +6,13 @@ function App() {
   const testRef = useRef<any>(null);
   const [fetched, setFetched] = useState(false);
   const [scheduleData, setScheduleData] = useState<
-    { start: number; end: number; title: string; remarks: string }[]
+    {
+      start: number;
+      end: number;
+      description: string;
+      remarks: string;
+      title: string;
+    }[]
   >([]);
 
   useEffect(() => {
@@ -15,14 +21,10 @@ function App() {
       .then((res) => {
         setScheduleData(JSON.parse(res.data));
         setFetched(true);
-        console.log(scheduleData);
       })
       .catch((err) => {
         console.log(err);
       });
-    // fetch("http://localhost:8001/api/getData").then(res => res.json()).then(data => {
-    //     setScheduleData(data)
-    // }).catch(err => console.log(err))
   }, []);
 
   return (

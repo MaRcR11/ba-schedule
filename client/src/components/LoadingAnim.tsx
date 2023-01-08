@@ -1,5 +1,5 @@
 import { BarLoader } from "react-spinners";
-import "./LoadingAnim.css";
+import "../styles/LoadingAnim.css";
 function LoadingAnim() {
   return (
     <>

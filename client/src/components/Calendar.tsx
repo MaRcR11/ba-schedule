@@ -11,13 +11,14 @@ import {
   ResourcesDirective,
   ResourceDirective,
 } from "@syncfusion/ej2-react-schedule";
-import scheduleDataFormat from "./scheduleDataFormat";
+import scheduleDataFormat from "../scheduleDataFormat";
 interface Props {
   scheduleData: {
     start: number;
     end: number;
-    title: string;
+    description: string;
     remarks: string;
+    title: string;
   }[];
 }
 function Calendar(props: Props) {
@@ -28,8 +29,6 @@ function Calendar(props: Props) {
     allowEditing: false,
     allowDeleting: false,
   };
-
-  console.log(scheduleDataFormat(props.scheduleData));
 
   return (
     <ScheduleComponent eventSettings={localData} currentView="WorkWeek">
