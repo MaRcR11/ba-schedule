@@ -12,6 +12,7 @@ function LoadingAnim() {
           transform: "translate(-50%, -50%)",
           fontFamily: "Trebuchet MS,  sans-serif",
           fontSize: "1.2rem",
+          userSelect: "none",
         }}
       >
         CS21-2 Stundenplan
