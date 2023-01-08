@@ -11,7 +11,7 @@ import {
   ResourcesDirective,
   ResourceDirective,
 } from "@syncfusion/ej2-react-schedule";
-import scheduleDataFormat from "../scheduleDataFormat";
+import scheduleDataFormat from "../helper/scheduleDataFormat";
 interface Props {
   scheduleData: {
     start: number;
