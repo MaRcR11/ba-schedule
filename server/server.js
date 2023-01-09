@@ -7,6 +7,7 @@ const app = express();
 const PORT = 8001 || process.env.PORT;
 const cron = require("node-cron");
 let data;
+let crawlTriedCounter = 0;
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,9 +23,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/getData", async (req, res) => {
-  if (!data || !data.crawledData) {
-    res.status(500);
-  } else if (data.failed) res.status(500).json({ message: data.error.message });
+  if (!data || !data.crawledData) res.status(500);
+  else if (data.failed) res.status(500).json({ message: data.error.message });
   else res.json(data.crawledData);
 });
 
@@ -33,8 +33,15 @@ const crawlScheduleData = async () => {
     console.log("crawling data...");
     crawledData = await crawler();
     data = { crawledData: crawledData, failed: false };
+    crawlTriedCounter = 0;
   } catch (error) {
     data = { failed: true, error };
+    if (crawlTriedCounter < 3) {
+      crawlScheduleData();
+      crawlTriedCounter++;
+    } else {
+      crawlTriedCounter = 0;
+    }
   }
 };
 
