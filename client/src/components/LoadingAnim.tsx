@@ -16,67 +16,47 @@ function LoadingAnim(props: Props) {
   }, []);
   return (
     <>
-      <div className="LoadingAnim"></div>
-      <p
-        style={{
-          position: "fixed",
-          top: "45%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          fontFamily: "Trebuchet MS,  sans-serif",
-          fontSize: "1.2rem",
-          userSelect: "none",
-        }}
-      >
-        CS21-2 Stundenplan
-      </p>
-      {props.apiAvailable ? (
+      <div className="LoadingAnim">
         <p
-          id="randomLoadingMessages"
+          id="loadingHeadline"
           style={{
-            position: "fixed",
-            zIndex: "-1",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
             fontFamily: "Trebuchet MS,  sans-serif",
             userSelect: "none",
-            fontWeight: "lighter",
-            fontStyle: "italic",
           }}
         >
-          {randomLoadingMessage()}
+          CS21-2 Stundenplan
         </p>
-      ) : (
-        <p
-          id="randomLoadingMessages"
-          style={{
-            position: "fixed",
-            zIndex: "-1",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            fontFamily: "Trebuchet MS,  sans-serif",
-            userSelect: "none",
-            fontWeight: "lighter",
-            fontStyle: "italic",
-          }}
-        >
-          {" "}
-          Campus Dual is not responding...{" "}
-        </p>
-      )}
 
-      <div
-        className="sweet-loading"
-        style={{
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <BarLoader color={"#747BFF"} width="20vw" />
+        <BarLoader id="barLoader" color={"#747BFF"} />
+
+        {props.apiAvailable ? (
+          <p
+            id="randomLoadingMessages"
+            style={{
+              zIndex: "-1",
+              fontFamily: "Trebuchet MS,  sans-serif",
+              userSelect: "none",
+              fontWeight: "lighter",
+              fontStyle: "italic",
+            }}
+          >
+            {randomLoadingMessage()}
+          </p>
+        ) : (
+          <p
+            id="randomLoadingMessages"
+            style={{
+              zIndex: "-1",
+              fontFamily: "Trebuchet MS,  sans-serif",
+              userSelect: "none",
+              fontWeight: "lighter",
+              fontStyle: "italic",
+            }}
+          >
+            {" "}
+            Campus Dual is not responding...{" "}
+          </p>
+        )}
       </div>
     </>
   );

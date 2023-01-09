@@ -1,0 +1,41 @@
+.LoadingAnim {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#randomLoadingMessages {
+  margin-block-start: 0.1em;
+}
+
+#loadingHeadline {
+  margin-block-end: 0.5em;
+}
+
+@media only screen and (max-width: 600px) {
+  #randomLoadingMessages {
+    font-size: 0.3rem;
+  }
+  #loadingHeadline {
+    font-size: 0.7rem;
+  }
+  #barLoader {
+    width: 40vw !important;
+    height: 2px !important;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  #randomLoadingMessages {
+    font-size: 0.75rem;
+  }
+  #loadingHeadline {
+    font-size: 1.2rem;
+  }
+  #barLoader {
+    width: 30vw !important;
+    height: 4px !important;
+  }
+}

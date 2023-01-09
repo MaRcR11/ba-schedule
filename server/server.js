@@ -45,4 +45,4 @@ const crawlScheduleData = async () => {
   }
 };
 
-cron.schedule("0 * * * *", crawlScheduleData);
+cron.schedule("*/5 * * * *", crawlScheduleData);
