@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8001/api/getDaa")
+      .get("http://localhost:8001/api/getData")
       .then((res) => {
         setScheduleData(JSON.parse(res.data));
         setFetched(true);
