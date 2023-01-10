@@ -21,8 +21,8 @@
     font-size: 5px;
     white-space: break-spaces;
   }
+}
 
-  .e-schedule .e-vertical-view .e-day-wrapper .e-appointment .e-time {
-    display: block !important;
-  }
+.e-schedule .e-vertical-view .e-day-wrapper .e-appointment .e-time {
+  display: block !important;
 }

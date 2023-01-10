@@ -33,6 +33,7 @@ const crawlScheduleData = async () => {
     data = await crawler();
     crawlTriedCounter = 0;
   } catch (error) {
+    console.log(error);
     if (crawlTriedCounter < 3) {
       crawlScheduleData();
       crawlTriedCounter++;
