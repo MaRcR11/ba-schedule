@@ -1,0 +1,13 @@
+@media only screen and (max-width: 600px) {
+  .e-schedule .e-vertical-view .e-day-wrapper .e-appointment .e-subject {
+    font-size: 7px;
+    line-height: 1.1;
+  }
+
+  .e-schedule .e-vertical-view .e-day-wrapper .e-appointment .e-time,
+  .e-schedule .e-vertical-view .e-day-wrapper .e-appointment .e-location {
+    display: block !important;
+    font-size: 5px;
+    white-space: break-spaces;
+  }
+}

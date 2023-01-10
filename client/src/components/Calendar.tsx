@@ -11,6 +11,8 @@ import {
   ViewDirective,
 } from "@syncfusion/ej2-react-schedule";
 import scheduleDataFormat from ".././helpers/scheduleDataFormat";
+import "../styles/Calender.css";
+
 interface Props {
   scheduleData: {
     start: number;
