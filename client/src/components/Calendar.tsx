@@ -12,6 +12,7 @@ import {
 } from "@syncfusion/ej2-react-schedule";
 import scheduleDataFormat from ".././helpers/scheduleDataFormat";
 import "../styles/Calender.css";
+import setAppointmentColors from "../helpers/setAppointmentColors";
 
 interface Props {
   scheduleData: {
@@ -24,7 +25,7 @@ interface Props {
     sroom: string;
   }[];
 }
-function Calendar(props: Props) {
+function Calendar(this: any, props: Props) {
   const formattedScheduleData = scheduleDataFormat(props.scheduleData);
   const localData: EventSettingsModel = {
     dataSource: formattedScheduleData,
@@ -32,6 +33,10 @@ function Calendar(props: Props) {
     allowEditing: false,
     allowDeleting: false,
   };
+
+  function onEventRendered(args: any) {
+    setAppointmentColors(args);
+  }
 
   return (
     <ScheduleComponent
@@ -42,6 +47,7 @@ function Calendar(props: Props) {
         start: "08:00",
         end: "19:00",
       }}
+      eventRendered={onEventRendered.bind(this)}
     >
       <ViewsDirective>
         <ViewDirective option="Day" startHour="07:00" endHour="21:00" />
