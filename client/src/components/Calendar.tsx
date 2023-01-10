@@ -35,7 +35,11 @@ function Calendar(this: any, props: Props) {
   };
 
   function onEventRendered(args: any) {
-    setAppointmentColors(args);
+    var scheduleObj: any = (document.querySelector(".e-schedule") as any)
+      .ej2_instances[0];
+    setAppointmentColors(args, scheduleObj);
+    if (scheduleObj.currentView == "Day")
+      args.element.classList.add("daySelected");
   }
 
   return (
@@ -49,7 +53,7 @@ function Calendar(this: any, props: Props) {
       }}
       eventRendered={onEventRendered.bind(this)}
     >
-       <ViewsDirective>
+      <ViewsDirective>
         <ViewDirective option="Day" startHour="08:00" endHour="21:00" />
         <ViewDirective option="WorkWeek" startHour="08:00" endHour="21:00" />
         <ViewDirective option="Month" showWeekend={false} />
