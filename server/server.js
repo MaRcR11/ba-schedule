@@ -23,19 +23,16 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/getData", async (req, res) => {
-  if (!data || !data.crawledData) res.status(500);
-  else if (data.failed) res.status(500).json({ message: data.error.message });
-  else res.json(data.crawledData);
+  if (!data) res.status(500);
+  else res.json(data);
 });
 
 const crawlScheduleData = async () => {
   try {
     console.log("crawling data...");
-    crawledData = await crawler();
-    data = { crawledData: crawledData, failed: false };
+    data = await crawler();
     crawlTriedCounter = 0;
   } catch (error) {
-    data = { failed: true, error };
     if (crawlTriedCounter < 3) {
       crawlScheduleData();
       crawlTriedCounter++;
