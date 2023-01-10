@@ -1,9 +1,11 @@
 import * as subjects from "../data/subjects.json";
 
-function setAppointmentColors(args: any) {
+function setAppointmentColors(args: any, scheduleObj: any) {
   (subjects as any).default.map((e: any) => {
     args.data.Subject.includes(e.name)
-      ? (args.element.style.backgroundColor = e.color)
+      ? scheduleObj.currentView == "Agenda"
+        ? (args.element.children[0].style.borderColor = e.color)
+        : (args.element.style.backgroundColor = e.color)
       : null;
   });
 }

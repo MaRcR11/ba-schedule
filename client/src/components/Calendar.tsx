@@ -35,9 +35,9 @@ function Calendar(this: any, props: Props) {
   };
 
   function onEventRendered(args: any) {
-    setAppointmentColors(args);
     var scheduleObj: any = (document.querySelector(".e-schedule") as any)
       .ej2_instances[0];
+    setAppointmentColors(args, scheduleObj);
     if (scheduleObj.currentView == "Day")
       args.element.classList.add("daySelected");
   }
