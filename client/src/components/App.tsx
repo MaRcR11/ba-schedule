@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Calendar from "./Calendar";
 import LoadingAnim from "./LoadingAnim";
+import Login from "./Login";
 function App() {
   const [fetched, setFetched] = useState(false);
+  const [fireRedirect, setFireRedirect] = useState(false);
   const [apiAvailable, setapiAvailable] = useState(true);
   const [scheduleData, setScheduleData] = useState<
     {
@@ -19,7 +21,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("https://cs21-2-schedule.de/api/getData")
+      .get("http://localhost:3000/api/getData")
       .then((res) => {
         setScheduleData(JSON.parse(res.data));
         setFetched(true);
@@ -31,10 +33,14 @@ function App() {
 
   return (
     <>
-      {fetched ? (
-        <Calendar scheduleData={scheduleData} />
+      {fireRedirect ? (
+        fetched ? (
+          <Calendar scheduleData={scheduleData} />
+        ) : (
+          <LoadingAnim apiAvailable={apiAvailable} />
+        )
       ) : (
-        <LoadingAnim apiAvailable={apiAvailable} />
+        <Login setFireRedirect={setFireRedirect} />
       )}
     </>
   );

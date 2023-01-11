@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App";
 import "./styles/index.css";
+import "bulma/css/bulma.min.css";
 import { registerLicense } from "@syncfusion/ej2-base";
 
 registerLicense(

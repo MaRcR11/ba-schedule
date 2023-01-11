@@ -20,7 +20,6 @@ function LoadingAnim(props: Props) {
         <p
           id="loadingHeadline"
           style={{
-            fontFamily: "Trebuchet MS,  sans-serif",
             userSelect: "none",
           }}
         >
@@ -34,7 +33,6 @@ function LoadingAnim(props: Props) {
             id="randomLoadingMessages"
             style={{
               zIndex: "-1",
-              fontFamily: "Trebuchet MS,  sans-serif",
               userSelect: "none",
               fontWeight: "lighter",
               fontStyle: "italic",
@@ -47,7 +45,6 @@ function LoadingAnim(props: Props) {
             id="randomLoadingMessages"
             style={{
               zIndex: "-1",
-              fontFamily: "Trebuchet MS,  sans-serif",
               userSelect: "none",
               fontWeight: "lighter",
               fontStyle: "italic",
