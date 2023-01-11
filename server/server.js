@@ -42,9 +42,20 @@ app.get("/", (req, res) => {
   res.send("hi");
 });
 
-app.get("/api/getData", async (req, res) => {
+app.get("/api/getData/", async (req, res) => {
   if (!data) res.status(500);
-  else res.json(data);
+  else {
+    res.json(data);
+    // const pwdHashed = (await Model.find())[0].pwd;
+    //const isValid = await bcrypt.compare(req.params.key, pwdHashed);
+
+    //console.log(isValid);
+    // if (true) {
+    //   res.json(data);
+    // } else {
+    //   res.status(500);
+    // }
+  }
 });
 
 app.post("/login", async (req, res) => {
@@ -56,10 +67,10 @@ app.post("/login", async (req, res) => {
     if (isValid) {
       res.status(200).json("success");
     } else {
-      res.status(400).json("failed");
+      res.status(401).json("failed");
     }
   } catch (error) {
-    res.status(400).json("failed");
+    res.status(401).json("failed");
   }
 });
 

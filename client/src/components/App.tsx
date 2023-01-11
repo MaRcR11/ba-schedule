@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Calendar from "./Calendar";
 import LoadingAnim from "./LoadingAnim";
 import Login from "./Login";
 function App() {
   const [fetched, setFetched] = useState(false);
+  const pwdRef = useRef<HTMLInputElement>(null);
   const [fireRedirect, setFireRedirect] = useState(false);
   const [apiAvailable, setapiAvailable] = useState(true);
   const [scheduleData, setScheduleData] = useState<
@@ -20,16 +21,19 @@ function App() {
   >([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/getData")
-      .then((res) => {
-        setScheduleData(JSON.parse(res.data));
-        setFetched(true);
-      })
-      .catch((err) => {
-        setapiAvailable(false);
-      });
-  }, []);
+    fireRedirect
+      ? axios
+          .get(`http://localhost:3000/api/getData/`)
+          .then((res) => {
+            console.log("jsdsdsdsds");
+            setScheduleData(JSON.parse(res.data));
+            setFetched(true);
+          })
+          .catch((err) => {
+            setapiAvailable(false);
+          })
+      : null;
+  }, [fireRedirect]);
 
   return (
     <>
@@ -40,7 +44,7 @@ function App() {
           <LoadingAnim apiAvailable={apiAvailable} />
         )
       ) : (
-        <Login setFireRedirect={setFireRedirect} />
+        <Login setFireRedirect={setFireRedirect} pwdRef={pwdRef} />
       )}
     </>
   );

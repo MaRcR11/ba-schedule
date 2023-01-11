@@ -3,23 +3,28 @@ import axios from "axios";
 
 interface Props {
   setFireRedirect: any;
+  pwdRef: any;
 }
 function Login(props: Props) {
-  const pwdRef = useRef<HTMLInputElement>(null);
+  const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
 
   const onSubmitPwd = () => {
-    const pwd = pwdRef.current!.value;
-    console.log(pwd);
+    const pwd = props.pwdRef.current!.value;
     axios
-      .post("http://localhost:3000/login", { pwd })
+      .post("http://localhost:3000/login/", { pwd })
       .then((res) => {
-        console.log("passt");
         props.setFireRedirect(true);
       })
       .catch((err) => {
-        console.log("pass nicht");
+        invalidPwdMsgRef.current!.style.display = "block";
       });
   };
+
+  const onChangeHideInvalidPwdMsg = () => {
+    if (!props.pwdRef.current!.value)
+      invalidPwdMsgRef.current!.style.display = "none";
+  };
+
   return (
     <div className="hero is-fullheight">
       <div className="hero-body  is-justify-content-center is-align-items-center">
@@ -29,11 +34,19 @@ function Login(props: Props) {
           </div>
           <div className="column">
             <input
-              ref={pwdRef}
+              ref={props.pwdRef}
+              onChange={onChangeHideInvalidPwdMsg}
               className="input is-primary"
               type="password"
               placeholder="Password"
             />
+            <p
+              ref={invalidPwdMsgRef}
+              style={{ display: "none" }}
+              className="help is-danger"
+            >
+              This password is invalid
+            </p>
           </div>
           <div className="column">
             <button
