@@ -6,6 +6,7 @@ import Login from "./Login";
 function App() {
   const [fetched, setFetched] = useState(false);
   const pwdRef = useRef<HTMLInputElement>(null);
+  const [storePwdRef, setStorePwdRef] = useState("");
   const [fireRedirect, setFireRedirect] = useState(false);
   const [apiAvailable, setapiAvailable] = useState(true);
   const [scheduleData, setScheduleData] = useState<
@@ -23,7 +24,7 @@ function App() {
   useEffect(() => {
     fireRedirect
       ? axios
-          .get(`http://localhost:3000/api/getData/`)
+          .get(`http://localhost:3000/api/getData/${storePwdRef}`)
           .then((res) => {
             console.log("jsdsdsdsds");
             setScheduleData(JSON.parse(res.data));
@@ -44,7 +45,11 @@ function App() {
           <LoadingAnim apiAvailable={apiAvailable} />
         )
       ) : (
-        <Login setFireRedirect={setFireRedirect} pwdRef={pwdRef} />
+        <Login
+          setFireRedirect={setFireRedirect}
+          pwdRef={pwdRef}
+          setStorePwdRef={setStorePwdRef}
+        />
       )}
     </>
   );

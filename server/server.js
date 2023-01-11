@@ -42,19 +42,18 @@ app.get("/", (req, res) => {
   res.send("hi");
 });
 
-app.get("/api/getData/", async (req, res) => {
+app.get("/api/getData/:key", async (req, res) => {
   if (!data) res.status(500);
   else {
-    res.json(data);
-    // const pwdHashed = (await Model.find())[0].pwd;
-    //const isValid = await bcrypt.compare(req.params.key, pwdHashed);
+    const pwdHashed = (await Model.find())[0].pwd;
+    const isValid = await bcrypt.compare(req.params.key, pwdHashed);
 
-    //console.log(isValid);
-    // if (true) {
-    //   res.json(data);
-    // } else {
-    //   res.status(500);
-    // }
+    console.log(isValid);
+    if (isValid) {
+      res.json(data);
+    } else {
+      res.status(500);
+    }
   }
 });
 

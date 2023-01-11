@@ -4,15 +4,19 @@ import axios from "axios";
 interface Props {
   setFireRedirect: any;
   pwdRef: any;
+
+  setStorePwdRef: any;
 }
 function Login(props: Props) {
   const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
 
   const onSubmitPwd = () => {
     const pwd = props.pwdRef.current!.value;
+    console.log(props.pwdRef.current!.value);
     axios
       .post("http://localhost:3000/login/", { pwd })
       .then((res) => {
+        props.setStorePwdRef(pwd);
         props.setFireRedirect(true);
       })
       .catch((err) => {
