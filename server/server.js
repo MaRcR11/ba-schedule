@@ -24,7 +24,7 @@ app.use(cors());
 dotenv.config();
 
 //db
-mongoose.connect(process.env.DB_URL);
+//mongoose.connect(process.env.DB_URL);
 db.on("error", (error) => {
   console.log(error);
 });
@@ -56,6 +56,7 @@ app.post("/login", async (req, res) => {
 });
 
 const checkPwd = async (pwd) => {
+  if (!pwd) return false;
   try {
     const pwdHashed = (await Model.find())[0].pwd;
     const isValid = await bcrypt.compare(pwd, pwdHashed);
