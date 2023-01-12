@@ -43,36 +43,32 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/getData", async (req, res) => {
-  if (!data) res.status(500);
-  else {
-    const pwdHashed = (await Model.find())[0].pwd;
-    const isValid = await bcrypt.compare(req.query.pwd, pwdHashed);
-
-    if (isValid) {
-      console.log("Login succeeded");
-      res.json(data);
-    } else {
-      console.log("Login failed");
-      res.status(500);
-    }
-  }
+  if (!data) res.status(502);
+  const pwd = req.query.pwd;
+  const result = await checkPwd(pwd);
+  result ? res.json(data) : res.status(401).json("not authorized");
 });
 
 app.post("/login", async (req, res) => {
+  const pwd = req.body.pwd;
+  const result = await checkPwd(pwd);
+  result ? res.status(200).json("success") : res.status(401).json("failed");
+});
+
+const checkPwd = async (pwd) => {
   try {
-    const pwd = req.body.pwd;
     const pwdHashed = (await Model.find())[0].pwd;
     const isValid = await bcrypt.compare(pwd, pwdHashed);
 
     if (isValid) {
-      res.status(200).json("success");
+      return true;
     } else {
-      res.status(401).json("failed");
+      return false;
     }
   } catch (error) {
-    res.status(401).json("failed");
+    return false;
   }
-});
+};
 
 const crawlScheduleData = async () => {
   try {
