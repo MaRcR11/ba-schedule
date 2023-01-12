@@ -4,8 +4,16 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const crawler = require("./crawler");
 const app = express();
-const PORT = 8001 || process.env.PORT;
+const PORT = 3000 || process.env.PORT;
 const cron = require("node-cron");
+const bcrypt = require("bcryptjs");
+const Login = require("./models/model");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const Model = require("./models/model");
+const { createBrowserFetcher } = require("puppeteer");
+const db = mongoose.connection;
+
 let data;
 let crawlTriedCounter = 0;
 
@@ -13,19 +21,54 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use(cors());
+dotenv.config();
+
+//db
+mongoose.connect(process.env.DB_URL);
+db.on("error", (error) => {
+  console.log(error);
+});
+db.on("connected", () => {
+  console.log("db connected");
+});
+
+//server
 
 app.listen(PORT, () => {
   console.log(`Server at ${PORT}`);
   crawlScheduleData();
 });
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/../client/dist/index.html"));
+  res.send("hi");
 });
 
 app.get("/api/getData", async (req, res) => {
-  if (!data) res.status(500);
-  else res.json(data);
+  if (!data) res.status(502);
+  const pwd = req.query.pwd;
+  const result = await checkPwd(pwd);
+  result ? res.json(data) : res.status(401).json("not authorized");
 });
+
+app.post("/login", async (req, res) => {
+  const pwd = req.body.pwd;
+  const result = await checkPwd(pwd);
+  result ? res.status(200).json("success") : res.status(401).json("failed");
+});
+
+const checkPwd = async (pwd) => {
+  try {
+    const pwdHashed = (await Model.find())[0].pwd;
+    const isValid = await bcrypt.compare(pwd, pwdHashed);
+
+    if (isValid) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    return false;
+  }
+};
 
 const crawlScheduleData = async () => {
   try {

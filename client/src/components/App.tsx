@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Calendar from "./Calendar";
 import LoadingAnim from "./LoadingAnim";
+import Login from "./Login";
 function App() {
   const [fetched, setFetched] = useState(false);
+  const pwdRef = useRef<HTMLInputElement>(null);
+  const [storePwdRef, setStorePwdRef] = useState("");
+  const [fireRedirect, setFireRedirect] = useState(false);
   const [apiAvailable, setapiAvailable] = useState(true);
   const [scheduleData, setScheduleData] = useState<
     {
@@ -18,23 +22,38 @@ function App() {
   >([]);
 
   useEffect(() => {
-    axios
-      .get("https://cs21-2-schedule.de/api/getData")
-      .then((res) => {
-        setScheduleData(JSON.parse(res.data));
-        setFetched(true);
-      })
-      .catch((err) => {
-        setapiAvailable(false);
-      });
-  }, []);
+    fireRedirect
+      ? axios
+          .get(
+            `http://localhost:3000/api/getData?` +
+              new URLSearchParams({
+                pwd: storePwdRef,
+              })
+          )
+          .then((res) => {
+            setScheduleData(JSON.parse(res.data));
+            setFetched(true);
+          })
+          .catch((err) => {
+            setapiAvailable(false);
+          })
+      : null;
+  }, [fireRedirect]);
 
   return (
     <>
-      {fetched ? (
-        <Calendar scheduleData={scheduleData} />
+      {fireRedirect ? (
+        fetched ? (
+          <Calendar scheduleData={scheduleData} />
+        ) : (
+          <LoadingAnim apiAvailable={apiAvailable} />
+        )
       ) : (
-        <LoadingAnim apiAvailable={apiAvailable} />
+        <Login
+          setFireRedirect={setFireRedirect}
+          pwdRef={pwdRef}
+          setStorePwdRef={setStorePwdRef}
+        />
       )}
     </>
   );
