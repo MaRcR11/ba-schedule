@@ -23,6 +23,10 @@ function Login(props: Props) {
       });
   };
 
+  const onEnterPressed = (e: any) => {
+    if (e.code === "Enter") onSubmitPwd();
+  };
+
   const onChangeHideInvalidPwdMsg = () => {
     if (!props.pwdRef.current!.value)
       invalidPwdMsgRef.current!.style.display = "none";
@@ -39,6 +43,7 @@ function Login(props: Props) {
             <input
               ref={props.pwdRef}
               onChange={onChangeHideInvalidPwdMsg}
+              onKeyDown={onEnterPressed}
               className="input is-primary"
               type="password"
               placeholder="Password"
