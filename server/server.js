@@ -56,6 +56,7 @@ app.post("/login", async (req, res) => {
 });
 
 const checkPwd = async (pwd) => {
+  if (!pwd) return false;
   try {
     const pwdHashed = (await Model.find())[0].pwd;
     const isValid = await bcrypt.compare(pwd, pwdHashed);
