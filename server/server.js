@@ -24,7 +24,7 @@ app.use(cors());
 dotenv.config();
 
 //db
-//mongoose.connect(process.env.DB_URL);
+mongoose.connect(process.env.DB_URL);
 db.on("error", (error) => {
   console.log(error);
 });
