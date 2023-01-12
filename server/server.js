@@ -48,10 +48,11 @@ app.get("/api/getData", async (req, res) => {
     const pwdHashed = (await Model.find())[0].pwd;
     const isValid = await bcrypt.compare(req.query.pwd, pwdHashed);
 
-    console.log("Login succeeded");
     if (isValid) {
+      console.log("Login succeeded");
       res.json(data);
     } else {
+      console.log("Login failed");
       res.status(500);
     }
   }
