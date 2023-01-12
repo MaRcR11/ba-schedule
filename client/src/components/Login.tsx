@@ -12,7 +12,6 @@ function Login(props: Props) {
 
   const onSubmitPwd = () => {
     const pwd = props.pwdRef.current!.value;
-    console.log(props.pwdRef.current!.value);
     axios
       .post("http://localhost:3000/login/", { pwd })
       .then((res) => {

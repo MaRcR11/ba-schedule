@@ -24,9 +24,13 @@ function App() {
   useEffect(() => {
     fireRedirect
       ? axios
-          .get(`http://localhost:3000/api/getData/${storePwdRef}`)
+          .get(
+            `http://localhost:3000/api/getData?` +
+              new URLSearchParams({
+                pwd: storePwdRef,
+              })
+          )
           .then((res) => {
-            console.log("jsdsdsdsds");
             setScheduleData(JSON.parse(res.data));
             setFetched(true);
           })

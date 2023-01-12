@@ -42,13 +42,13 @@ app.get("/", (req, res) => {
   res.send("hi");
 });
 
-app.get("/api/getData/:key", async (req, res) => {
+app.get("/api/getData", async (req, res) => {
   if (!data) res.status(500);
   else {
     const pwdHashed = (await Model.find())[0].pwd;
-    const isValid = await bcrypt.compare(req.params.key, pwdHashed);
+    const isValid = await bcrypt.compare(req.query.pwd, pwdHashed);
 
-    console.log(isValid);
+    console.log("Login succeeded");
     if (isValid) {
       res.json(data);
     } else {
