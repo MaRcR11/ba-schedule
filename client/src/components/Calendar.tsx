@@ -10,9 +10,8 @@ import {
   ViewsDirective,
   ViewDirective,
 } from "@syncfusion/ej2-react-schedule";
-import scheduleDataFormat from ".././helpers/scheduleDataFormat";
+import {scheduleDataFormat, setAppointmentColors} from "../helpers";
 import "../styles/Calender.css";
-import setAppointmentColors from "../helpers/setAppointmentColors";
 
 interface Props {
   scheduleData: {
