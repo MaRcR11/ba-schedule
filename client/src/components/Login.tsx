@@ -13,7 +13,7 @@ function Login(props: Props) {
   const onSubmitPwd = () => {
     const pwd = props.pwdRef.current!.value;
     axios
-      .post("http://localhost:3000/login/", { pwd })
+      .post("http://localhost:4959/login/", { pwd })
       .then((res) => {
         props.setStorePwdRef(pwd);
         props.setFireRedirect(true);
