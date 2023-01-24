@@ -8,6 +8,10 @@ interface Props {
   setStorePwdRef: any;
 }
 function Login(props: Props) {
+  useEffect(() => {
+    props.pwdRef.current!.focus();
+  }, []);
+
   const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
 
   const onSubmitPwd = () => {
