@@ -12,6 +12,7 @@ function LoadingAnim(props: Props) {
   useEffect(() => {
     setInterval(() => {
       setMsg(loadingMessages());
+      console.log(loadingMessages())
     }, 2000);
   }, []);
   return (
@@ -44,7 +45,6 @@ function LoadingAnim(props: Props) {
           <p
             id="randomLoadingMessages"
             style={{
-              zIndex: "-1",
               userSelect: "none",
               fontWeight: "lighter",
               fontStyle: "italic",

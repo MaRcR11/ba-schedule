@@ -39,6 +39,10 @@ function Calendar(this: any, props: Props) {
     setAppointmentColors(args, scheduleObj);
     if (scheduleObj.currentView == "Day")
       args.element.classList.add("daySelected");
+
+
+
+
   }
 
   return (
@@ -52,8 +56,8 @@ function Calendar(this: any, props: Props) {
       }}
       eventRendered={onEventRendered.bind(this)}
     >
-      <ViewsDirective>
-        <ViewDirective option="Day" startHour="08:00" endHour="21:00" />
+      <ViewsDirective >
+        <ViewDirective option="Day" startHour="08:00" endHour="21:00"/>
         <ViewDirective option="WorkWeek" startHour="08:00" endHour="21:00" />
         <ViewDirective option="Month" showWeekend={false} />
         <ViewDirective option="Agenda" />
