@@ -11,7 +11,6 @@ const Login = require("./models/model");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const Model = require("./models/model");
-const { createBrowserFetcher } = require("puppeteer");
 const db = mongoose.connection;
 
 let data;
