@@ -61,11 +61,7 @@ const checkPwd = async (pwd) => {
     const pwdHashed = (await Model.find())[0].pwd;
     const isValid = await bcrypt.compare(pwd, pwdHashed);
 
-    if (isValid) {
-      return true;
-    } else {
-      return false;
-    }
+    return isValid;
   } catch (error) {
     return false;
   }
