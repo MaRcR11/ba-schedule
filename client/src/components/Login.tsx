@@ -42,7 +42,7 @@ function Login(props: Props) {
           <div className="column">
             <input
               ref={props.pwdRef}
-              autofocus
+              autoFocus
               onChange={onChangeHideInvalidPwdMsg}
               onKeyDown={onEnterPressed}
               className="input is-primary"
