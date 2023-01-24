@@ -24,6 +24,7 @@ app.use(cors());
 dotenv.config();
 
 //db
+mongoose.set('strictQuery', true);
 mongoose.connect(process.env.DB_URL);
 db.on("error", (error) => {
   console.log(error);
