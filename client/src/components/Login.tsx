@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, {useRef, useState} from "react";
 import axios from "axios";
 
 interface Props {
@@ -9,19 +9,25 @@ interface Props {
 }
 function Login(props: Props) {
   const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
+  const [isPwdDisabled, setPwdDisabled] = useState(false)
 
   const onSubmitPwd = () => {
     const pwd = props.pwdRef.current!.value;
+    setPwdDisabled(true)
     axios
       .post("http://localhost:4959/login/", { pwd })
       .then((res) => {
         props.setStorePwdRef(pwd);
         props.setFireRedirect(true);
+        setPwdDisabled(false)
       })
       .catch((err) => {
+        setPwdDisabled(false)
         invalidPwdMsgRef.current!.style.display = "block";
       });
   };
+
+
 
   const onEnterPressed = (e: any) => {
     if (e.code === "Enter") onSubmitPwd();
@@ -33,7 +39,7 @@ function Login(props: Props) {
   };
 
   return (
-    <div className="hero is-fullheight">
+    <div className="hero is-fullheight" >
       <div className="hero-body  is-justify-content-center is-align-items-center">
         <div className="columns is-half is-flex-direction-column box">
           <div className="column is-flex is-justify-content-center">
@@ -42,6 +48,7 @@ function Login(props: Props) {
           <div className="column">
             <input
               ref={props.pwdRef}
+              disabled={isPwdDisabled}
               autoFocus
               onChange={onChangeHideInvalidPwdMsg}
               onKeyDown={onEnterPressed}
