@@ -14,7 +14,6 @@ body,
 #root {
   height: 100% !important;
   background: #303030;
-  position: fixed;
   width: 100% !important;
 }
 
