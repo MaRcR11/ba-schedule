@@ -1,7 +1,7 @@
 const https = require('https');
 const fs = require('fs');
 
-var options = {
+const OPTIONS = {
   host: "selfservice.campus-dual.de",
   path: "/room/json?userid=5002080&hash=a0f51c26573dbf74502666d418252988&start=1648418400&end=1649023200&_=1648473223770",
   ca: fs.readFileSync(__dirname + '/campusdual-cert-chain.pem'),
@@ -9,9 +9,10 @@ var options = {
 };
 
 const crawler = async () => {
+  let res_str;
   try {
     return new Promise((resolve) => {
-      https.get(options, function(res) {
+      https.get(OPTIONS, function(res) {
         res.setEncoding('utf8');
         res_str = "";
 
