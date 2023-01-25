@@ -8,8 +8,10 @@
     color: white;
 }
 
-
-
 ::-webkit-scrollbar{
     display: none;
 }
+
+.is-fullheight {
+    min-height: calc(100vh - var(--vh-check)) !important;
+  }
