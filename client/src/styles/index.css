@@ -8,11 +8,14 @@
 }
 
 
+
 html,
 body,
 #root {
+  height: 100% !important;
   background: #303030;
-  height: 100%;
+  position: fixed;
+  width: 100% !important;
 }
 
 
