@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   Agenda,
   Day,
@@ -12,6 +12,7 @@ import {
 } from "@syncfusion/ej2-react-schedule";
 import {scheduleDataFormat, setAppointmentColors} from "../helpers";
 import "../styles/Calender.css";
+import app from "./App";
 
 interface Props {
   scheduleData: {
@@ -39,6 +40,10 @@ function Calendar(this: any, props: Props) {
     setAppointmentColors(args, scheduleObj);
     if (scheduleObj.currentView == "Day")
       args.element.classList.add("daySelected");
+
+
+
+
   }
 
   return (
@@ -52,8 +57,8 @@ function Calendar(this: any, props: Props) {
       }}
       eventRendered={onEventRendered.bind(this)}
     >
-      <ViewsDirective>
-        <ViewDirective option="Day" startHour="08:00" endHour="21:00" />
+      <ViewsDirective >
+        <ViewDirective option="Day" startHour="08:00" endHour="21:00"/>
         <ViewDirective option="WorkWeek" startHour="08:00" endHour="21:00" />
         <ViewDirective option="Month" showWeekend={false} />
         <ViewDirective option="Agenda" />

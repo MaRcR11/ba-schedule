@@ -1,0 +1,15 @@
+.box{
+    color: white !important;
+    background-color: #303030 !important;
+}
+
+.LoadingAnim{
+    background-color: #303030;
+    color: white;
+}
+
+
+
+::-webkit-scrollbar{
+    display: none;
+}

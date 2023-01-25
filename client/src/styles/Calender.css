@@ -1,23 +1,23 @@
 @media only screen and (max-width: 600px) {
   .e-schedule
-    .e-vertical-view
-    .e-day-wrapper
-    .e-appointment:not(.daySelected)
-    .e-subject {
+  .e-vertical-view
+  .e-day-wrapper
+  .e-appointment:not(.daySelected)
+  .e-subject {
     font-size: 7px;
     line-height: 1.1;
   }
 
   .e-schedule
-    .e-vertical-view
-    .e-day-wrapper
-    .e-appointment:not(.daySelected)
-    .e-time,
+  .e-vertical-view
+  .e-day-wrapper
+  .e-appointment:not(.daySelected)
+  .e-time,
   .e-schedule
-    .e-vertical-view
-    .e-day-wrapper
-    .e-appointment:not(.daySelected)
-    .e-location {
+  .e-vertical-view
+  .e-day-wrapper
+  .e-appointment:not(.daySelected)
+  .e-location {
     font-size: 5px;
     white-space: break-spaces;
   }
@@ -25,4 +25,12 @@
 
 .e-schedule .e-vertical-view .e-day-wrapper .e-appointment .e-time {
   display: block !important;
+}
+
+.e-schedule .e-vertical-view .e-work-cells {
+  background-color: #303030;
+}
+
+.e-schedule .e-vertical-view .e-work-cells:hover {
+  background-color: #303030;
 }
