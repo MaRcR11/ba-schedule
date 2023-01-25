@@ -19,13 +19,16 @@
 
 #loadingHeadline {
   margin-block-end: 0.5em;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 
 @media only screen and (max-width: 600px) {
   #barLoader {
     width: 70vw !important;
-    height: 2px !important;
+    height: 4px !important;
+  }
+  #randomLoadingMessages {
+    font-size: 1rem;
   }
 }
 
