@@ -12,6 +12,6 @@
     display: none;
 }
 
-.is-fullheight {
+.hero.is-fullheight {
     min-height: calc(100vh - var(--vh-check)) !important;
   }
