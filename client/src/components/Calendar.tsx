@@ -46,27 +46,6 @@ function Calendar(this: any, props: Props) {
 
   }
 
-  useEffect(() =>
-  {
-    const appearanceSwitch = document.createElement("field");
-    const checkbox = document.createElement("input")
-    checkbox.setAttribute("id", "switchRoundedOutlinedInfo")
-    checkbox.setAttribute("type", "checkbox")
-    checkbox.setAttribute("name", "switchRoundedOutlinedInfo")
-    checkbox.setAttribute("class", "switch is-rounded is-outlined is-info")
-    checkbox.setAttribute("checked", "checked")
-
-    const label = document.createElement("label")
-    label.setAttribute("for", "switchRoundedOutlinedInfo")
-
-    appearanceSwitch.append(checkbox)
-    appearanceSwitch.append(label)
-
-    document.getElementsByClassName("e-toolbar-right")[0].prepend(appearanceSwitch)
-
-  },[])
-
-
   return (
     <ScheduleComponent
       eventSettings={localData}

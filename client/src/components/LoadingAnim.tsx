@@ -12,7 +12,6 @@ function LoadingAnim(props: Props) {
   useEffect(() => {
     setInterval(() => {
       setMsg(loadingMessages());
-      console.log(loadingMessages())
     }, 2000);
   }, []);
   return (
