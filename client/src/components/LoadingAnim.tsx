@@ -32,7 +32,7 @@ function LoadingAnim(props: Props) {
           <p
             id="randomLoadingMessages"
             style={{
-              zIndex: "-1",
+
               userSelect: "none",
               fontWeight: "lighter",
               fontStyle: "italic",
