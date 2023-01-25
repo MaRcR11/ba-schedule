@@ -24,7 +24,7 @@ function Login(props: Props) {
     const pwd = props.pwdRef.current!.value;
     setPwdDisabled(true)
     axios
-      .post("http://localhost:4959/login/", { pwd })
+      .post("https://cs21-2-schedule.de/login/", { pwd })
       .then((res) => {
         props.setStorePwdRef(pwd);
         props.setFireRedirect(true);
