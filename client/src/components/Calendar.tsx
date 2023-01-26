@@ -11,7 +11,7 @@ import {
   ViewDirective,
 } from "@syncfusion/ej2-react-schedule";
 import {scheduleDataFormat, setAppointmentColors} from "../helpers";
-import "../styles/Calender.css";
+import "../styles/Calendar.css";
 import app from "./App";
 
 interface Props {

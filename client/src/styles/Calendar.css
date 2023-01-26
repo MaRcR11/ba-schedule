@@ -27,10 +27,3 @@
   display: block !important;
 }
 
-.e-schedule .e-vertical-view .e-work-cells {
-  background-color: #303030;
-}
-
-.e-schedule .e-vertical-view .e-work-cells:hover {
-  background-color: #303030;
-}
