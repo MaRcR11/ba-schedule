@@ -26,7 +26,7 @@ function LoadingAnim(props: Props) {
           CS21-2 Stundenplan
         </p>
 
-        <BarLoader id="barLoader" color={"#747BFF"} />
+        <BarLoader id="barLoader" color={"#00d1b2"} />
 
         {props.apiAvailable ? (
           <p
