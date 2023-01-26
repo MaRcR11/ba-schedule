@@ -8,8 +8,10 @@
     color: white;
 }
 
-
-
 ::-webkit-scrollbar{
     display: none;
 }
+
+.hero.is-fullheight {
+    min-height: calc(100vh - var(--vh-check, 0px)) !important;
+  }
