@@ -1,11 +1,18 @@
-.box{
-    color: white !important;
-    background-color: #303030 !important;
-}
-
-.LoadingAnim{
-    background-color: #303030;
-    color: white;
+@media (prefers-color-scheme: dark) {
+    html{
+        background-color: #303030 !important;
+    }
+    #root{
+        background-color: #303030;
+    }
+    .box{
+        color: white !important;
+        background-color: #383838 !important;
+    }
+    .LoadingAnim{
+        background-color: #303030;
+        color: white;
+    }
 }
 
 ::-webkit-scrollbar{

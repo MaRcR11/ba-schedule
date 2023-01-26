@@ -8,34 +8,30 @@
 
 #randomLoadingMessages {
   margin-block-start: 0.1em;
+  font-size: 0.85rem;
+  max-width: 80vw;
+  text-align: center;
+}
+
+::-webkit-scrollbar{
+    display: none;
 }
 
 #loadingHeadline {
   margin-block-end: 0.5em;
+  font-size: 1.6rem;
 }
 
 @media only screen and (max-width: 600px) {
-  #randomLoadingMessages {
-    font-size: 0.3rem;
-  }
-  #loadingHeadline {
-    font-size: 0.7rem;
-  }
   #barLoader {
-    width: 40vw !important;
-    height: 2px !important;
+    width: 70vw !important;
+    height: 4px !important;
   }
 }
 
 @media only screen and (min-width: 600px) {
-  #randomLoadingMessages {
-    font-size: 0.75rem;
-  }
-  #loadingHeadline {
-    font-size: 1.2rem;
-  }
   #barLoader {
-    width: 30vw !important;
+    width: 40vw !important;
     height: 4px !important;
   }
 }

@@ -7,16 +7,12 @@
   box-sizing: border-box;
 }
 
-
-
 html,
 body,
 #root {
   height: 100% !important;
-  background: #303030;
   width: 100% !important;
 }
-
 
 ::-webkit-scrollbar {
   width: 20px;
