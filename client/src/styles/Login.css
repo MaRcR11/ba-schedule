@@ -15,6 +15,12 @@
     }
 }
 
+@media (prefers-color-scheme: light) {
+    html {
+        background-color: #ffffff !important;
+    }
+}
+
 ::-webkit-scrollbar{
     display: none;
 }
