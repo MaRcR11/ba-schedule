@@ -13,5 +13,5 @@
 }
 
 .hero.is-fullheight {
-    min-height: calc(100vh - var(--vh-check)) !important;
+    min-height: calc(100vh - var(--vh-check, 0px)) !important;
   }
