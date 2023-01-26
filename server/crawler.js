@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const OPTIONS = {
   host: "selfservice.campus-dual.de",
-  path: "/room/json?userid=5002080&hash=a0f51c26573dbf74502666d418252988&start=1648418400&end=1649023200&_=1648473223770",
+  path: "/room/json?userid=5002080&hash=a0f51c26573dbf74502666d418252988",
   ca: fs.readFileSync(__dirname + '/campusdual-cert-chain.pem'),
   json:true
 };
