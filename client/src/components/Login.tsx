@@ -43,7 +43,7 @@ function Login(props: Props) {
   };
 
   const onChangeHideInvalidPwdMsg = () => {
-    if (!props.pwdRef.current!.value)
+    if ( invalidPwdMsgRef.current!.style.display = "block")
       invalidPwdMsgRef.current!.style.display = "none";
   };
 
