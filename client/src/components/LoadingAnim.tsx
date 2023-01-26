@@ -1,6 +1,6 @@
 import { BarLoader } from "react-spinners";
 import "../styles/LoadingAnim.css";
-import {loadingMessages} from "../helpers/";
+import { loadingMessages } from "../helpers/";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -11,7 +11,7 @@ function LoadingAnim(props: Props) {
 
   useEffect(() => {
     setInterval(() => {
-      setMsg(loadingMessages());
+      setMsg(loadingMessages() as any);
     }, 2000);
   }, []);
   return (
@@ -32,13 +32,12 @@ function LoadingAnim(props: Props) {
           <p
             id="randomLoadingMessages"
             style={{
-
               userSelect: "none",
               fontWeight: "lighter",
               fontStyle: "italic",
             }}
           >
-            {loadingMessages()}
+            {loadingMessages() as any}
           </p>
         ) : (
           <p
