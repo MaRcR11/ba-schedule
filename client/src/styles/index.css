@@ -14,14 +14,6 @@ body,
   width: 100% !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  html,
-  body,
-  #root {
-    background: #303030;
-  }
-}
-
 ::-webkit-scrollbar {
   width: 20px;
 }

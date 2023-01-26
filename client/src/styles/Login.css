@@ -1,10 +1,13 @@
 @media (prefers-color-scheme: dark) {
-    #root{
+    html{
         background-color: #303030 !important;
+    }
+    #root{
+        background-color: #303030;
     }
     .box{
         color: white !important;
-        background-color: #666666 !important;
+        background-color: #383838 !important;
     }
     .LoadingAnim{
         background-color: #303030;

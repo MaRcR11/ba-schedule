@@ -27,9 +27,6 @@
     width: 70vw !important;
     height: 4px !important;
   }
-  #randomLoadingMessages {
-    font-size: 1rem;
-  }
 }
 
 @media only screen and (min-width: 600px) {
