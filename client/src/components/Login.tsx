@@ -49,7 +49,7 @@ function Login(props: Props) {
   return (
     <>
       <div className="hero is-fullheight ">
-        {isPwdDisabled ? <BarLoader color={"#00d1b2"} width={"100%"} /> : null}
+        {isPwdDisabled ? <BarLoader id="top-barloader" color={"#00d1b2"} width={"100%"} /> : null}
         <div className="hero-body  is-justify-content-center is-align-items-center">
           <div className="columns is-half is-flex-direction-column box">
             <div className="column is-flex is-justify-content-center">

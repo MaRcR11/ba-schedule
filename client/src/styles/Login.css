@@ -21,6 +21,9 @@
     }
 }
 
+#top-barloader {
+    position: absolute !important;
+}
 ::-webkit-scrollbar{
     display: none;
 }
