@@ -15,10 +15,15 @@
     }
 }
 
+@media (prefers-color-scheme: light) {
+    html {
+        background-color: #ffffff !important;
+    }
+}
+
 #top-barloader {
     position: absolute !important;
 }
-
 ::-webkit-scrollbar{
     display: none;
 }
