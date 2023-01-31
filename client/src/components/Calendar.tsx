@@ -44,19 +44,36 @@ function Calendar(this: any, props: Props) {
 
   useEffect(() => {
     let toolbar = document.getElementsByClassName("e-toolbar-right");
-    if (!toolbar[0].children[0].classList.contains("field")) {
+    if (!toolbar[0].children[0]?.classList.contains("field")) {
       let theme: any = document.getElementById("theme");
+      let htmlElement = document.getElementsByTagName("html")[0];
       let toggle = DesignToggle();
       toolbar[0].prepend(toggle);
-      toggle.addEventListener("click", (e) => {
-        e.preventDefault();
-        let input = toggle.children[0] as HTMLInputElement;
-        if (input.checked) {
-          theme.href = "https://cdn.syncfusion.com/ej2/material.css";
+      let input = toggle.children[0] as HTMLInputElement;
+      try {
+        let mode = localStorage.getItem("mode") as string;
+        if (mode === "light") {
           input.checked = false;
         } else {
+          input.checked = true;
+        }
+      } catch (error) {
+        console.error("ungültiger Wert im localStorage");
+      }
+      toggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (input.checked) {
+          localStorage.setItem("mode", "light");
+          theme.href = "https://cdn.syncfusion.com/ej2/material.css";
+          input.checked = false;
+          htmlElement.classList.add("light");
+          htmlElement.classList.remove("dark");
+        } else {
+          localStorage.setItem("mode", "dark");
           theme.href = "//cdn.syncfusion.com/ej2/material-dark.css";
           input.checked = true;
+          htmlElement.classList.add("dark");
+          htmlElement.classList.remove("light");
         }
       });
     }

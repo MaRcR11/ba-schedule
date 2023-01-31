@@ -7,7 +7,6 @@ function DesignToggle() {
   input.name = "switchRoundedDefault";
   input.classList.add("is-rounded");
   input.classList.add("switch");
-  input.defaultChecked = true;
   let label = document.createElement("label");
   label.setAttribute("for", "switchRoundedDefault");
   toggle.append(input);

@@ -22,8 +22,6 @@ function App() {
     }[]
   >([]);
 
-
-
   useEffect(() => {
     fireRedirect
       ? axios
@@ -58,8 +56,6 @@ function App() {
           setStorePwdRef={setStorePwdRef}
         />
       )}
-
-
     </>
   );
 }

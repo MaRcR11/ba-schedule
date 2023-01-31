@@ -35,11 +35,11 @@
 }
 
 .field {
-  display: flex;
+  min-height: 25px;
   margin-top: auto;
   margin-bottom: auto !important;
 }
 
-.e-work-cells{
+.e-work-cells {
   pointer-events: none;
 }

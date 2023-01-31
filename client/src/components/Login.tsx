@@ -1,25 +1,19 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import vhCheck from 'vh-check';
-vhCheck('vh-check'); // css var name
-import "../styles/Login.css"
+import vhCheck from "vh-check";
+vhCheck("vh-check"); // css var name
+import "../styles/Login.css";
 import { BarLoader } from "react-spinners";
 
 interface Props {
   setFireRedirect: any;
   pwdRef: any;
-
   setStorePwdRef: any;
 }
 function Login(props: Props) {
   const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
   const [isPwdDisabled, setPwdDisabled] = useState(false);
 
-  const [isDarkMode, setDarkMode] = React.useState(false);
-
-  const toggleDarkMode = (checked: boolean) => {
-    setDarkMode(checked);
-  };
   const onSubmitPwd = () => {
     if (!props.pwdRef.current!.value) return;
     const pwd = props.pwdRef.current!.value;
@@ -34,6 +28,7 @@ function Login(props: Props) {
       .catch((err) => {
         setPwdDisabled(false);
         invalidPwdMsgRef.current!.style.display = "block";
+        document.getElementById("pwdInput")?.focus();
       });
   };
 
@@ -46,10 +41,29 @@ function Login(props: Props) {
       invalidPwdMsgRef.current!.style.display = "none";
   };
 
+  useEffect(() => {
+    try {
+      let mode = localStorage.getItem("mode") as string;
+      let theme: any = document.getElementById("theme");
+      let htmlElement = document.getElementsByTagName("html")[0];
+      if (mode === "light") {
+        theme.href = "https://cdn.syncfusion.com/ej2/material.css";
+        htmlElement.classList.add("light");
+      } else {
+        theme.href = "//cdn.syncfusion.com/ej2/material-dark.css";
+        htmlElement.classList.add("dark");
+      }
+    } catch (error) {
+      console.error("ungültiger Wert im localStorage");
+    }
+  }, []);
+
   return (
     <>
       <div className="hero is-fullheight ">
-        {isPwdDisabled ? <BarLoader id="top-barloader" color={"#00d1b2"} width={"100%"} /> : null}
+        {isPwdDisabled ? (
+          <BarLoader id="top-barloader" color={"#00d1b2"} width={"100%"} />
+        ) : null}
         <div className="hero-body  is-justify-content-center is-align-items-center">
           <div className="columns is-half is-flex-direction-column box">
             <div className="column is-flex is-justify-content-center">
@@ -57,6 +71,7 @@ function Login(props: Props) {
             </div>
             <div className="column">
               <input
+                id="pwdInput"
                 ref={props.pwdRef}
                 disabled={isPwdDisabled}
                 autoFocus
