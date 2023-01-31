@@ -30,12 +30,9 @@
   display: block !important;
 }
 
-.e-toolbar-right {
-  display: flex !important;
-}
-
 .field {
-  min-height: 25px;
+  display: inline-flex;
+  vertical-align: middle;
   margin-top: auto;
   margin-bottom: auto !important;
 }
