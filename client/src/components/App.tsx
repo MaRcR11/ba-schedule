@@ -3,6 +3,7 @@ import axios from "axios";
 import Calendar from "./Calendar";
 import LoadingAnim from "./LoadingAnim";
 import Login from "./Login";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
 function App() {
   const [fetched, setFetched] = useState(false);
   const pwdRef = useRef<HTMLInputElement>(null);
@@ -20,6 +21,8 @@ function App() {
       sroom: string;
     }[]
   >([]);
+
+
 
   useEffect(() => {
     fireRedirect
@@ -55,6 +58,8 @@ function App() {
           setStorePwdRef={setStorePwdRef}
         />
       )}
+
+
     </>
   );
 }

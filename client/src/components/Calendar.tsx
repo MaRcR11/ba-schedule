@@ -12,6 +12,8 @@ import {
 } from "@syncfusion/ej2-react-schedule";
 import {scheduleDataFormat, setAppointmentColors} from "../helpers";
 import "../styles/Calendar.css";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
+import { Portal } from 'react-portal';
 import app from "./App";
 
 interface Props {
@@ -40,20 +42,38 @@ function Calendar(this: any, props: Props) {
     setAppointmentColors(args, scheduleObj);
     if (scheduleObj.currentView == "Day")
       args.element.classList.add("daySelected");
-
-
-
-
   }
 
+  useEffect(() => {
+    let x = document.getElementsByClassName("e-toolbar-right")
+
+    let toggle = document.createElement("div")
+    toggle.setAttribute("class", "field")
+    let input = document.createElement("input")
+    input.setAttribute("id", "switchRoundedDefault")
+    input.setAttribute("type", "checkbox")
+    input.setAttribute("name", "switchRoundedDefault")
+    input.setAttribute("class", "switch is-rounded")
+    input.defaultChecked
+    let label = document.createElement("label")
+    label.setAttribute("for", "switchRoundedDefault")
+    toggle.append(input)
+    toggle.append(label)
+
+    x[0].prepend(toggle)
+    console.log(x[0])
+  }, [ScheduleComponent])
+
   return (
-    <ScheduleComponent
+    <>
+
+<ScheduleComponent
       eventSettings={localData}
       currentView="WorkWeek"
       workHours={{
         highlight: true,
         start: "08:00",
-        end: "19:00",
+        end: "21:00",
       }}
       eventRendered={onEventRendered.bind(this)}
     >
@@ -65,7 +85,12 @@ function Calendar(this: any, props: Props) {
       </ViewsDirective>
       <Inject services={[Day, WorkWeek, Month, Agenda]} />
     </ScheduleComponent>
+
+
+    </>
+    
   );
+
 }
 
 export default Calendar;

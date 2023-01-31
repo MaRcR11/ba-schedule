@@ -1,23 +1,26 @@
 @media only screen and (max-width: 600px) {
   .e-schedule
-  .e-vertical-view
-  .e-day-wrapper
-  .e-appointment:not(.daySelected)
-  .e-subject {
+    .e-vertical-view
+    .e-day-wrapper
+    .e-appointment:not(.daySelected)
+    .e-subject {
     font-size: 7px;
     line-height: 1.1;
   }
+  .e-toolbar-right {
+    display: flex;
+  }
 
   .e-schedule
-  .e-vertical-view
-  .e-day-wrapper
-  .e-appointment:not(.daySelected)
-  .e-time,
+    .e-vertical-view
+    .e-day-wrapper
+    .e-appointment:not(.daySelected)
+    .e-time,
   .e-schedule
-  .e-vertical-view
-  .e-day-wrapper
-  .e-appointment:not(.daySelected)
-  .e-location {
+    .e-vertical-view
+    .e-day-wrapper
+    .e-appointment:not(.daySelected)
+    .e-location {
     font-size: 5px;
     white-space: break-spaces;
   }
@@ -27,3 +30,16 @@
   display: block !important;
 }
 
+.e-toolbar-right {
+  display: flex !important;
+}
+
+.field {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto !important;
+}
+
+.e-work-cells{
+  pointer-events: none;
+}
