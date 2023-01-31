@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useRef } from "react";
 import {
   Agenda,
   Day,
@@ -10,11 +10,9 @@ import {
   ViewsDirective,
   ViewDirective,
 } from "@syncfusion/ej2-react-schedule";
-import {scheduleDataFormat, setAppointmentColors} from "../helpers";
+import { scheduleDataFormat, setAppointmentColors } from "../helpers";
 import "../styles/Calendar.css";
-import { DarkModeSwitch } from "react-toggle-dark-mode";
-import { Portal } from 'react-portal';
-import app from "./App";
+import DesignToggle from "./DesignToggle";
 
 interface Props {
   scheduleData: {
@@ -45,52 +43,35 @@ function Calendar(this: any, props: Props) {
   }
 
   useEffect(() => {
-    let x = document.getElementsByClassName("e-toolbar-right")
-
-    let toggle = document.createElement("div")
-    toggle.setAttribute("class", "field")
-    let input = document.createElement("input")
-    input.setAttribute("id", "switchRoundedDefault")
-    input.setAttribute("type", "checkbox")
-    input.setAttribute("name", "switchRoundedDefault")
-    input.setAttribute("class", "switch is-rounded")
-    input.defaultChecked
-    let label = document.createElement("label")
-    label.setAttribute("for", "switchRoundedDefault")
-    toggle.append(input)
-    toggle.append(label)
-
-    x[0].prepend(toggle)
-    console.log(x[0])
-  }, [ScheduleComponent])
+    let toolbar = document.getElementsByClassName("e-toolbar-right");
+    if (!toolbar[0].children[0].classList.contains("field")) {
+      let toggle = DesignToggle();
+      toolbar[0].prepend(toggle);
+    }
+  }, [ScheduleComponent]);
 
   return (
     <>
-
-<ScheduleComponent
-      eventSettings={localData}
-      currentView="WorkWeek"
-      workHours={{
-        highlight: true,
-        start: "08:00",
-        end: "21:00",
-      }}
-      eventRendered={onEventRendered.bind(this)}
-    >
-      <ViewsDirective >
-        <ViewDirective option="Day" startHour="08:00" endHour="21:00"/>
-        <ViewDirective option="WorkWeek" startHour="08:00" endHour="21:00" />
-        <ViewDirective option="Month" showWeekend={false} />
-        <ViewDirective option="Agenda" />
-      </ViewsDirective>
-      <Inject services={[Day, WorkWeek, Month, Agenda]} />
-    </ScheduleComponent>
-
-
+      <ScheduleComponent
+        eventSettings={localData}
+        currentView="WorkWeek"
+        workHours={{
+          highlight: true,
+          start: "08:00",
+          end: "21:00",
+        }}
+        eventRendered={onEventRendered.bind(this)}
+      >
+        <ViewsDirective>
+          <ViewDirective option="Day" startHour="08:00" endHour="21:00" />
+          <ViewDirective option="WorkWeek" startHour="08:00" endHour="21:00" />
+          <ViewDirective option="Month" showWeekend={false} />
+          <ViewDirective option="Agenda" />
+        </ViewsDirective>
+        <Inject services={[Day, WorkWeek, Month, Agenda]} />
+      </ScheduleComponent>
     </>
-    
   );
-
 }
 
 export default Calendar;
