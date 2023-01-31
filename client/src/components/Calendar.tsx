@@ -76,6 +76,10 @@ function Calendar(this: any, props: Props) {
           htmlElement.classList.remove("light");
         }
       });
+      window.addEventListener("resize", () => {
+        toggle.remove();
+        toolbar[0].prepend(toggle);
+      });
     }
   }, [ScheduleComponent]);
 
