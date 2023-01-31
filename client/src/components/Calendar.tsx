@@ -45,8 +45,20 @@ function Calendar(this: any, props: Props) {
   useEffect(() => {
     let toolbar = document.getElementsByClassName("e-toolbar-right");
     if (!toolbar[0].children[0].classList.contains("field")) {
+      let theme: any = document.getElementById("theme");
       let toggle = DesignToggle();
       toolbar[0].prepend(toggle);
+      toggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        let input = toggle.children[0] as HTMLInputElement;
+        if (input.checked) {
+          theme.href = "https://cdn.syncfusion.com/ej2/material.css";
+          input.checked = false;
+        } else {
+          theme.href = "//cdn.syncfusion.com/ej2/material-dark.css";
+          input.checked = true;
+        }
+      });
     }
   }, [ScheduleComponent]);
 
