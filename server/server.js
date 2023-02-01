@@ -7,7 +7,6 @@ const app = express();
 const PORT = 4959 || process.env.PORT;
 const cron = require("node-cron");
 const bcrypt = require("bcryptjs");
-const Login = require("./models/model");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const Model = require("./models/model");

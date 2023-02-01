@@ -15,11 +15,9 @@
     "@syncfusion/ej2-react-schedule": "^20.4.42",
     "axios": "^1.2.2",
     "bulma": "^0.9.4",
-    "bulma-extensions": "^6.2.7",
     "bulma-switch": "^2.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-portal": "^4.2.2",
     "react-spinners": "^0.13.7",
     "react-toggle-dark-mode": "^1.1.1",
     "vh-check": "^2.0.5"
