@@ -35,7 +35,7 @@ function Login(props: Props) {
   };
 
   const onEnterPressed = (e: any) => {
-    if (e.code === "Enter") onSubmitPwd();
+    if (e.keyCode === 13) onSubmitPwd();
   };
 
   const onChangeHideInvalidPwdMsg = () => {
@@ -78,7 +78,7 @@ function Login(props: Props) {
                 disabled={isPwdDisabled}
                 autoFocus
                 onChange={onChangeHideInvalidPwdMsg}
-                onKeyDown={onEnterPressed}
+                onKeyUp={onEnterPressed}
                 className="input is-primary"
                 type="password"
                 placeholder="Password"
