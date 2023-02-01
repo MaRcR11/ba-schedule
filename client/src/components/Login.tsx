@@ -28,7 +28,9 @@ function Login(props: Props) {
       .catch((err) => {
         setPwdDisabled(false);
         invalidPwdMsgRef.current!.style.display = "block";
-        document.getElementById("pwdInput")?.focus();
+        setTimeout(() => {
+          document.getElementById("pwdInput")?.focus();
+        }, 0);
       });
   };
 
