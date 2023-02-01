@@ -21,7 +21,7 @@ async function login(req) {
   const pwd = req.body.pwd;
   const isPwdValid = await checkPwd(pwd);
   if (!isPwdValid) return { status: 401, json: "login failed" };
-  return { status: 200, json: "success failed" };
+  return { status: 200, json: "login success" };
 }
 
 cron.schedule("*/5 * * * *", () => {
