@@ -19,11 +19,8 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/../client/dist/index.html"));
 });
 
-// app.post("/login", (req, res) => {
-//   res.json("wörki");
-// });
 
-app.listen(PORT, async () => {
+
+app.listen(PORT,  () => {
   console.log(`Server at ${PORT}`);
-  // await crawlScheduleData();
 });
