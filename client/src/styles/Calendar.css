@@ -30,16 +30,13 @@
   display: block !important;
 }
 
-.e-toolbar-right {
-  display: flex !important;
-}
-
 .field {
-  display: flex;
+  display: inline-flex;
+  vertical-align: middle;
   margin-top: auto;
   margin-bottom: auto !important;
 }
 
-.e-work-cells{
+.e-work-cells {
   pointer-events: none;
 }
