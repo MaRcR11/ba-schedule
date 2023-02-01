@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use(cors());
-app.use("/routes", scheduleRouter);
+app.use("/", scheduleRouter);
 dotenv.config();
 
 app.get("/", (req, res) => {
@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 //   res.json("wörki");
 // });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Server at ${PORT}`);
-  crawlScheduleData();
+  // await crawlScheduleData();
 });

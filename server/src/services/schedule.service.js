@@ -7,6 +7,7 @@ let data;
 
 (async () => {
   await connectDB();
+  data = await crawlScheduleData();
 })();
 
 async function getData(req) {
@@ -24,8 +25,8 @@ async function login(req) {
   return { status: 200, json: "login success" };
 }
 
-cron.schedule("*/5 * * * *", () => {
-  data = crawlScheduleData();
+cron.schedule("*/5 * * * *", async () => {
+  data = await crawlScheduleData();
 });
 
 module.exports = {
