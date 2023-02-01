@@ -1,6 +1,6 @@
 [
   {
-    "name": "Algorithmen",
+    "name": "Algorithmen und Datenstrukturen",
     "color": "#d64161"
   },
   {
@@ -8,15 +8,160 @@
     "color": "#86af49"
   },
   {
-    "name": "Fachenglisch",
+    "name": "Fachenglisch u. Kommunikationstechn.",
     "color": "#622569"
   },
   {
-    "name": "Nutzerinterakt.",
+    "name": "Nutzerinterakt. u. relation. Datenb.",
     "color": "#667292"
   },
   {
     "name": "Stochastik",
     "color": "#4040a1"
+  },
+  {
+    "name": "Software Engineering",
+    "color":  "#34568B"
+  },
+  {
+    "name": "Softwaretechnik und Projektmanagement",
+    "color":   "#FF6F61"
+  },
+  {
+    "name": "Computernetzw. u. Drahtl. Kommun.",
+    "color": "#6B5B95"
+  },
+  {
+    "name": "Numerik",
+    "color": "#F7CAC9"
+  },
+  {
+    "name": "Datenschutz und Kryptographie",
+    "color": "#955251"
+  },
+  {
+    "name": "BWL 2: Rechnungsw. und Investition",
+    "color": "#009B77"
+  },
+  {
+    "name": "Eigenständige Projektarbeit",
+    "color": "#DD4124"
+  },
+  {
+    "name": "Softwareprojekt",
+    "color": "#D65076"
+  },
+  {
+    "name": "Bildbearb., Comp.grafik u. C.anim.",
+    "color":  "#45B8AC"
+  },
+  {
+    "name": "Recht",
+    "color": "#EFC050"
+  },
+  {
+    "name": "Programmierung in C/C++",
+    "color":   "#5B5EA6"
+  },
+  {
+    "name": "FPGA",
+    "color": "#9B2335"
+  },
+  {
+    "name": "Künstliche Intelligenz",
+    "color": "#DFCFBE"
+  },
+  {
+    "name": "Paralleles Rechnen",
+    "color":  "#55B4B0"
+  },
+  {
+    "name": "Data Science",
+    "color":"#E15D44"
+  },
+  {
+    "name": "Professionell mit Linux arbeiten",
+    "color":"#7FCDCD"
+  },
+  {
+    "name": "Bachelorarbeit SG Informatik",
+    "color":  "#FDAC53"
+  },
+  {
+    "name": "Videotech., 3D-Modell. u. Animat.",
+    "color": "#9BB7D4"
+  },
+  {
+    "name": "Servers. Technol. u. vert. Systeme",
+    "color": "#B55A30"
+  },
+  {
+    "name": "Mikrocontroller",
+    "color":"#B55A30"
+  },
+  {
+    "name": "Grdl. rechnergestützte Konstruktion",
+    "color": "#0072B5"
+  },
+  {
+    "name": "Berechenbarkeit und Komplexität",
+    "color":  "#A0DAA9"
+  },
+  {
+    "name": "Quantum Computing",
+    "color": "#E9897E"
+  },
+  {
+    "name": "Medizinisches Informationsmanagement",
+    "color": "#00A170"
+  },
+  {
+    "name": "Python",
+    "color": "#926AA6"
+  },
+  {
+    "name": "Digitaltechnik und Rechnerarchitektur",
+    "color": "#363945"
+  },
+  {
+    "name": "Wirtschaftsenglisch und Kommunikation",
+    "color": "#939597"
+  },
+  {
+    "name": "Analysis",
+    "color": "#EFE1CE"
+  },
+  {
+    "name": "Datenver. u. Datenbankzugriffsspr.",
+    "color": "#E0B589"
+  },
+  {
+    "name": "Betriebssysteme und Netzwerke",
+    "color":"#FFA500"
+  },
+  {
+    "name": "Grdl. d. Elektrot. u.Halbleiterel.",
+    "color": "#56C6A9"
+  },
+  {
+    "name": "BWL 1: Personal und Organisation",
+    "color":  "#4B5335"
+  },
+  {
+    "name": "Lineare Algebra",
+    "color": "#798EA4"
+  },
+  {
+    "name": "Automaten und formale Sprachen",
+    "color":"#FA7A35"
+  },
+  {
+    "name": "Rechnerprogr. und Web-Technologien",
+    "color": "#00758F"
+  },
+  {
+    "name": "IT-Prozesse des Unternehmens",
+    "color":  "#EDD59E"
   }
+
 ]
