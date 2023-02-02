@@ -19,6 +19,10 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/../client/dist/index.html"));
 });
 
+app.get("/timer", (req, res) => {
+  res.sendFile(path.join(__dirname, "/../client/timer.html"));
+});
+
 app.listen(PORT, () => {
   console.log(`Server at ${PORT}`);
 });
