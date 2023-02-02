@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
   Agenda,
   Day,
@@ -10,9 +10,14 @@ import {
   ViewsDirective,
   ViewDirective,
 } from "@syncfusion/ej2-react-schedule";
-import { scheduleDataFormat, setAppointmentColors } from "../helpers";
+import {
+  scheduleDataFormat,
+  setAppointmentColors,
+  calenderSetLightTheme,
+  calenderSetDarkTheme,
+} from "../helpers";
 import "../styles/Calendar.css";
-import DesignToggle from "./DesignToggle";
+import ThemeToggle from "./ThemeToggle";
 
 interface Props {
   scheduleData: {
@@ -34,54 +39,60 @@ function Calendar(this: any, props: Props) {
     allowDeleting: false,
   };
 
-  function onEventRendered(args: any) {
+  const onEventRendered = (args: any) => {
     var scheduleObj: any = (document.querySelector(".e-schedule") as any)
       .ej2_instances[0];
     setAppointmentColors(args, scheduleObj);
     if (scheduleObj.currentView == "Day")
       args.element.classList.add("daySelected");
-  }
+  };
 
   useEffect(() => {
-    let toolbar = document.getElementsByClassName("e-toolbar-right");
-    if (!toolbar[0].children[0]?.classList.contains("field")) {
-      let theme: any = document.getElementById("theme");
-      let htmlElement = document.getElementsByTagName("html")[0];
-      let toggle = DesignToggle();
-      toolbar[0].prepend(toggle);
-      let input = toggle.children[0] as HTMLInputElement;
-      try {
-        let mode = localStorage.getItem("mode") as string;
-        if (mode === "light") {
-          input.checked = false;
-        } else {
-          input.checked = true;
-        }
-      } catch (error) {
-        console.error("ungültiger Wert im localStorage");
-      }
-      toggle.addEventListener("click", (e) => {
-        e.preventDefault();
-        if (input.checked) {
-          localStorage.setItem("mode", "light");
-          theme.href = "https://cdn.syncfusion.com/ej2/material.css";
-          input.checked = false;
-          htmlElement.classList.add("light");
-          htmlElement.classList.remove("dark");
-        } else {
-          localStorage.setItem("mode", "dark");
-          theme.href = "//cdn.syncfusion.com/ej2/material-dark.css";
-          input.checked = true;
-          htmlElement.classList.add("dark");
-          htmlElement.classList.remove("light");
-        }
-      });
-      window.addEventListener("resize", () => {
-        toggle.remove();
-        toolbar[0].prepend(toggle);
-      });
-    }
+    configureDarkLightMode();
   }, [ScheduleComponent]);
+
+  const configureDarkLightMode = () => {
+    let rightToolbar = document.getElementsByClassName("e-toolbar-right")[0];
+    if (rightToolbar.children[0]?.classList.contains("field")) return;
+    let themeToggle = ThemeToggle();
+    rightToolbar.prepend(themeToggle);
+    let toggleCheckbox = themeToggle.children[0] as HTMLInputElement;
+    toggleConfigureCorrectChecking(toggleCheckbox);
+    toggleConfigureOnClickEvent(themeToggle);
+    window.addEventListener("resize", () => {
+      themeToggle.remove();
+      rightToolbar.prepend(themeToggle);
+    });
+  };
+
+  const toggleConfigureCorrectChecking = (toggleCheckbox: HTMLInputElement) => {
+    try {
+      let mode: string = localStorage.getItem("mode") as string;
+      toggleCheckbox.checked = mode !== "light";
+    } catch (error) {
+      console.error("ungültiger Wert im localStorage");
+    }
+  };
+
+  const toggleConfigureOnClickEvent = (themeToggle: HTMLDivElement) => {
+    themeToggle.addEventListener("click", (e: Event) => {
+      e.preventDefault();
+      setThemeForCheckedToggleOption(themeToggle);
+    });
+  };
+
+  const setThemeForCheckedToggleOption = (themeToggle: HTMLDivElement) => {
+    let toggleCheckbox = themeToggle.children[0] as HTMLInputElement;
+    if (toggleCheckbox.checked) {
+      calenderSetLightTheme();
+      toggleCheckbox.checked = false;
+      localStorage.setItem("mode", "light");
+    } else {
+      calenderSetDarkTheme();
+      toggleCheckbox.checked = true;
+      localStorage.setItem("mode", "dark");
+    }
+  };
 
   return (
     <>
