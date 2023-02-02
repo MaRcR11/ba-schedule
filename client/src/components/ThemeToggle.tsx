@@ -1,4 +1,4 @@
-function DesignToggle() {
+function ThemeToggle() {
   let toggle = document.createElement("div");
   toggle.classList.add("field");
   let input = document.createElement("input");
@@ -15,4 +15,4 @@ function DesignToggle() {
   return toggle;
 }
 
-export default DesignToggle;
+export default ThemeToggle;

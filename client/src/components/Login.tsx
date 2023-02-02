@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import vhCheck from "vh-check";
-vhCheck("vh-check"); // css var name
+vhCheck("vh-check");
 import "../styles/Login.css";
 import { BarLoader } from "react-spinners";
+import { calenderSetDarkTheme, calenderSetLightTheme } from "../helpers";
 
 interface Props {
   setFireRedirect: any;
@@ -44,21 +45,17 @@ function Login(props: Props) {
   };
 
   useEffect(() => {
+    configureDarkLightMode();
+  }, []);
+
+  const configureDarkLightMode = () => {
     try {
-      let mode = localStorage.getItem("mode") as string;
-      let theme: any = document.getElementById("theme");
-      let htmlElement = document.getElementsByTagName("html")[0];
-      if (mode === "light") {
-        theme.href = "https://cdn.syncfusion.com/ej2/material.css";
-        htmlElement.classList.add("light");
-      } else {
-        theme.href = "//cdn.syncfusion.com/ej2/material-dark.css";
-        htmlElement.classList.add("dark");
-      }
+      let mode: string = localStorage.getItem("mode") as string;
+      mode === "light" ? calenderSetLightTheme() : calenderSetDarkTheme();
     } catch (error) {
       console.error("ungültiger Wert im localStorage");
     }
-  }, []);
+  };
 
   return (
     <>
