@@ -52,11 +52,7 @@ function Calendar(this: any, props: Props) {
       let input = toggle.children[0] as HTMLInputElement;
       try {
         let mode = localStorage.getItem("mode") as string;
-        if (mode === "light") {
-          input.checked = false;
-        } else {
-          input.checked = true;
-        }
+        input.checked = mode !== "light";
       } catch (error) {
         console.error("ungültiger Wert im localStorage");
       }

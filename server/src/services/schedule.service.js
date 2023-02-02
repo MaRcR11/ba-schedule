@@ -11,8 +11,14 @@ let data;
 })();
 
 async function getData(req) {
-  if (!data) return { status: 502, json: "no data" };
+  if (!data)
+    return {
+      status: 502,
+
+      json: "no data",
+    };
   const pwd = req.query.pwd;
+
   const isPwdValid = await checkPwd(pwd);
   if (!isPwdValid) return { status: 401, json: "not authorized" };
   return { status: 200, json: data };
