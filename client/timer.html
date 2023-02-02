@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>CS21-2 Stundenplan-Timer</title>
+  </head>
+  <body>
+    <div id="container">
+      <p>noch:</p>
+      <h1 id="endOfDayTimer"></h1>
+      <p>bis Feierabend</p>
+    </div>
+  </body>
+  <style>
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+      background: radial-gradient(
+          circle closest-corner at center,
+          #222,
+          black 80%
+        )
+        no-repeat;
+      margin: 0;
+    }
+    body {
+      background-color: black;
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+    h1,
+    p {
+      font-size: 17px;
+      display: block;
+      font-family: "Syncopate", sans-serif;
+      text-transform: uppercase;
+      background: radial-gradient(
+          circle farthest-corner at center center,
+          #ccc,
+          #666666
+        )
+        no-repeat;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h1 {
+      min-height: 59px;
+      font-size: 50px;
+      font-family: monospace, monospace;
+    }
+  </style>
+  <script>
+    fetch("http://localhost:4959/api/getEndTimeOfCurrentDay")
+      .then((response) => response.json())
+      .then((data) => createTimer(JSON.parse(data)));
+
+    function createTimer(endTime) {
+      let countDownDate = endTime * 1000;
+
+      var x = setInterval(function () {
+        let now = new Date().getTime();
+
+        let distance = countDownDate - now;
+
+        let hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        if (hours < 10) hours = "0" + hours;
+        if (minutes < 10) minutes = "0" + minutes;
+        if (seconds < 10) seconds = "0" + seconds;
+
+        document.getElementById("endOfDayTimer").innerText =
+          hours + "h " + minutes + "m " + seconds + "s ";
+
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("endOfDayTimer").innerText =
+            "00" + "h " + "00" + "m " + "00" + "s ";
+        }
+      }, 1000);
+    }
+  </script>
+</html>

@@ -1,6 +1,7 @@
 const cron = require("node-cron");
 const crawlScheduleData = require("../helpers/crawlScheduleData.helpers");
 const checkPwd = require("../helpers/checkPwd.helpers");
+const getEndTime = require("../helpers/endTime.helpers");
 const { connectDB } = require("./db.service");
 
 let data;
@@ -31,6 +32,17 @@ async function login(req) {
   return { status: 200, json: "login success" };
 }
 
+async function getEndTimeOfCurrentDay(req) {
+  if (!data)
+    return {
+      status: 502,
+
+      json: "no data",
+    };
+  let endtime = getEndTime(data);
+  return { status: 200, json: endtime };
+}
+
 cron.schedule("*/5 * * * *", async () => {
   data = await crawlScheduleData();
 });
@@ -38,4 +50,5 @@ cron.schedule("*/5 * * * *", async () => {
 module.exports = {
   getData,
   login,
+  getEndTimeOfCurrentDay,
 };

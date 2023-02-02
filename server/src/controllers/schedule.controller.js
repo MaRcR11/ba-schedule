@@ -21,7 +21,19 @@ async function login(req, res, next) {
   }
 }
 
+async function getEndTimeOfCurrentDay(req, res) {
+  try {
+    const scheduleServiceEndTime = await scheduleService.getEndTimeOfCurrentDay(
+      req
+    );
+    res.status(scheduleServiceEndTime.status).json(scheduleServiceEndTime.json);
+  } catch (err) {
+    console.error(`Error while getting end-time`, err.message);
+  }
+}
+
 module.exports = {
   getData,
   login,
+  getEndTimeOfCurrentDay,
 };
