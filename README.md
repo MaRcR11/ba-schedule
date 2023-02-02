@@ -1,4 +1,4 @@
-<h1>CS21-2-Schedule</h1>
+<h1>cs21-2-schedule</h1>
 <hr><p>This is a project that makes it easier for us students to access our schedule for our courses at the university. Our actual web application for this is trash and therefore we had to look for a better solution and create one ourselves.</p><h2>General Information</h2>
 <hr><ul>
 <li>Our scheduler crawls the data from our actual university webapp und displays it way faster and nicer.</li>
