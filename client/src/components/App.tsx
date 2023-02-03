@@ -26,7 +26,7 @@ function App() {
     fireRedirect
       ? axios
           .get(
-            `http://localhost:4959/api/getData?` +
+            `https://cs21-2-schedule.de/api/getData?` +
               new URLSearchParams({
                 pwd: storePwdRef,
               })
