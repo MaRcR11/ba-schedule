@@ -6,7 +6,7 @@ const app = express();
 const PORT = 4959 || process.env.PORT;
 const dotenv = require("dotenv");
 const scheduleRouter = require("./src/routes/schedule.route");
-const rateLimiter = require("./src/middlewares/rateLimit.middleware")
+const rateLimiter = require("./src/middlewares/rateLimit.middleware");
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -14,7 +14,6 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use(cors());
 app.use("/", scheduleRouter);
 app.use(rateLimiter);
-
 
 dotenv.config();
 

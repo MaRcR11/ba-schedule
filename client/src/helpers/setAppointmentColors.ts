@@ -4,11 +4,11 @@ function setAppointmentColors(args: any, scheduleObj: any) {
   (subjects as any).default.map((e: any) => {
     let color = null;
 
-    if(args.data.Subject.includes("Fachenglisch")){
-      console.log(args.data.Subject)
+    if (args.data.Subject.includes("Fachenglisch")) {
+      console.log(args.data.Subject);
     }
     if (args.data.Location.includes("Prüfung")) {
-      console.log(args.data.Subject)
+      console.log(args.data.Subject);
       color = "#D2042D";
     }
 
