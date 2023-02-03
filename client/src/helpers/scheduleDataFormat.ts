@@ -12,7 +12,7 @@ function scheduleDataFormat(
   const formattedScheduleData: any = [];
   const regexGroup = "Gruppe";
   const regexVSreplace = "VS";
-  const regexExam = "Prüfung"
+  const regexExam = "Prüfung";
   scheduleData.map((e, i) => {
     formattedScheduleData.push({
       EndTime: new Date(e.end * 1000),
@@ -23,9 +23,9 @@ function scheduleDataFormat(
       Location:
         e.remarks && !e.remarks.match(regexGroup) && !e.remarks.match(regexExam)
           ? e.remarks
-          : `BA Leipzig ${e.remarks ? `(${e.remarks})` : ""} (${e.sroom ? e.sroom : "Raum unbekannt"}) (${
-              e.instructor
-            })`,
+          : `BA Leipzig ${e.remarks ? `(${e.remarks})` : ""} (${
+              e.sroom ? e.sroom : "Raum unbekannt"
+            }) (${e.instructor})`,
     });
   });
   return formattedScheduleData;
