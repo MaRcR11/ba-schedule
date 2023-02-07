@@ -22,14 +22,13 @@ function scheduleDataFormat(
       }`,
       Location:
         e.remarks && !e.remarks.match(regexGroup) && !e.remarks.match(regexExam)
-          ? e.remarks
+          ? `${e.remarks} (${e.instructor})`
           : `BA Leipzig ${e.remarks ? `(${e.remarks})` : ""} (${
               e.sroom ? e.sroom : "Raum unbekannt"
             }) (${e.instructor})`,
     });
   });
 
-  console.log(formattedScheduleData);
   return formattedScheduleData;
 }
 
