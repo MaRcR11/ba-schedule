@@ -15,7 +15,7 @@ This app is MERN **dockerized**, just note the following.
 
 - Make sure Docker is installed on your system, if not: https://docs.docker.com/desktop/
 
-- You need to create an .env on root of the app, witch includes the following:
+- You need to create an .env on root of the app, witch includes the following (without some Docker Desktop version may throw an error):
   ```
    export DOCKER_BUILDKIT=0
    export COMPOSE_DOCKER_CLI_BUILD=0
