@@ -30,7 +30,7 @@ This app is MERN **dockerized**, just note the following.
   ```
   docker-compose up --build
   ```
- **_NOTE:_** If you do not want to run it via docker, of course you can also run it locally.
+  **_NOTE:_** If you do not want to run it via docker, of course you can also run it locally.
 
 <h2>Technologies Used</h2>
 <hr><ul>
