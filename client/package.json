@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host --port 9865",
+    "dev": "vite --host --port 32993",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
