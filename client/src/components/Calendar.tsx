@@ -49,6 +49,7 @@ function Calendar(this: any, props: Props) {
 
   useEffect(() => {
     configureDarkLightMode();
+    configureKeyDownEvents();
   }, [ScheduleComponent]);
 
   const configureDarkLightMode = () => {
@@ -98,6 +99,27 @@ function Calendar(this: any, props: Props) {
       toggleCheckbox.checked = true;
       localStorage.setItem("mode", "dark");
     }
+  };
+
+  const configureKeyDownEvents = () => {
+    window.addEventListener("keydown", (e) => {
+      switch (e.key) {
+        case "Right":
+        case "ArrowRight":
+          e.preventDefault();
+          document.getElementById("e-tbr-btn_1")?.click();
+          document.getElementById("e-tbr-btn_1")?.blur();
+          break;
+        case "Left":
+        case "ArrowLeft":
+          e.preventDefault();
+          document.getElementById("e-tbr-btn_0")?.click();
+          document.getElementById("e-tbr-btn_0")?.blur();
+          break;
+        default:
+          break;
+      }
+    });
   };
 
   return (
