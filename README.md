@@ -27,9 +27,9 @@ This app is MERN **dockerized**, just note the following.
 - Make sure the ports in the app **match** the specified ports from the **Dockerfile** and **docker-compose.yml**.
 
 - You can now start the app and create your **client and - server-side containers** with the following command:
-  ` 
-   docker-compose up --build
- `  
+  ```
+  docker-compose up --build
+  ```
   **_NOTE:_** If you do not want to run it via docker, of course you can also run it locally.
 
 <h2>Technologies Used</h2>
