@@ -8,10 +8,12 @@ services:
       - "4000:4000"
     container_name: server
     volumes:
-      - ./server:/app
+      - ./server/:/usr/src/app
+      - /usr/src/app/node_modules
 
   client:
     build: ./client
+    restart: always
     ports:
       - "3000:3000"
     container_name: client
