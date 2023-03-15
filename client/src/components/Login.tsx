@@ -14,6 +14,7 @@ interface Props {
 function Login(props: Props) {
   const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
   const [isPwdDisabled, setPwdDisabled] = useState(false);
+  const [isModeLoaded, setIsModeLoaded] = useState(false);
 
   const onSubmitPwd = () => {
     if (!props.pwdRef.current!.value) return;
@@ -45,13 +46,18 @@ function Login(props: Props) {
   };
 
   useEffect(() => {
-    configureDarkLightMode();
+    (async () => {
+      await configureDarkLightMode();
+    })();
   }, []);
 
-  const configureDarkLightMode = () => {
+
+
+  const configureDarkLightMode = async () => {
     try {
       let mode: string = localStorage.getItem("mode") as string;
-      mode === "light" ? calenderSetLightTheme() : calenderSetDarkTheme();
+      mode === "light" ? await calenderSetLightTheme() : await calenderSetDarkTheme();
+      setIsModeLoaded(true);
     } catch (error) {
       console.error("ungültiger Wert im localStorage");
     }
@@ -59,6 +65,7 @@ function Login(props: Props) {
 
   return (
     <>
+      {isModeLoaded ? (
       <div className="hero is-fullheight ">
         {isPwdDisabled ? (
           <BarLoader id="top-barloader" color={"#00d1b2"} width={"100%"} />
@@ -101,6 +108,7 @@ function Login(props: Props) {
           </div>
         </div>
       </div>
+      ): null }
     </>
   );
 }
