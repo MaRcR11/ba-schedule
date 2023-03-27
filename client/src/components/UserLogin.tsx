@@ -12,20 +12,23 @@ interface Props {
   setStorePwdRef: any;
   setLoginMode: any;
   changeLoginMode: any;
+  setStoreUserIDRef: any;
 }
-function Login(props: Props) {
+function UserLogin(props: Props) {
   const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
   const [isPwdDisabled, setPwdDisabled] = useState(false);
   const [isModeLoaded, setIsModeLoaded] = useState(false);
-
+  const userIDRef = useRef<HTMLInputElement>(null);
   const onSubmitPwd = () => {
-    if (!props.pwdRef.current!.value) return;
-    const pwd = props.pwdRef.current!.value;
+    if (!props.pwdRef.current!.value || !userIDRef.current!.value) return;
+    const hash = props.pwdRef.current!.value;
+    const userID = userIDRef.current!.value;
     setPwdDisabled(true);
     axios
-      .post("http://localhost:4000/login/", { pwd })
+      .post("http://localhost:4000/userLogin/", { userID, hash })
       .then((res) => {
-        props.setStorePwdRef(pwd);
+        props.setStorePwdRef(hash);
+        props.setStoreUserIDRef(userID);
         props.setFireRedirect(true);
         setPwdDisabled(false);
       })
@@ -80,7 +83,7 @@ function Login(props: Props) {
               <div className="column">
                 <input
                   id="pwdInput"
-                  ref={props.pwdRef}
+                  ref={userIDRef}
                   disabled={isPwdDisabled}
                   autoFocus
                   onChange={onChangeHideInvalidPwdMsg}
@@ -133,4 +136,4 @@ function Login(props: Props) {
   );
 }
 
-export default Login;
+export default UserLogin;

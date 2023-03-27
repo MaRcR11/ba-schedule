@@ -10,6 +10,7 @@ function App() {
   const [storePwdRef, setStorePwdRef] = useState("");
   const [fireRedirect, setFireRedirect] = useState(false);
   const [apiAvailable, setapiAvailable] = useState(true);
+  const [storeUserIDRef, setStoreUserIDRef] = useState("");
   const [scheduleData, setScheduleData] = useState<
     {
       start: number;
@@ -43,19 +44,20 @@ function App() {
 
   return (
     <>
-      {fireRedirect ? (
-        fetched ? (
-          <Calendar scheduleData={scheduleData} />
-        ) : (
-          <LoadingAnim apiAvailable={apiAvailable} />
-        )
-      ) : (
-        <Login
-          setFireRedirect={setFireRedirect}
-          pwdRef={pwdRef}
-          setStorePwdRef={setStorePwdRef}
-        />
-      )}
+      {/*{fireRedirect ? (*/}
+      {/*  fetched ? (*/}
+      {/*    <Calendar scheduleData={scheduleData} />*/}
+      {/*  ) : (*/}
+      {/*    <LoadingAnim apiAvailable={apiAvailable} />*/}
+      {/*  )*/}
+      {/*) : (*/}
+      <Login
+        setFireRedirect={setFireRedirect}
+        pwdRef={pwdRef}
+        setStorePwdRef={setStorePwdRef}
+        setStoreUserIDRef={setStoreUserIDRef}
+      />
+      {/*)}*/}
     </>
   );
 }

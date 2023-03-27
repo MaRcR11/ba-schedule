@@ -6,10 +6,12 @@ interface Props {
   setFireRedirect: any;
   pwdRef: any;
   setStorePwdRef: any;
+
+  setStoreUserIDRef: any;
 }
 
 function Login(props: Props) {
-  const [loginMode, setLoginMode] = useState<boolean>(true);
+  const [loginMode, setLoginMode] = useState<boolean>(false);
 
   const changeLoginMode = () => {
     setLoginMode(!loginMode);
@@ -30,6 +32,7 @@ function Login(props: Props) {
       setStorePwdRef={props.setStorePwdRef}
       setLoginMode={setLoginMode}
       changeLoginMode={changeLoginMode}
+      setStoreUserIDRef={props.setStoreUserIDRef}
     />
   );
 }
