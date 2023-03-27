@@ -32,6 +32,13 @@ async function login(req) {
   return { status: 200, json: "login success" };
 }
 
+async function userLogin(req) {
+  const pwd = req.body.pwd;
+  const isPwdValid = await checkPwd(pwd);
+  if (!isPwdValid) return { status: 401, json: "login failed" };
+  return { status: 200, json: "login success" };
+}
+
 async function getEndTimeOfCurrentDay(req) {
   if (!data)
     return {
@@ -51,4 +58,5 @@ module.exports = {
   getData,
   login,
   getEndTimeOfCurrentDay,
+  userLogin,
 };

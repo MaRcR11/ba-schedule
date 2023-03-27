@@ -9,5 +9,6 @@ router.get(
   "/api/getEndTimeOfCurrentDay",
   scheduleController.getEndTimeOfCurrentDay
 );
+router.get("/userLogin", scheduleController.login);
 
 module.exports = router;
