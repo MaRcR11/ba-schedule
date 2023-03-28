@@ -9,8 +9,9 @@ const createNewUser = require("../helpers/createNewUser.helpers");
 const updateUserLastLogin = require("../helpers/updateUserLastLogin");
 const checkUserRegistered = require("../helpers/checkUserRegistered.helpers");
 const createNewCronJob = require("../helpers/createNewCronJob");
-
+const initialCrawl = require("../helpers/initialCrawl");
 let data = {};
+let userIDglobal;
 
 (async () => {
   await connectDB();
@@ -21,11 +22,11 @@ async function getData(req) {
   if (!data)
     return {
       status: 502,
-
       json: "no data",
     };
-  const pwd = req.query.pwd;
   const userID = req.query.userID;
+  const pwd = req.query.pwd;
+
   const isUserRegistered = await checkUserRegistered(userID);
   if (!userID) {
     const isPwdValid = await checkPwd(pwd, { checkUserHash: false });
@@ -37,7 +38,20 @@ async function getData(req) {
     });
     if (!isPwdValid) return { status: 401, json: "not authorized" };
     console.log(Object.keys(data));
-    return { status: 200, json: data[userID] };
+    const userLatestData = isUserRegistered.get("latestData").trim();
+    console.log(
+      Boolean(userLatestData),
+      "userLatestData",
+      data[userID],
+      "data[userID]"
+    );
+    if (!userLatestData)
+      return {
+        status: 502,
+        json: "no data",
+      };
+
+    return { status: 200, json: data[userID] ? data[userID] : userLatestData };
   }
 }
 
@@ -52,7 +66,7 @@ async function userLogin(req) {
   const userID = req.body.userID;
   const userHash = req.body.hash;
   const isUserExisting = await checkUserExistence(userID, userHash);
-
+  console.log(isUserExisting);
   if (!isUserExisting)
     return { status: 401, json: "login failed, user does not exist" };
 
@@ -96,9 +110,10 @@ async function getEndTimeOfCurrentDay(req) {
   return { status: 200, json: endtime };
 }
 
-cron.schedule("*/5 * * * *", async () => {
-  data.general = await crawlScheduleData();
-});
+(async () => {
+  console.log("hieeeeee");
+  await initialCrawl(data, userHash);
+})();
 
 module.exports = {
   getData,
