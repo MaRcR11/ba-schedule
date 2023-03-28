@@ -4,20 +4,17 @@ const checkPwd = require("../helpers/checkPwd.helpers");
 const getEndTime = require("../helpers/endTime.helpers");
 const { connectDB } = require("./db.service");
 const bcrypt = require("bcryptjs");
-const userModel = require("../models/userModel");
-const https = require("https");
-const fs = require("fs");
-const path = require("path");
 const checkUserExistence = require("../helpers/checkUserExistence.helpers");
 const createNewUser = require("../helpers/createNewUser.helpers");
 const updateUserLastLogin = require("../helpers/updateUserLastLogin");
 const checkUserRegistered = require("../helpers/checkUserRegistered.helpers");
+const createNewCronJob = require("../helpers/createNewCronJob");
 
-let data;
+let data = {};
 
 (async () => {
   await connectDB();
-  data = await crawlScheduleData();
+  data = { general: await crawlScheduleData() };
 })();
 
 async function getData(req) {
@@ -33,13 +30,14 @@ async function getData(req) {
   if (!userID) {
     const isPwdValid = await checkPwd(pwd, { checkUserHash: false });
     if (!isPwdValid) return { status: 401, json: "not authorized" };
-    return { status: 200, json: data };
+    return { status: 200, json: data.general };
   } else {
     const isPwdValid = await checkPwd(pwd, {
       checkUserHash: isUserRegistered.get("hash").trim(),
     });
     if (!isPwdValid) return { status: 401, json: "not authorized" };
-    return { status: 200, json: data };
+    console.log(Object.keys(data));
+    return { status: 200, json: data[userID] };
   }
 }
 
@@ -79,6 +77,7 @@ async function userLogin(req) {
 
     try {
       await createNewUser(userID, hash);
+      await createNewCronJob(userID, data);
       return { status: 200, json: "registration success" };
     } catch (error) {
       console.error(error);
@@ -98,7 +97,7 @@ async function getEndTimeOfCurrentDay(req) {
 }
 
 cron.schedule("*/5 * * * *", async () => {
-  data = await crawlScheduleData();
+  data.general = await crawlScheduleData();
 });
 
 module.exports = {
