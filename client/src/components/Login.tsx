@@ -8,21 +8,23 @@ interface Props {
   setStorePwdRef: any;
 
   setStoreUserIDRef: any;
+
+  setLoginMode: any;
+
+  loginMode: any;
 }
 
 function Login(props: Props) {
-  const [loginMode, setLoginMode] = useState<boolean>(false);
-
   const changeLoginMode = () => {
-    setLoginMode(!loginMode);
+    props.setLoginMode(!props.loginMode);
   };
 
-  return loginMode ? (
+  return props.loginMode ? (
     <GeneralLogin
       setFireRedirect={props.setFireRedirect}
       pwdRef={props.pwdRef}
       setStorePwdRef={props.setStorePwdRef}
-      setLoginMode={setLoginMode}
+      setLoginMode={props.setLoginMode}
       changeLoginMode={changeLoginMode}
     />
   ) : (
@@ -30,7 +32,7 @@ function Login(props: Props) {
       setFireRedirect={props.setFireRedirect}
       pwdRef={props.pwdRef}
       setStorePwdRef={props.setStorePwdRef}
-      setLoginMode={setLoginMode}
+      setLoginMode={props.setLoginMode}
       changeLoginMode={changeLoginMode}
       setStoreUserIDRef={props.setStoreUserIDRef}
     />

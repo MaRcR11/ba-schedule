@@ -28,11 +28,19 @@ async function getData(req) {
       json: "no data",
     };
   const pwd = req.query.pwd;
-
-  const isPwdValid = await checkPwd(pwd, { checkUserHash: false });
-
-  if (!isPwdValid) return { status: 401, json: "not authorized" };
-  return { status: 200, json: data };
+  const userID = req.query.userID;
+  const isUserRegistered = await checkUserRegistered(userID);
+  if (!userID) {
+    const isPwdValid = await checkPwd(pwd, { checkUserHash: false });
+    if (!isPwdValid) return { status: 401, json: "not authorized" };
+    return { status: 200, json: data };
+  } else {
+    const isPwdValid = await checkPwd(pwd, {
+      checkUserHash: isUserRegistered.get("hash").trim(),
+    });
+    if (!isPwdValid) return { status: 401, json: "not authorized" };
+    return { status: 200, json: data };
+  }
 }
 
 async function login(req) {
@@ -56,6 +64,7 @@ async function userLogin(req) {
     const isHashValid = await checkPwd(userHash, {
       checkUserHash: isUserRegistered.get("hash").trim(),
     });
+
     if (!isHashValid) return { status: 401, json: "login failed" };
 
     try {
