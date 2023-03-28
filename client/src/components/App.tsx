@@ -10,6 +10,8 @@ function App() {
   const [storePwdRef, setStorePwdRef] = useState("");
   const [fireRedirect, setFireRedirect] = useState(false);
   const [apiAvailable, setapiAvailable] = useState(true);
+  const [loginMode, setLoginMode] = useState<boolean>(false);
+  const [storeUserIDRef, setStoreUserIDRef] = useState("");
   const [scheduleData, setScheduleData] = useState<
     {
       start: number;
@@ -29,6 +31,7 @@ function App() {
             `http://localhost:4000/api/getData?` +
               new URLSearchParams({
                 pwd: storePwdRef,
+                userID: loginMode ? "" : `${storeUserIDRef}`,
               })
           )
           .then((res) => {
@@ -54,6 +57,9 @@ function App() {
           setFireRedirect={setFireRedirect}
           pwdRef={pwdRef}
           setStorePwdRef={setStorePwdRef}
+          setStoreUserIDRef={setStoreUserIDRef}
+          loginMode={loginMode}
+          setLoginMode={setLoginMode}
         />
       )}
     </>

@@ -32,8 +32,19 @@ async function getEndTimeOfCurrentDay(req, res) {
   }
 }
 
+async function userLogin(req, res, next) {
+  try {
+    const scheduleServiceLogin = await scheduleService.userLogin(req);
+    res.status(scheduleServiceLogin.status).json(scheduleServiceLogin.json);
+  } catch (err) {
+    console.error(`Error while login`, err.message);
+    next(err);
+  }
+}
+
 module.exports = {
   getData,
   login,
   getEndTimeOfCurrentDay,
+  userLogin,
 };
