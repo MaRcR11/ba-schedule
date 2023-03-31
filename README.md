@@ -12,6 +12,7 @@
 <p>1. Login on https://selfservice.campus-dual.de/ </p>
 <p>2. Press F12 and open Network</p>
 <p>3. Copy your hash </p>
+<img src="./hash_location.png">
 </ul>
 
 

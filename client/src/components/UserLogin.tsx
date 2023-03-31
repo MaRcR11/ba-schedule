@@ -108,7 +108,7 @@ function UserLogin(props: Props) {
                   style={{ display: "none" }}
                   className="help is-danger"
                 >
-                  This password is invalid
+                  This password or username is invalid
                 </p>
               </div>
               <div className="column">
