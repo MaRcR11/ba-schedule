@@ -4,7 +4,7 @@ let crawlTriedCounter = 0;
 let data;
 const crawlScheduleData = async (userID, userHash) => {
   try {
-    console.log(`crawling data (${userID})...`);
+    console.log(`crawling data (${userID ? userID : "general"})...`);
     data = await crawler(userID, userHash);
     crawlTriedCounter = 0;
     return data;

@@ -9,9 +9,8 @@ const createNewUser = require("../helpers/createNewUser.helpers");
 const updateUserLastLogin = require("../helpers/updateUserLastLogin");
 const checkUserRegistered = require("../helpers/checkUserRegistered.helpers");
 const createNewCronJob = require("../helpers/createNewCronJob");
-const initialCrawl = require("../helpers/initialCrawl");
+
 let data = {};
-let userIDglobal;
 
 (async () => {
   await connectDB();
@@ -99,6 +98,7 @@ async function userLogin(req) {
     }
   }
 }
+
 async function getEndTimeOfCurrentDay(req) {
   if (!data)
     return {
@@ -110,10 +110,9 @@ async function getEndTimeOfCurrentDay(req) {
   return { status: 200, json: endtime };
 }
 
-(async () => {
-  console.log("hieeeeee");
-  await initialCrawl(data, userHash);
-})();
+cron.schedule("*/5 * * * *", async () => {
+  data.general = await crawlScheduleData();
+});
 
 module.exports = {
   getData,
