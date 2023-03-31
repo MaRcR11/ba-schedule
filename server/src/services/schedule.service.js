@@ -21,11 +21,11 @@ async function getData(req) {
   if (!data)
     return {
       status: 502,
-
       json: "no data",
     };
-  const pwd = req.query.pwd;
   const userID = req.query.userID;
+  const pwd = req.query.pwd;
+
   const isUserRegistered = await checkUserRegistered(userID);
   if (!userID) {
     const isPwdValid = await checkPwd(pwd, { checkUserHash: false });
@@ -37,7 +37,20 @@ async function getData(req) {
     });
     if (!isPwdValid) return { status: 401, json: "not authorized" };
     console.log(Object.keys(data));
-    return { status: 200, json: data[userID] };
+    const userLatestData = isUserRegistered.get("latestData").trim();
+    console.log(
+      Boolean(userLatestData),
+      "userLatestData",
+      data[userID],
+      "data[userID]"
+    );
+    if (!userLatestData)
+      return {
+        status: 502,
+        json: "no data",
+      };
+
+    return { status: 200, json: data[userID] ? data[userID] : userLatestData };
   }
 }
 
@@ -52,7 +65,7 @@ async function userLogin(req) {
   const userID = req.body.userID;
   const userHash = req.body.hash;
   const isUserExisting = await checkUserExistence(userID, userHash);
-
+  console.log(isUserExisting);
   if (!isUserExisting)
     return { status: 401, json: "login failed, user does not exist" };
 
@@ -85,6 +98,7 @@ async function userLogin(req) {
     }
   }
 }
+
 async function getEndTimeOfCurrentDay(req) {
   if (!data)
     return {

@@ -13,6 +13,9 @@ const userModel = new mongoose.Schema({
     required: true,
     type: Number,
   },
+  latestData: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("user", userModel, "users");
