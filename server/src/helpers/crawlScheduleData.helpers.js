@@ -11,12 +11,14 @@ const crawlScheduleData = async (userID, userHash) => {
   } catch (error) {
     console.log(error);
     if (crawlTriedCounter < 3) {
-      crawlScheduleData();
+      crawlScheduleData(userID);
       crawlTriedCounter++;
     } else {
       crawlTriedCounter = 0;
+
     }
   }
 };
+
 
 module.exports = crawlScheduleData;

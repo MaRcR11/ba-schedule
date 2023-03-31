@@ -11,21 +11,17 @@ const checkUserRegistered = require("../helpers/checkUserRegistered.helpers");
 const createNewCronJob = require("../helpers/createNewCronJob");
 
 let data = {};
+const isJobRunning = {};
 
 (async () => {
   await connectDB();
-  data = { general: await crawlScheduleData() };
+  data = { general: await crawlScheduleData(null) };
 })();
 
 async function getData(req) {
-  if (!data)
-    return {
-      status: 502,
-      json: "no data",
-    };
-  const userID = req.query.userID;
+  if (!data) return { status: 502, json: "no data" };
   const pwd = req.query.pwd;
-
+  const userID = req.query.userID;
   const isUserRegistered = await checkUserRegistered(userID);
   if (!userID) {
     const isPwdValid = await checkPwd(pwd, { checkUserHash: false });
@@ -36,21 +32,7 @@ async function getData(req) {
       checkUserHash: isUserRegistered.get("hash").trim(),
     });
     if (!isPwdValid) return { status: 401, json: "not authorized" };
-    console.log(Object.keys(data));
-    const userLatestData = isUserRegistered.get("latestData").trim();
-    console.log(
-      Boolean(userLatestData),
-      "userLatestData",
-      data[userID],
-      "data[userID]"
-    );
-    if (!userLatestData)
-      return {
-        status: 502,
-        json: "no data",
-      };
-
-    return { status: 200, json: data[userID] ? data[userID] : userLatestData };
+    return { status: 200, json: data[userID] };
   }
 }
 
@@ -65,11 +47,16 @@ async function userLogin(req) {
   const userID = req.body.userID;
   const userHash = req.body.hash;
   const isUserExisting = await checkUserExistence(userID, userHash);
-  console.log(isUserExisting);
+
   if (!isUserExisting)
     return { status: 401, json: "login failed, user does not exist" };
 
   const isUserRegistered = await checkUserRegistered(userID);
+
+  if (!isJobRunning[userID]) {
+    await createNewCronJob(userID, userHash, data);
+    isJobRunning[userID] = true;
+  }
 
   if (isUserRegistered) {
     const isHashValid = await checkPwd(userHash, {
@@ -90,7 +77,6 @@ async function userLogin(req) {
 
     try {
       await createNewUser(userID, hash);
-      await createNewCronJob(userID, data);
       return { status: 200, json: "registration success" };
     } catch (error) {
       console.error(error);
@@ -98,7 +84,6 @@ async function userLogin(req) {
     }
   }
 }
-
 async function getEndTimeOfCurrentDay(req) {
   if (!data)
     return {
@@ -111,7 +96,7 @@ async function getEndTimeOfCurrentDay(req) {
 }
 
 cron.schedule("*/5 * * * *", async () => {
-  data.general = await crawlScheduleData();
+  data.general = await crawlScheduleData(null);
 });
 
 module.exports = {
