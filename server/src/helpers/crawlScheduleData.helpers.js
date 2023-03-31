@@ -2,9 +2,9 @@ const crawler = require("../crawler/crawler");
 
 let crawlTriedCounter = 0;
 let data;
-const crawlScheduleData = async () => {
+const crawlScheduleData = async (userID) => {
   try {
-    console.log("crawling data...");
+    console.log(`crawling data (${userID ? userID : "general"})...`);
     data = await crawler();
     crawlTriedCounter = 0;
     return data;
@@ -15,8 +15,10 @@ const crawlScheduleData = async () => {
       crawlTriedCounter++;
     } else {
       crawlTriedCounter = 0;
+
     }
   }
 };
+
 
 module.exports = crawlScheduleData;

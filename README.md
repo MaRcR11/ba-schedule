@@ -6,6 +6,15 @@
 </ul><ul>
 <li>This project was inspired by the poor condition of campus dual</li>
 </ul>
+<h2>User Login</h2>
+<ul>
+<li>Where to find hash?</li>
+<p>1. Login on https://selfservice.campus-dual.de/ </p>
+<p>2. Press F12 and open Network</p>
+<p>3. Copy your hash </p>
+</ul>
+
+
 
 ## Getting Started
 

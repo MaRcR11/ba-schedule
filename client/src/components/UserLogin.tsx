@@ -125,11 +125,17 @@ function UserLogin(props: Props) {
                 <p className="is-size-7">
                   <a onClick={props.changeLoginMode} className="has-text-link">
                     General Login
+                  </a> -&nbsp;
+                  <a href="https://github.com/MaRcR11/cs21-2-schedule" className="has-text-danger">
+                    Help?
                   </a>
                 </p>
+
               </div>
             </div>
+
           </div>
+
         </div>
       ) : null}
     </>

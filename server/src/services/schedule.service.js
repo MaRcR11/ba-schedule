@@ -11,10 +11,12 @@ const checkUserRegistered = require("../helpers/checkUserRegistered.helpers");
 const createNewCronJob = require("../helpers/createNewCronJob");
 
 let data = {};
+const isJobRunning = {};
+
 
 (async () => {
   await connectDB();
-  data = { general: await crawlScheduleData() };
+  data = { general: await crawlScheduleData(null) };
 })();
 
 async function getData(req) {
@@ -36,7 +38,6 @@ async function getData(req) {
       checkUserHash: isUserRegistered.get("hash").trim(),
     });
     if (!isPwdValid) return { status: 401, json: "not authorized" };
-    console.log(Object.keys(data));
     return { status: 200, json: data[userID] };
   }
 }
@@ -58,6 +59,13 @@ async function userLogin(req) {
 
   const isUserRegistered = await checkUserRegistered(userID);
 
+
+  if(!isJobRunning[userID]) {
+    await createNewCronJob(userID, userHash, data);
+    isJobRunning[userID] = true;
+  }
+
+
   if (isUserRegistered) {
     const isHashValid = await checkPwd(userHash, {
       checkUserHash: isUserRegistered.get("hash").trim(),
@@ -77,7 +85,6 @@ async function userLogin(req) {
 
     try {
       await createNewUser(userID, hash);
-      await createNewCronJob(userID, data);
       return { status: 200, json: "registration success" };
     } catch (error) {
       console.error(error);
@@ -97,8 +104,9 @@ async function getEndTimeOfCurrentDay(req) {
 }
 
 cron.schedule("*/5 * * * *", async () => {
-  data.general = await crawlScheduleData();
+  data.general = await crawlScheduleData(null);
 });
+
 
 module.exports = {
   getData,

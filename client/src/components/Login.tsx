@@ -20,7 +20,7 @@ function Login(props: Props) {
   };
 
   return props.loginMode ? (
-    <GeneralLogin
+      <GeneralLogin
       setFireRedirect={props.setFireRedirect}
       pwdRef={props.pwdRef}
       setStorePwdRef={props.setStorePwdRef}
@@ -36,7 +36,7 @@ function Login(props: Props) {
       changeLoginMode={changeLoginMode}
       setStoreUserIDRef={props.setStoreUserIDRef}
     />
-  );
+);
 }
 
 export default Login;
