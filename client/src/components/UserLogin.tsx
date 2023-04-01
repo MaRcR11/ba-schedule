@@ -82,7 +82,6 @@ function UserLogin(props: Props) {
                   </div>
                   <div className="column">
                     <input
-                        id="pwdInput"
                         ref={userIDRef}
                         disabled={isPwdDisabled}
                         autoFocus
