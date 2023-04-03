@@ -1,4 +1,4 @@
-const Model = require("../models/model");
+const Model = require("../models/general.model");
 const bcrypt = require("bcryptjs");
 const checkPwd = async (pwd, OPTIONS) => {
   if (OPTIONS.checkUserHash) {

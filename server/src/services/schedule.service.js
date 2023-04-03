@@ -1,14 +1,14 @@
 const cron = require("node-cron");
-const crawlScheduleData = require("../helpers/crawlScheduleData.helpers");
-const checkPwd = require("../helpers/checkPwd.helpers");
-const getEndTime = require("../helpers/endTime.helpers");
+const crawlScheduleData = require("../helpers/crawlScheduleData.helper");
+const checkPwd = require("../helpers/checkPwd.helper");
+const getEndTime = require("../helpers/endTime.helper");
 const { connectDB } = require("./db.service");
 const bcrypt = require("bcryptjs");
-const checkUserExistence = require("../helpers/checkUserExistence.helpers");
-const createNewUser = require("../helpers/createNewUser.helpers");
-const updateUserLastLogin = require("../helpers/updateUserLastLogin");
-const checkUserRegistered = require("../helpers/checkUserRegistered.helpers");
-const createNewCronJob = require("../helpers/createNewCronJob");
+const checkUserExistence = require("../helpers/checkUserExistence.helper");
+const createNewUser = require("../helpers/createNewUser.helper");
+const updateUserLastLogin = require("../helpers/updateUserLastLogin.helper");
+const checkUserRegistered = require("../helpers/checkUserRegistered.helper");
+const createNewCronJob = require("../helpers/createNewCronJob.helper");
 
 let data = {};
 const isJobRunning = {};
@@ -27,12 +27,14 @@ async function getData(req) {
     const isPwdValid = await checkPwd(pwd, { checkUserHash: false });
     if (!isPwdValid) return { status: 401, json: "not authorized" };
     return { status: 200, json: data.general };
-  } else {
+  } else if (isUserRegistered) {
     const isPwdValid = await checkPwd(pwd, {
       checkUserHash: isUserRegistered.get("hash").trim(),
     });
     if (!isPwdValid) return { status: 401, json: "not authorized" };
     return { status: 200, json: data[userID] };
+  } else {
+    return { status: 401, json: "not authorized" };
   }
 }
 
