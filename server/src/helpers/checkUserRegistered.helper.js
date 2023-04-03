@@ -1,4 +1,4 @@
-const userModel = require("../models/userModel");
+const userModel = require("../models/user.model");
 
 const checkUserRegistered = async (userID) => {
     const isUserRegistered = await userModel

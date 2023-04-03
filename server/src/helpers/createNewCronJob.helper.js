@@ -1,7 +1,7 @@
 const cron = require("node-cron");
-const crawlScheduleData = require("./crawlScheduleData.helpers");
+const crawlScheduleData = require("./crawlScheduleData.helper");
 
-const createNewCronJob = async (userID, userHash, data) => {
+const createNewCronJobHelper = async (userID, userHash, data) => {
   data[userID] = await crawlScheduleData(userID, userHash);
 
   cron.schedule("*/5 * * * *", async () => {
@@ -11,4 +11,4 @@ const createNewCronJob = async (userID, userHash, data) => {
 
 };
 
-module.exports = createNewCronJob;
+module.exports = createNewCronJobHelper;
