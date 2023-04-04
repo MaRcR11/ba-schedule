@@ -8,7 +8,11 @@ const rateLimiterUsingThirdParty = rateLimit({
   legacyHeaders: false,
   skip: function (req, res) {
     // Only apply rate limiting to the "/" and "/timer" endpoints
-    if (req.path === "/" || (req.path === "/userLogin/" && req.method === "POST") || (req.path === "/login/" && req.method === "POST")) {
+    if (
+      req.path === "/" ||
+      (req.path === "/userLogin/" && req.method === "POST") ||
+      (req.path === "/login/" && req.method === "POST")
+    ) {
       return false;
     }
 

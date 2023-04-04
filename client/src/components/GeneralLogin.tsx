@@ -33,12 +33,12 @@ function UserLogin(props: Props) {
       })
       .catch((error) => {
         setPwdDisabled(false);
-        if (!error.response) { // status code out of the range of 2xx
-  
-          props.setLoginErrorMsg("Too Many Requests")
-        }
-        else{
-          props.setLoginErrorMsg("This password or username is invalid")
+        if (!error.response) {
+          // status code out of the range of 2xx
+
+          props.setLoginErrorMsg("Too Many Requests");
+        } else {
+          props.setLoginErrorMsg("This password or username is invalid");
         }
         invalidPwdMsgRef.current!.style.display = "block";
         setTimeout(() => {
@@ -107,8 +107,7 @@ function UserLogin(props: Props) {
                   style={{ display: "none" }}
                   className="help is-danger"
                 >
-                                   {props.loginErrorMsg}
-
+                  {props.loginErrorMsg}
                 </p>
               </div>
               <div className="column">
