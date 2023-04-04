@@ -13,23 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use(cors());
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.use("/", scheduleRouter);
-app.use(rateLimiter);
+app.use(rateLimiter)
 app.set("trust proxy", 1)
-dotenv.config();
+dotenv.config()
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/../client/dist/index.html"));
