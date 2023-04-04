@@ -1,6 +1,5 @@
 name: Prettier
 
-# This action works with pull requests and pushes
 on:
   pull_request:
   push:
@@ -8,23 +7,28 @@ on:
       - '**'
 
 jobs:
-    prettier:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-              with:
-                  ref: ${{ github.head_ref }}
-                  working-directory: client
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
+      - name: Check if package.json exists
+        run: |
+          if [ ! -f package.json ]; then
+            echo "Error: package.json not found"
+            exit 1
+          fi
 
-            - name: Install
-              run: yarn install
-              env:
-                  CI: true
+      - name: Install dependencies
+        run: yarn install
+        env:
+          CI: true
 
-            - name: Run prettier
-              run: yarn run prettier --write '**/*.{css,js,ts,tsx,html,md}'
+      - name: Run Prettier
+        run: yarn prettier
 
-            - uses: stefanzweifel/git-auto-commit-action@v4
-              with:
-                  commit_message: Apply prettier changes
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Apply prettier changes
