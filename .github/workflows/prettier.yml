@@ -1,6 +1,6 @@
 name: Prettier
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   prettier:
@@ -12,4 +12,4 @@ jobs:
       - name: Run Prettier
         uses: actionsx/prettier@v2
         with:
-          args: --write .
+          args: --write . --loglevel verbose
