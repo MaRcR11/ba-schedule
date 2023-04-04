@@ -7,8 +7,6 @@ const createNewCronJobHelper = async (userID, userHash, data) => {
   cron.schedule("*/5 * * * *", async () => {
     data[userID] = await crawlScheduleData(userID, userHash);
   });
-
-
 };
 
 module.exports = createNewCronJobHelper;
