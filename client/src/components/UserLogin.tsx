@@ -27,7 +27,7 @@ function UserLogin(props: Props) {
     const userID = userIDRef.current!.value;
     setPwdDisabled(true);
     axios
-      .post("https://cs21-2-schedule.de/userLogin/", { userID, hash })
+      .post("http://localhost:4000/userLogin/", { userID, hash })
       .then((res) => {
         props.setStorePwdRef(hash);
         props.setStoreUserIDRef(userID);
