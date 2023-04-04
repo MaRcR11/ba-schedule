@@ -27,7 +27,7 @@ function UserLogin(props: Props) {
     const userID = userIDRef.current!.value;
     setPwdDisabled(true);
     axios
-      .post("https://cs21-2-schedule.de/userLogin/", { userID, hash })
+      .post("https://cs212-schedule.de/userLogin/", { userID, hash })
       .then((res) => {
         props.setStorePwdRef(hash);
         props.setStoreUserIDRef(userID);
@@ -36,13 +36,8 @@ function UserLogin(props: Props) {
       })
       .catch((error) => {
         setPwdDisabled(false);
-        console.log(error.response);
-        if (!error.response) {
-          // status code out of the range of 2xx
-
-          console.log("hi");
-          props.setLoginErrorMsg("Too Many Requests");
-        } else {
+        if (error.response.status === 429) props.setLoginErrorMsg(error.response.statusText);
+        else {
           props.setLoginErrorMsg("This password or username is invalid");
         }
         invalidPwdMsgRef.current!.style.display = "block";
