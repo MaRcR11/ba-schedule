@@ -36,7 +36,8 @@ function UserLogin(props: Props) {
       })
       .catch((error) => {
         setPwdDisabled(false);
-        if (error.response.status === 429) props.setLoginErrorMsg(error.response.statusText);
+        if (error.response.status === 429)
+          props.setLoginErrorMsg(error.response.statusText);
         else {
           props.setLoginErrorMsg("This password or username is invalid");
         }
