@@ -4,7 +4,9 @@ const fs = require("fs");
 const crawler = async (userID, userHash) => {
   const OPTIONS = {
     host: "selfservice.campus-dual.de",
-    path: `/room/json?userid=${userID ? userID : 5002080 }&hash=${userHash ? userHash : "a0f51c26573dbf74502666d418252988"}`,
+    path: `/room/json?userid=${userID ? userID : 5002080}&hash=${
+      userHash ? userHash : "a0f51c26573dbf74502666d418252988"
+    }`,
     ca: fs.readFileSync(__dirname + "/campusdual-cert-chain.pem"),
     json: true,
   };
@@ -17,12 +19,12 @@ const crawler = async (userID, userHash) => {
         res_str = "";
 
         res
-            .on("data", (chunk) => {
-              res_str += chunk;
-            })
-            .on("end", () => {
-              resolve(res_str);
-            });
+          .on("data", (chunk) => {
+            res_str += chunk;
+          })
+          .on("end", () => {
+            resolve(res_str);
+          });
       });
     });
   } catch (err) {

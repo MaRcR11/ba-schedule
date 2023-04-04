@@ -15,8 +15,6 @@
 <img src="./hash_location.png">
 </ul>
 
-
-
 ## Getting Started
 
 ---
