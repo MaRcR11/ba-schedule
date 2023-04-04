@@ -13,8 +13,8 @@
   text-align: center;
 }
 
-::-webkit-scrollbar{
-    display: none;
+::-webkit-scrollbar {
+  display: none;
 }
 
 #loadingHeadline {

@@ -15,10 +15,8 @@ const crawlScheduleData = async (userID, userHash) => {
       crawlTriedCounter++;
     } else {
       crawlTriedCounter = 0;
-
     }
   }
 };
-
 
 module.exports = crawlScheduleData;
