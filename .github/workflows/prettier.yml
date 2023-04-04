@@ -1,10 +1,6 @@
 name: Prettier
 
-on:
-  pull_request:
-  push:
-    branches:
-      - '**'
+on: [push, pull_request]
 
 jobs:
   prettier:
@@ -13,22 +9,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Check if package.json exists
-        run: |
-          if [ ! -f package.json ]; then
-            echo "Error: package.json not found"
-            exit 1
-          fi
-
-      - name: Install dependencies
-        run: yarn install
-        env:
-          CI: true
-
       - name: Run Prettier
-        run: yarn prettier
-
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: actionsx/prettier@v2
         with:
-          commit_message: Apply prettier changes
+          args: --check .
