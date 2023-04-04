@@ -33,11 +33,9 @@ function UserLogin(props: Props) {
       })
       .catch((error) => {
         setPwdDisabled(false);
-        if (!error.response) {
-          // status code out of the range of 2xx
-
-          props.setLoginErrorMsg("Too Many Requests");
-        } else {
+        if (error.response.status === 429)
+          props.setLoginErrorMsg(error.response.statusText);
+        else {
           props.setLoginErrorMsg("This password or username is invalid");
         }
         invalidPwdMsgRef.current!.style.display = "block";
