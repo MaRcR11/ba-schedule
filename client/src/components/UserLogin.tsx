@@ -13,8 +13,8 @@ interface Props {
   setLoginMode: any;
   changeLoginMode: any;
   setStoreUserIDRef: any;
-  errorText: any;
-  setErrorText:any
+  loginErrorMsg: any;
+  setLoginErrorMsg:any
 }
 function UserLogin(props: Props) {
   const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
@@ -36,12 +36,14 @@ function UserLogin(props: Props) {
         })
         .catch((error) => {
           setPwdDisabled(false);
+          console.log(error.response)
           if (!error.response) { // status code out of the range of 2xx
-  
-            props.setErrorText("Too Many Requests")
+
+            console.log("hi")
+            props.setLoginErrorMsg("Too Many Requests")
           }
           else{
-            props.setErrorText("This password or username is invalid")
+            props.setLoginErrorMsg("This password or username is invalid")
           }
           invalidPwdMsgRef.current!.style.display = "block";
           setTimeout(() => {
@@ -116,7 +118,7 @@ function UserLogin(props: Props) {
                         style={{ display: "none" }}
                         className="help is-danger"
                     >
-                     {props.errorText}
+                     {props.loginErrorMsg}
                     </p>
                   </div>
                   <div className="column">
