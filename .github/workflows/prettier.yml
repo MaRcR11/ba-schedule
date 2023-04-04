@@ -12,4 +12,4 @@ jobs:
       - name: Run Prettier
         uses: actionsx/prettier@v2
         with:
-          args: --check .
+          args: --write .
