@@ -52,8 +52,6 @@ This app is MERN **dockerized**, just note the following.
 </ul><ul>
 <li>Vite</li>
 </ul><ul>
-<li>React</li>
-</ul><ul>
 <li>Bulma</li>
 </ul><ul>
 <li>NodeJS</li>
