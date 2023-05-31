@@ -66,11 +66,10 @@ This app is MERN **dockerized**, just note the following.
 <hr><p>In Progress</p><h2>Improvements</h2>
 <hr><ul>
 <li>Read our code, find issues and fix them or just be creative and develop new features :)</li>
-</ul><h2>Acknowledgement</h2>
-<hr><ul>
-<li>Admin: Felix Herpich</li>
-</ul><ul>
-<li>Developers: Marc Wegeleben, Simon Nikolaidis</li>
-</ul><ul>
-<li>Thanks to: Florian Schmidt, Fritz Schubert</li>
-</ul>
+## Contribution
+Thank you to all the people who already contributed!
+
+<a href="https://github.com/marcr11/cs21-2-schedule/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=marcr11/cs21-2-schedule" />
+</a>
+
