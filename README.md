@@ -65,12 +65,10 @@ This app is MERN **dockerized**, just note the following.
 
 Read our code, find issues and fix them or just be creative and develop new features :)
 
-
 ## Contribution
+
 Thank you to all the people who already contributed!
 
 <a href="https://github.com/marcr11/cs21-2-schedule/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=marcr11/cs21-2-schedule" />
 </a>
-
-
