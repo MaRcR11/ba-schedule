@@ -66,6 +66,7 @@ This app is MERN **dockerized**, just note the following.
 <hr><p>In Progress</p><h2>Improvements</h2>
 <hr><ul>
 <li>Read our code, find issues and fix them or just be creative and develop new features :)</li>
+</ul>
 ## Contribution
 Thank you to all the people who already contributed!
 
