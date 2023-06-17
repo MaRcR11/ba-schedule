@@ -1,16 +1,7 @@
 const cron = require("node-cron");
 const { connectDB } = require("./db.service");
 const bcrypt = require("bcryptjs");
-const {
-  createNewCronJob,
-  updateUserLastLogin,
-  createNewUser,
-  checkUserRegistered,
-  checkUserExistence,
-  checkPwd,
-  getEndTime,
-  crawlScheduleData,
-} = require("../helpers");
+const { createNewCronJob, updateUserLastLogin, createNewUser, checkUserRegistered, checkUserExistence, checkPwd, getEndTime, crawlScheduleData } = require("../helpers");
 
 let data = {};
 const isJobRunning = {};
