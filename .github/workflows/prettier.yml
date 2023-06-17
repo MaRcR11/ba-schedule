@@ -19,4 +19,4 @@ jobs:
           prettier_options: --write **/*.{css,js,ts,tsx,html,md} --print-width 120
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-        commit_message: Apply prettier changes
+          commit_message: Apply prettier changes
