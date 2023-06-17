@@ -13,7 +13,7 @@ jobs:
       - name: Run Prettier
         uses: actionsx/prettier@v2
         with:
-          args: --write '**/*.{css,js,ts,tsx,html,md} --printWidth 120'
+          args: --write '**/*.{css,js,ts,tsx,html,md} --print-width 120'
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
             commit_message: Apply prettier changes
