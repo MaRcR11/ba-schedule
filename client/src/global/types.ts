@@ -33,11 +33,8 @@ export interface LoginProps {
   setFireRedirect: React.Dispatch<React.SetStateAction<boolean>>;
   pwdRef: React.RefObject<HTMLInputElement>;
   setStorePwdRef: React.Dispatch<React.SetStateAction<string>>;
-
   setStoreUserIDRef: React.Dispatch<React.SetStateAction<string>>;
-
   setLoginMode: React.Dispatch<React.SetStateAction<boolean>>;
-
   loginMode: boolean;
 }
 
