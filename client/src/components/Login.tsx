@@ -1,21 +1,10 @@
 import React, { useState } from "react";
 import GeneralLogin from "./GeneralLogin";
 import UserLogin from "./UserLogin";
+import { LoginProps } from "../global/types";
 
-interface Props {
-  setFireRedirect: any;
-  pwdRef: any;
-  setStorePwdRef: any;
-
-  setStoreUserIDRef: any;
-
-  setLoginMode: any;
-
-  loginMode: any;
-}
-
-function Login(props: Props) {
-  const [loginErrorMsg, setLoginErrorMsg] = useState("This password or username is invalid");
+function Login(props: LoginProps) {
+  const [loginErrorMsg, setLoginErrorMsg] = useState<string>("This password or username is invalid");
 
   const changeLoginMode = () => {
     props.setLoginMode(!props.loginMode);

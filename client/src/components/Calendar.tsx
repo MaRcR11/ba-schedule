@@ -13,17 +13,9 @@ import {
 import { scheduleDataFormat, setAppointmentColors, calenderSetLightTheme, calenderSetDarkTheme } from "../helpers";
 import "../styles/Calendar.css";
 import ThemeToggle from "./ThemeToggle";
-
+import { ScheduleData } from "../global/types";
 interface Props {
-  scheduleData: {
-    start: number;
-    end: number;
-    description: string;
-    remarks: string;
-    title: string;
-    instructor: string;
-    sroom: string;
-  }[];
+  scheduleData: ScheduleData[];
 }
 function Calendar(this: any, props: Props) {
   const formattedScheduleData = scheduleDataFormat(props.scheduleData);
@@ -35,7 +27,7 @@ function Calendar(this: any, props: Props) {
   };
 
   const onEventRendered = (args: any) => {
-    var scheduleObj: any = (document.querySelector(".e-schedule") as any).ej2_instances[0];
+    const scheduleObj: any = (document.querySelector(".e-schedule") as any).ej2_instances[0];
     setAppointmentColors(args, scheduleObj);
     if (scheduleObj.currentView == "Day") args.element.classList.add("daySelected");
   };
@@ -96,18 +88,21 @@ function Calendar(this: any, props: Props) {
 
   const configureKeyDownEvents = () => {
     window.addEventListener("keydown", (e) => {
+      const btn1 = document.getElementById("e-tbr-btn_1");
+      const btn0 = document.getElementById("e-tbr-btn_0");
+
       switch (e.key) {
         case "Right":
         case "ArrowRight":
           e.preventDefault();
-          document.getElementById("e-tbr-btn_1")?.click();
-          document.getElementById("e-tbr-btn_1")?.blur();
+          btn1?.click();
+          btn1?.blur();
           break;
         case "Left":
         case "ArrowLeft":
           e.preventDefault();
-          document.getElementById("e-tbr-btn_0")?.click();
-          document.getElementById("e-tbr-btn_0")?.blur();
+          btn0?.click();
+          btn0?.blur();
           break;
         default:
           break;

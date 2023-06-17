@@ -2,12 +2,10 @@ import { BarLoader } from "react-spinners";
 import "../styles/LoadingAnim.css";
 import { loadingMessages } from "../helpers/";
 import { useEffect, useState } from "react";
+import { LoadingAnimProps } from "../global/types";
 
-interface Props {
-  apiAvailable: boolean;
-}
-function LoadingAnim(props: Props) {
-  const [msg, setMsg] = useState("");
+function LoadingAnim(props: LoadingAnimProps) {
+  const [msg, setMsg] = useState<string>("");
 
   useEffect(() => {
     setInterval(() => {
@@ -37,7 +35,7 @@ function LoadingAnim(props: Props) {
               fontStyle: "italic",
             }}
           >
-            {loadingMessages() as any}
+            {loadingMessages()}
           </p>
         ) : (
           <p

@@ -1,22 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import vhCheck from "vh-check";
-vhCheck("vh-check");
 import "../styles/Login.css";
 import { BarLoader } from "react-spinners";
 import { calenderSetDarkTheme, calenderSetLightTheme } from "../helpers";
+import { UserLoginProps } from "../global/types";
+vhCheck("vh-check");
 
-interface Props {
-  setFireRedirect: any;
-  pwdRef: any;
-  setStorePwdRef: any;
-  setLoginMode: any;
-  changeLoginMode: any;
-  setStoreUserIDRef: any;
-  loginErrorMsg: any;
-  setLoginErrorMsg: any;
-}
-function UserLogin(props: Props) {
+function UserLogin(props: UserLoginProps) {
   const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
   const [isPwdDisabled, setPwdDisabled] = useState(false);
   const [isModeLoaded, setIsModeLoaded] = useState(false);
@@ -64,7 +55,7 @@ function UserLogin(props: Props) {
   const configureDarkLightMode = async () => {
     try {
       let mode: string = localStorage.getItem("mode") as string;
-      mode === "light" ? await calenderSetLightTheme() : await calenderSetDarkTheme();
+      mode === "light" ? calenderSetLightTheme() : calenderSetDarkTheme();
       setIsModeLoaded(true);
     } catch (error) {
       console.error("ungültiger Wert im localStorage");
