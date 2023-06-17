@@ -1,14 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const { getData, login, getEndTimeOfCurrentDay, userLogin } = require("../controllers/schedule.controller");
 
-const scheduleController = require("../controllers/schedule.controller");
-
-router.get("/api/getData", scheduleController.getData);
-router.post("/login", scheduleController.login);
-router.get(
-  "/api/getEndTimeOfCurrentDay",
-  scheduleController.getEndTimeOfCurrentDay
-);
-router.post("/userLogin", scheduleController.userLogin);
+router
+  .get("/api/getData", getData)
+  .post("/login", login)
+  .get("/api/getEndTimeOfCurrentDay", getEndTimeOfCurrentDay)
+  .post("/userLogin", userLogin);
 
 module.exports = router;
