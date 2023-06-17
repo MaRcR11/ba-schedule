@@ -36,8 +36,7 @@ function UserLogin(props: Props) {
       })
       .catch((error) => {
         setPwdDisabled(false);
-        if (error.response.status === 429)
-          props.setLoginErrorMsg(error.response.statusText);
+        if (error.response.status === 429) props.setLoginErrorMsg(error.response.statusText);
         else {
           props.setLoginErrorMsg("This password or username is invalid");
         }
@@ -53,8 +52,7 @@ function UserLogin(props: Props) {
   };
 
   const onChangeHideInvalidPwdMsg = () => {
-    if ((invalidPwdMsgRef.current!.style.display = "block"))
-      invalidPwdMsgRef.current!.style.display = "none";
+    if ((invalidPwdMsgRef.current!.style.display = "block")) invalidPwdMsgRef.current!.style.display = "none";
   };
 
   useEffect(() => {
@@ -66,9 +64,7 @@ function UserLogin(props: Props) {
   const configureDarkLightMode = async () => {
     try {
       let mode: string = localStorage.getItem("mode") as string;
-      mode === "light"
-        ? await calenderSetLightTheme()
-        : await calenderSetDarkTheme();
+      mode === "light" ? await calenderSetLightTheme() : await calenderSetDarkTheme();
       setIsModeLoaded(true);
     } catch (error) {
       console.error("ungültiger Wert im localStorage");
@@ -79,9 +75,7 @@ function UserLogin(props: Props) {
     <>
       {isModeLoaded ? (
         <div className="hero is-fullheight ">
-          {isPwdDisabled ? (
-            <BarLoader id="top-barloader" color={"#00d1b2"} width={"100%"} />
-          ) : null}
+          {isPwdDisabled ? <BarLoader id="top-barloader" color={"#00d1b2"} width={"100%"} /> : null}
           <div className="hero-body  is-justify-content-center is-align-items-center">
             <div className="columns is-half is-flex-direction-column box">
               <div className="column is-flex is-justify-content-center">
@@ -109,11 +103,7 @@ function UserLogin(props: Props) {
                   type="password"
                   placeholder="Hashwert"
                 />
-                <p
-                  ref={invalidPwdMsgRef}
-                  style={{ display: "none" }}
-                  className="help is-danger"
-                >
+                <p ref={invalidPwdMsgRef} style={{ display: "none" }} className="help is-danger">
                   {props.loginErrorMsg}
                 </p>
               </div>
@@ -133,10 +123,7 @@ function UserLogin(props: Props) {
                     General Login
                   </a>{" "}
                   -&nbsp;
-                  <a
-                    href="https://github.com/MaRcR11/cs21-2-schedule"
-                    className="has-text-danger"
-                  >
+                  <a href="https://github.com/MaRcR11/cs21-2-schedule" className="has-text-danger">
                     Help?
                   </a>
                 </p>

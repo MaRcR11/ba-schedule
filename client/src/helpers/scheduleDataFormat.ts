@@ -17,15 +17,13 @@ function scheduleDataFormat(
     formattedScheduleData.push({
       EndTime: new Date(e.end * 1000),
       StartTime: new Date(e.start * 1000),
-      Subject: `${
-        e.description.replace(regexVSreplace, "") + ` ` + `(${e.title})`
-      }`,
+      Subject: `${e.description.replace(regexVSreplace, "") + ` ` + `(${e.title})`}`,
       Location:
         e.remarks && !e.remarks.match(regexGroup) && !e.remarks.match(regexExam)
           ? `${e.remarks} (${e.instructor})`
-          : `BA Leipzig ${e.remarks ? `(${e.remarks})` : ""} (${
-              e.sroom ? e.sroom : "Raum unbekannt"
-            }) (${e.instructor})`,
+          : `BA Leipzig ${e.remarks ? `(${e.remarks})` : ""} (${e.sroom ? e.sroom : "Raum unbekannt"}) (${
+              e.instructor
+            })`,
     });
   });
 

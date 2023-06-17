@@ -10,12 +10,7 @@ import {
   ViewsDirective,
   ViewDirective,
 } from "@syncfusion/ej2-react-schedule";
-import {
-  scheduleDataFormat,
-  setAppointmentColors,
-  calenderSetLightTheme,
-  calenderSetDarkTheme,
-} from "../helpers";
+import { scheduleDataFormat, setAppointmentColors, calenderSetLightTheme, calenderSetDarkTheme } from "../helpers";
 import "../styles/Calendar.css";
 import ThemeToggle from "./ThemeToggle";
 
@@ -40,11 +35,9 @@ function Calendar(this: any, props: Props) {
   };
 
   const onEventRendered = (args: any) => {
-    var scheduleObj: any = (document.querySelector(".e-schedule") as any)
-      .ej2_instances[0];
+    var scheduleObj: any = (document.querySelector(".e-schedule") as any).ej2_instances[0];
     setAppointmentColors(args, scheduleObj);
-    if (scheduleObj.currentView == "Day")
-      args.element.classList.add("daySelected");
+    if (scheduleObj.currentView == "Day") args.element.classList.add("daySelected");
   };
 
   useEffect(() => {
