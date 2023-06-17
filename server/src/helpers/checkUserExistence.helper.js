@@ -8,9 +8,7 @@ const checkUserExistence = (userID, userHash) => {
   const OPTIONS = {
     host: "selfservice.campus-dual.de",
     path: `/dash/getcp?user=${userID}&hash=${userHash}`,
-    ca: fs.readFileSync(
-      path.join(__dirname, "..", "crawler", "campusdual-cert-chain.pem")
-    ),
+    ca: fs.readFileSync(path.join(__dirname, "..", "crawler", "campusdual-cert-chain.pem")),
     json: true,
   };
 

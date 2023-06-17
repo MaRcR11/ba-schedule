@@ -1,19 +1,19 @@
 name: Prettier
 
+# This action works with pull requests and pushes
 on: [push]
 
 jobs:
   prettier:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-            ref: ${{ github.head_ref }}
-      - name: Run Prettier
-        uses: actionsx/prettier@v2
+          ref: ${{ github.head_ref }}
+
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.3
         with:
-          args: --write '**/*.{css,js,ts,tsx,html,md}'
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-            commit_message: Apply prettier changes
+          prettier_options: --write **/*.{css,js,ts,tsx,html,md} --print-width 120

@@ -6,10 +6,6 @@ import "bulma/css/bulma.min.css";
 import "bulma-switch";
 import { registerLicense } from "@syncfusion/ej2-base";
 
-registerLicense(
-  "ORg4AjUWIQA/Gnt2VVhkQlFacl1JXGFWfVJpTGpQdk5xdV9DaVZUTWY/P1ZhSXxQdkRjXn5ccHRXRGBaVEM="
-);
+registerLicense("ORg4AjUWIQA/Gnt2VVhkQlFacl1JXGFWfVJpTGpQdk5xdV9DaVZUTWY/P1ZhSXxQdkRjXn5ccHRXRGBaVEM=");
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <App />
-);
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(<App />);

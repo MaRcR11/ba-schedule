@@ -15,9 +15,7 @@ interface Props {
 }
 
 function Login(props: Props) {
-  const [loginErrorMsg, setLoginErrorMsg] = useState(
-    "This password or username is invalid"
-  );
+  const [loginErrorMsg, setLoginErrorMsg] = useState("This password or username is invalid");
 
   const changeLoginMode = () => {
     props.setLoginMode(!props.loginMode);
