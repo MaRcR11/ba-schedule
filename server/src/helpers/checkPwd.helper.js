@@ -7,6 +7,7 @@ const checkPwd = async (pwd, OPTIONS) => {
     return hashToCheck ? await bcrypt.compare(pwd, hashToCheck) : false;
   } catch (error) {
     console.error(error);
+
     return false;
   }
 };

@@ -3,32 +3,23 @@ import axios from "axios";
 import Calendar from "./Calendar";
 import LoadingAnim from "./LoadingAnim";
 import Login from "./Login";
+import { ScheduleData } from "../global/types";
 
 function App() {
-  const [fetched, setFetched] = useState(false);
+  const [fetched, setFetched] = useState<boolean>(false);
   const pwdRef = useRef<HTMLInputElement>(null);
-  const [storePwdRef, setStorePwdRef] = useState("");
-  const [fireRedirect, setFireRedirect] = useState(false);
-  const [apiAvailable, setapiAvailable] = useState(true);
+  const [storePwdRef, setStorePwdRef] = useState<string>("");
+  const [fireRedirect, setFireRedirect] = useState<boolean>(false);
+  const [apiAvailable, setApiAvailable] = useState<boolean>(true);
   const [loginMode, setLoginMode] = useState<boolean>(false);
-  const [storeUserIDRef, setStoreUserIDRef] = useState("");
-  const [scheduleData, setScheduleData] = useState<
-    {
-      start: number;
-      end: number;
-      description: string;
-      remarks: string;
-      title: string;
-      instructor: string;
-      sroom: string;
-    }[]
-  >([]);
+  const [storeUserIDRef, setStoreUserIDRef] = useState<string>("");
+  const [scheduleData, setScheduleData] = useState<ScheduleData[]>([]);
 
   useEffect(() => {
     fireRedirect
       ? axios
           .get(
-            `http://localhost:4000/api/getData?` +
+            `http://localhost:4000/api/getDataa?` +
               new URLSearchParams({
                 pwd: storePwdRef,
                 userID: loginMode ? "" : `${storeUserIDRef}`,
@@ -38,8 +29,8 @@ function App() {
             setScheduleData(JSON.parse(res.data));
             setFetched(true);
           })
-          .catch((err) => {
-            setapiAvailable(true);
+          .catch(() => {
+            setApiAvailable(true);
           })
       : null;
   }, [fireRedirect]);

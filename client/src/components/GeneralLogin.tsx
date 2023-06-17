@@ -5,20 +5,12 @@ vhCheck("vh-check");
 import "../styles/Login.css";
 import { BarLoader } from "react-spinners";
 import { calenderSetDarkTheme, calenderSetLightTheme } from "../helpers";
+import { GeneralLoginProps } from "../global/types";
 
-interface Props {
-  setFireRedirect: any;
-  pwdRef: any;
-  setStorePwdRef: any;
-  setLoginMode: any;
-  changeLoginMode: any;
-  loginErrorMsg: any;
-  setLoginErrorMsg: any;
-}
-function UserLogin(props: Props) {
+function GeneralLogin(props: GeneralLoginProps) {
   const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
-  const [isPwdDisabled, setPwdDisabled] = useState(false);
-  const [isModeLoaded, setIsModeLoaded] = useState(false);
+  const [isPwdDisabled, setPwdDisabled] = useState<boolean>(false);
+  const [isModeLoaded, setIsModeLoaded] = useState<boolean>(false);
 
   const onSubmitPwd = () => {
     if (!props.pwdRef.current!.value) return;
@@ -26,7 +18,7 @@ function UserLogin(props: Props) {
     setPwdDisabled(true);
     axios
       .post("http://localhost:4000/login/", { pwd })
-      .then((res) => {
+      .then(() => {
         props.setStorePwdRef(pwd);
         props.setFireRedirect(true);
         setPwdDisabled(false);
@@ -68,10 +60,6 @@ function UserLogin(props: Props) {
     }
   };
 
-  const changeLoginMode = () => {
-    props.setLoginMode(false);
-  };
-
   return (
     <>
       {isModeLoaded ? (
@@ -110,7 +98,7 @@ function UserLogin(props: Props) {
               </div>
               <div className="has-text-centered">
                 <p className="is-size-7">
-                  <a onClick={changeLoginMode} className="has-text-link">
+                  <a onClick={props.changeLoginMode} className="has-text-link">
                     User Login
                   </a>
                 </p>
@@ -123,4 +111,4 @@ function UserLogin(props: Props) {
   );
 }
 
-export default UserLogin;
+export default GeneralLogin;

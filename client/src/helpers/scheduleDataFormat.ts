@@ -1,33 +1,14 @@
-function scheduleDataFormat(
-  scheduleData: {
-    start: number;
-    end: number;
-    description: string;
-    remarks: string;
-    title: string;
-    instructor: string;
-    sroom: string;
-  }[]
-): any {
-  const formattedScheduleData: any = [];
-  const regexGroup = "Gruppe";
-  const regexVSreplace = "VS";
-  const regexExam = "Prüfung";
-  scheduleData.map((e, i) => {
-    formattedScheduleData.push({
-      EndTime: new Date(e.end * 1000),
-      StartTime: new Date(e.start * 1000),
-      Subject: `${e.description.replace(regexVSreplace, "") + ` ` + `(${e.title})`}`,
-      Location:
-        e.remarks && !e.remarks.match(regexGroup) && !e.remarks.match(regexExam)
-          ? `${e.remarks} (${e.instructor})`
-          : `BA Leipzig ${e.remarks ? `(${e.remarks})` : ""} (${e.sroom ? e.sroom : "Raum unbekannt"}) (${
-              e.instructor
-            })`,
-    });
-  });
+import { FormattedScheduleData, ScheduleData } from "../global/types";
 
-  return formattedScheduleData;
-}
+const scheduleDataFormat = (scheduleData: ScheduleData[]): FormattedScheduleData[] =>
+  scheduleData.map((e) => ({
+    EndTime: new Date(e.end * 1000),
+    StartTime: new Date(e.start * 1000),
+    Subject: `${e.description.replace("VS", "")} (${e.title})`,
+    Location:
+      e.remarks && !e.remarks.includes("Gruppe") && !e.remarks.includes("Prüfung")
+        ? `${e.remarks} (${e.instructor})`
+        : `BA Leipzig ${e.remarks ? `(${e.remarks})` : ""} (${e.sroom ?? "Raum unbekannt"}) (${e.instructor})`,
+  }));
 
 export default scheduleDataFormat;

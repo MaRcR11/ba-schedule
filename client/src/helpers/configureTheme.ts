@@ -1,10 +1,10 @@
-const calenderSetDarkTheme = async () => {
+const calenderSetDarkTheme = () => {
   let theme: any = document.getElementById("theme");
   theme.href = "https://cdn.syncfusion.com/ej2/material-dark.css";
   htmlSetDarkTheme();
 };
 
-const calenderSetLightTheme = async () => {
+const calenderSetLightTheme = () => {
   let theme: any = document.getElementById("theme");
   theme.href = "https://cdn.syncfusion.com/ej2/material.css";
   htmlSetLightTheme();

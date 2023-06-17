@@ -1,17 +1,20 @@
-import * as subjects from "../data/subjects.json";
+import subjects from "../data/subjects.json";
 
-function setAppointmentColors(args: any, scheduleObj: any) {
-  (subjects as any).default.map((e: any) => {
-    let color = null;
+const setAppointmentColors = (args: any, scheduleObj: any) => {
+  const { data, element } = args;
+  const { currentView } = scheduleObj;
 
-    if (args.data.Location.includes("Prüfung")) color = "#D2042D";
+  const matchingSubject = subjects.find((e: any) => data.Subject.includes(e.name));
 
-    args.data.Subject.includes(e.name)
-      ? scheduleObj.currentView == "Agenda"
-        ? (args.element.children[0].style.borderColor = color === null ? e.color : color)
-        : (args.element.style.backgroundColor = color === null ? e.color : color)
-      : null;
-  });
-}
+  if (matchingSubject) {
+    const color = data.Location.includes("Prüfung") ? "#D2042D" : matchingSubject.color;
+
+    if (currentView === "Agenda") {
+      element.children[0].style.borderColor = color;
+    } else {
+      element.style.backgroundColor = color;
+    }
+  }
+};
 
 export default setAppointmentColors;

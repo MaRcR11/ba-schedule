@@ -1,9 +1,8 @@
-import * as randomLoadingMessages from "../data/randomLoadingMessages.json";
+import randomLoadingMessages from "../data/randomLoadingMessages.json";
 
 function getRandomLoadingMessage() {
-  return Object.values((randomLoadingMessages as any).default)[
-    Math.floor(Math.random() * Object.values((randomLoadingMessages as any).default).length)
-  ];
+  const loadingMessages = Object.values(randomLoadingMessages);
+  return loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
 }
 
 export default getRandomLoadingMessage;
