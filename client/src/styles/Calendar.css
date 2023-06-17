@@ -1,9 +1,5 @@
 @media only screen and (max-width: 600px) {
-  .e-schedule
-    .e-vertical-view
-    .e-day-wrapper
-    .e-appointment:not(.daySelected)
-    .e-subject {
+  .e-schedule .e-vertical-view .e-day-wrapper .e-appointment:not(.daySelected) .e-subject {
     font-size: 7px;
     line-height: 1.1;
   }
@@ -11,16 +7,8 @@
     display: flex;
   }
 
-  .e-schedule
-    .e-vertical-view
-    .e-day-wrapper
-    .e-appointment:not(.daySelected)
-    .e-time,
-  .e-schedule
-    .e-vertical-view
-    .e-day-wrapper
-    .e-appointment:not(.daySelected)
-    .e-location {
+  .e-schedule .e-vertical-view .e-day-wrapper .e-appointment:not(.daySelected) .e-time,
+  .e-schedule .e-vertical-view .e-day-wrapper .e-appointment:not(.daySelected) .e-location {
     font-size: 5px;
     white-space: break-spaces;
   }

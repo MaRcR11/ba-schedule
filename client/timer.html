@@ -18,12 +18,7 @@
     body {
       height: 100%;
       overflow: hidden;
-      background: radial-gradient(
-          circle closest-corner at center,
-          #222,
-          black 80%
-        )
-        no-repeat;
+      background: radial-gradient(circle closest-corner at center, #222, black 80%) no-repeat;
       margin: 0;
     }
     body {
@@ -39,12 +34,7 @@
       display: block;
       font-family: "Syncopate", sans-serif;
       text-transform: uppercase;
-      background: radial-gradient(
-          circle farthest-corner at center center,
-          #ccc,
-          #666666
-        )
-        no-repeat;
+      background: radial-gradient(circle farthest-corner at center center, #ccc, #666666) no-repeat;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -67,9 +57,7 @@
 
         let distance = countDownDate - now;
 
-        let hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
+        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
@@ -77,13 +65,11 @@
         if (minutes < 10) minutes = "0" + minutes;
         if (seconds < 10) seconds = "0" + seconds;
 
-        document.getElementById("endOfDayTimer").innerText =
-          hours + "h " + minutes + "m " + seconds + "s ";
+        document.getElementById("endOfDayTimer").innerText = hours + "h " + minutes + "m " + seconds + "s ";
 
         if (distance < 0) {
           clearInterval(x);
-          document.getElementById("endOfDayTimer").innerText =
-            "00" + "h " + "00" + "m " + "00" + "s ";
+          document.getElementById("endOfDayTimer").innerText = "00" + "h " + "00" + "m " + "00" + "s ";
         }
       }, 1000);
     }
