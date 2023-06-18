@@ -19,7 +19,7 @@ function App() {
     fireRedirect
       ? axios
           .get(
-            `http://localhost:4000/api/getDataa?` +
+            `http://localhost:4000/api/getData?` +
               new URLSearchParams({
                 pwd: storePwdRef,
                 userID: loginMode ? "" : `${storeUserIDRef}`,
