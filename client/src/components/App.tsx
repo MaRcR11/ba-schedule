@@ -11,7 +11,9 @@ function App() {
   const [storePwdRef, setStorePwdRef] = useState<string>("");
   const [fireRedirect, setFireRedirect] = useState<boolean>(false);
   const [apiAvailable, setApiAvailable] = useState<boolean>(true);
-  const [loginMode, setLoginMode] = useState<boolean>(false);
+  const [loginMode, setLoginMode] = useState<boolean>(
+    Boolean(localStorage.getItem("loginMode"))
+  );
   const [storeUserIDRef, setStoreUserIDRef] = useState<string>("");
   const [scheduleData, setScheduleData] = useState<ScheduleData[]>([]);
 
@@ -44,14 +46,14 @@ function App() {
           <LoadingAnim apiAvailable={apiAvailable} />
         )
       ) : (
-        <Login
-          setFireRedirect={setFireRedirect}
-          pwdRef={pwdRef}
-          setStorePwdRef={setStorePwdRef}
-          setStoreUserIDRef={setStoreUserIDRef}
-          loginMode={loginMode}
-          setLoginMode={setLoginMode}
-        />
+          <Login
+            setFireRedirect={setFireRedirect}
+            pwdRef={pwdRef}
+            setStorePwdRef={setStorePwdRef}
+            setStoreUserIDRef={setStoreUserIDRef}
+            loginMode={loginMode}
+            setLoginMode={setLoginMode}
+          />
       )}
     </>
   );
