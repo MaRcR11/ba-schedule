@@ -8,7 +8,7 @@ function Login(props: LoginProps) {
 
   const changeLoginMode = () => {
     props.setLoginMode(!props.loginMode);
-    localStorage.setItem("loginMode", props.loginMode ? "" : String(props.loginMode) )
+    localStorage.setItem("loginMode", props.loginMode ? "" : String(props.loginMode));
   };
 
   return props.loginMode ? (
@@ -20,7 +20,6 @@ function Login(props: LoginProps) {
       changeLoginMode={changeLoginMode}
       loginErrorMsg={loginErrorMsg}
       setLoginErrorMsg={setLoginErrorMsg}
-
     />
   ) : (
     <UserLogin
@@ -32,7 +31,6 @@ function Login(props: LoginProps) {
       setStoreUserIDRef={props.setStoreUserIDRef}
       loginErrorMsg={loginErrorMsg}
       setLoginErrorMsg={setLoginErrorMsg}
-
     />
   );
 }
