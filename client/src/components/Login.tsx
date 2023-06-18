@@ -8,6 +8,7 @@ function Login(props: LoginProps) {
 
   const changeLoginMode = () => {
     props.setLoginMode(!props.loginMode);
+    localStorage.setItem("loginMode", props.loginMode ? "" : String(props.loginMode));
   };
 
   return props.loginMode ? (
