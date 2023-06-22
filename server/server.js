@@ -17,7 +17,7 @@ app.use(cors());
 app.use("/", scheduleRouter);
 app.set("trust proxy", 1);
 dotenv.config();
-//
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/../client/dist/index.html"));
 });
