@@ -27,7 +27,7 @@ function GeneralLogin(props: GeneralLoginProps) {
         setPwdDisabled(false);
         if (error.response.status === 429) props.setLoginErrorMsg(error.response.statusText);
         else {
-          props.setLoginErrorMsg("This password or username is invalid");
+          props.setLoginErrorMsg("This password is invalid");
         }
         invalidPwdMsgRef.current!.style.display = "block";
         setTimeout(() => {
