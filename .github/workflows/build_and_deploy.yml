@@ -1,0 +1,53 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      
+      - name: Install dependencies
+        run: |
+          cd ./client
+          npm ci
+
+      - name: Build client
+        run: |
+          cd ./client
+          npm run build
+
+      - name: Remove dist from .gitignore
+        run: |
+          find . -name ".gitignore" -type f -exec sed -i '/dist/d' {} +
+
+      - name: Update routes 
+        run: |
+          find ./client -type f -exec sed -i 's|http://localhost:[0-9]\+/|https://cs21-2-schedule.de/|' {} +
+      
+      - name: create build branch and commit    
+        uses: EndBug/add-and-commit@v9 
+        with:
+          new_branch: build
+
+      - name: SSH into server and run setup script
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: root
+          password: ${{ secrets.SERVER_PASSWORD }}
+          script: |
+            cd ../var/www/html
+            bash setup.sh
+
