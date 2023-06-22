@@ -23,11 +23,6 @@ jobs:
           cd ./client
           npm ci
 
-      - name: Build client
-        run: |
-          cd ./client
-          npm run build
-
       - name: Remove dist from .gitignore
         run: |
           find . -name ".gitignore" -type f -exec sed -i '/dist/d' {} +
@@ -35,6 +30,11 @@ jobs:
       - name: Update routes 
         run: |
           find ./client -type f -exec sed -i 's|http://localhost:[0-9]\+/|https://cs21-2-schedule.de/|' {} +
+      
+      - name: Build client
+        run: |
+          cd ./client
+          npm run build
       
       - name: create build branch and commit    
         uses: EndBug/add-and-commit@v9 
