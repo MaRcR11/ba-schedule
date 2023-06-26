@@ -14,30 +14,6 @@
 <p>3. Copy your hash </p>
 <img src="./hash_location.png">
 </ul>
-
-## Getting Started
-
-This app is MERN **dockerized**, just note the following.
-
-- Make sure Docker is installed on your system, if not: https://docs.docker.com/desktop/
-
-- You need to create an .env on root of the app, witch includes the following (without some Docker Desktop versions may throw an error):
-  ```
-   export DOCKER_BUILDKIT=0
-   export COMPOSE_DOCKER_CLI_BUILD=0
-  ```
-- To access the MongoDB you need the matching DB_URI (only **trusted** contributors) and create an .env on root of the server directory, which includes the following:
-  ```
-  DB_URI=...
-  ```
-- Make sure the ports in the app **match** the specified ports from the **Dockerfile** and **docker-compose.yml**.
-
-- You can now start the app and create your **client and - server-side containers** with the following command:
-  ```
-  docker-compose up --build
-  ```
-  **_NOTE:_** If you do not want to run it via docker, of course you can also run it locally.
-
 <h2>Technologies Used</h2>
 <ul>
 <li>JavaScript</li>
