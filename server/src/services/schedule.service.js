@@ -84,7 +84,7 @@ async function userLogin(req) {
 }
 async function getEndTimeOfCurrentDay() {
   if (!data) return { status: 502, json: "no data" };
-  let endtime = getEndTime(data);
+  let endtime = getEndTime(data.general);
   return { status: 200, json: endtime };
 }
 
