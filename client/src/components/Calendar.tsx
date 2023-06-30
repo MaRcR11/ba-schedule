@@ -32,6 +32,15 @@ function Calendar(this: any, props: Props) {
     if (scheduleObj.currentView == "Day") args.element.classList.add("daySelected");
   };
 
+  const onDataBound = (color: string) => {
+    const elements = document.getElementsByClassName("e-appointment");
+    const mode = localStorage.getItem("mode");
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements[i] as HTMLElement;
+      element.style.color = `${!color ? (mode === "light" ? "black" : "white") : color}`;
+    }
+  };
+
   useEffect(() => {
     configureDarkLightMode();
     configureKeyDownEvents();
@@ -78,10 +87,12 @@ function Calendar(this: any, props: Props) {
     if (toggleCheckbox.checked) {
       calenderSetLightTheme();
       toggleCheckbox.checked = false;
+      onDataBound("black");
       localStorage.setItem("mode", "light");
     } else {
       calenderSetDarkTheme();
       toggleCheckbox.checked = true;
+      onDataBound("white");
       localStorage.setItem("mode", "dark");
     }
   };
@@ -121,6 +132,7 @@ function Calendar(this: any, props: Props) {
           end: "21:00",
         }}
         eventRendered={onEventRendered.bind(this)}
+        dataBound={onDataBound.bind(this)}
       >
         <ViewsDirective>
           <ViewDirective option="Day" startHour="08:00" endHour="21:00" />

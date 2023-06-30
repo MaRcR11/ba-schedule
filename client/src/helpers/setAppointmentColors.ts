@@ -1,4 +1,5 @@
 import subjects from "../data/subjects.json";
+import hexToRgb from "./hexToRgb";
 
 const setAppointmentColors = (args: any, scheduleObj: any) => {
   const { data, element } = args;
@@ -12,7 +13,8 @@ const setAppointmentColors = (args: any, scheduleObj: any) => {
     if (currentView === "Agenda") {
       element.children[0].style.borderColor = color;
     } else {
-      element.style.backgroundColor = color;
+      element.style.borderColor = color;
+      element.style.backgroundColor = `rgba(${[...hexToRgb(color)]}, ${0.2})`;
     }
   }
 };
