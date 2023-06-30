@@ -34,7 +34,7 @@ function Calendar(this: any, props: Props) {
 
   const onDataBound = (color: string) => {
     const elements = document.getElementsByClassName("e-appointment");
-    const mode = localStorage.getItem("mode")
+    const mode = localStorage.getItem("mode");
     for (let i = 0; i < elements.length; i++) {
       const element = elements[i] as HTMLElement;
       element.style.color = `${!color ? (mode === "light" ? "black" : "white") : color}`;
@@ -87,12 +87,12 @@ function Calendar(this: any, props: Props) {
     if (toggleCheckbox.checked) {
       calenderSetLightTheme();
       toggleCheckbox.checked = false;
-      onDataBound("black")
+      onDataBound("black");
       localStorage.setItem("mode", "light");
     } else {
       calenderSetDarkTheme();
       toggleCheckbox.checked = true;
-      onDataBound("white")
+      onDataBound("white");
       localStorage.setItem("mode", "dark");
     }
   };
@@ -120,8 +120,6 @@ function Calendar(this: any, props: Props) {
       }
     });
   };
-
-
 
   return (
     <>
