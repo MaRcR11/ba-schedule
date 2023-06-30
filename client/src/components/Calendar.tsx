@@ -75,7 +75,7 @@ function Calendar(this: any, props: Props) {
       e.preventDefault();
       setThemeForCheckedToggleOption(themeToggle);
       openTimerCounter++;
-      if (openTimerCounter >= 5000) {
+      if (openTimerCounter >= 5) {
         window.open("https://www.cs21-2-schedule.de/timer", "_blank")?.focus();
         openTimerCounter = 0;
       }
