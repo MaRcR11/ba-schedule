@@ -19,7 +19,6 @@ const htmlSetDarkTheme = () => {
 const htmlSetLightTheme = () => {
   let htmlElement = document.getElementsByTagName("html")[0];
 
-
   htmlElement.classList.add("light");
   htmlElement.classList.remove("dark");
 };

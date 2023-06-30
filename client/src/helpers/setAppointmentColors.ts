@@ -14,7 +14,7 @@ const setAppointmentColors = (args: any, scheduleObj: any) => {
       element.children[0].style.borderColor = color;
     } else {
       element.style.borderColor = color;
-      element.style.backgroundColor =`rgba(${[...hexToRgb(color)]}, ${0.2})`;
+      element.style.backgroundColor = `rgba(${[...hexToRgb(color)]}, ${0.2})`;
     }
   }
 };
