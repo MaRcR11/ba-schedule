@@ -1,4 +1,4 @@
-<h1>cs21-2-schedule</h1>
+<h1>ba-schedule</h1>
 <p>This is a project that makes it easier for us students to access our schedule for our courses at the university. Our actual web application for this is trash and therefore we had to look for a better solution and create one ourselves.</p>
 <h2>General Information</h2>
 <ul>
@@ -35,7 +35,7 @@
 <li>MongoDB</li>
 </ul><h2>Setup</h2>
 <p>No requirements besides an internet capable device</p><h5>Steps</h5><ul>
-<li>Just go to https://cs21-2-schedule.de/ - it's a web app :)</li>
+<li>Just go to https://ba-schedule.de/ - it's a web app :)</li>
 </ul><h2>Project Status</h2>
 <p>In Progress</p><h2>Improvements</h2>
 
