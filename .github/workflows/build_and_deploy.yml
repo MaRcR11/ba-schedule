@@ -48,6 +48,6 @@ jobs:
           username: root
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            cd ../var/www/html/ba-schedule
+            cd ../var/www/html/ba-schedule.de
             bash setup.sh
 
