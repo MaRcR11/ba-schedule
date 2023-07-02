@@ -44,7 +44,7 @@
     }
   </style>
   <script>
-    fetch("https://cs21-2-schedule.de/api/getEndTimeOfCurrentDay")
+    fetch("https://ba-schedule.de/api/getEndTimeOfCurrentDay")
       .then((response) => response.json())
       .then((data) => createTimer(JSON.parse(data)));
 
