@@ -29,7 +29,7 @@ jobs:
 
       - name: Update routes 
         run: |
-          find ./client -type f -exec sed -i 's|http://localhost:[0-9]\+/|https://cs21-2-schedule.de/|' {} +
+          find ./client -type f -exec sed -i 's|http://localhost:[0-9]\+/|https://ba-schedule.de/|' {} +
       
       - name: Build client
         run: |
