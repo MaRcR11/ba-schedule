@@ -76,7 +76,7 @@ function Calendar(this: any, props: Props) {
       setThemeForCheckedToggleOption(themeToggle);
       openTimerCounter++;
       if (openTimerCounter >= 5) {
-        window.open("https://www.cs21-2-schedule.de/timer", "_blank")?.focus();
+        window.open("https://www.ba-schedule.de/timer", "_blank")?.focus();
         openTimerCounter = 0;
       }
     });
