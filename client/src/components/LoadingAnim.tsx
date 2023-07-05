@@ -21,7 +21,7 @@ function LoadingAnim(props: LoadingAnimProps) {
             userSelect: "none",
           }}
         >
-          CS21-2 Stundenplan
+          ba-schedule
         </p>
 
         <BarLoader id="barLoader" color={"#00d1b2"} />
