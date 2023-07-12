@@ -5,7 +5,7 @@ function getTodaysAppointments(data) {
 
   const timeAtStartOfDay = currentTime - Math.floor((e - d.setHours(0, 0, 0, 0)) / 1000);
   const filteredData = data.filter(
-    (appointment) => appointment.start >= timeAtStartOfDay && appointment.end <= timeAtStartOfDay + 86400
+    (appointment) => appointment.start >= timeAtStartOfDay && appointment.end <= timeAtStartOfDay + 86400,
   );
   return filteredData;
 }
