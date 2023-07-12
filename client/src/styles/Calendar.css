@@ -28,3 +28,7 @@
 .e-work-cells {
   pointer-events: none;
 }
+
+.e-schedule .e-spinner-pane {
+  display: none !important;
+}
