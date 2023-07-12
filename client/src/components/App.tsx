@@ -19,7 +19,7 @@ function App() {
     fireRedirect
       ? axios
           .get(
-            `https://ba-schedule.de/api/getData?` +
+            `http://localhost:3000/api/getData?` +
               new URLSearchParams({
                 pwd: storePwdRef,
                 userID: loginMode ? "" : `${storeUserIDRef}`,
