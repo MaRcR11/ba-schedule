@@ -17,7 +17,7 @@ function GeneralLogin(props: GeneralLoginProps) {
     const pwd = props.pwdRef.current!.value;
     setPwdDisabled(true);
     axios
-      .post("https://ba-schedule.de/login/", { pwd })
+      .post("http://localhost:3000/login/", { pwd })
       .then(() => {
         props.setStorePwdRef(pwd);
         props.setFireRedirect(true);
