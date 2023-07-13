@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import ThemeToggle from "./ThemeToggle";
-import {SettingsOptionProps} from "../global/types";
+import { SettingsOptionProps } from "../global/types";
 
 function SettingsOption(props: SettingsOptionProps) {
     return (
@@ -9,12 +9,14 @@ function SettingsOption(props: SettingsOptionProps) {
                 <div className="field is-narrow is-block">
                     <div className="control">
                         <div className="field is-grouped is-align-items-center is-justify-content-space-between">
-                            <span className="option-text mr-6"  style={{fontSize: "0.85rem"}}>{props.settingName}</span>
+              <span className="option-text mr-6" style={{ fontSize: "0.85rem" }}>
+                {props.settingName}
+              </span>
                             <label className="switch">
-                                <ThemeToggle id={props.id}/>
+                                <ThemeToggle id={props.id} />
                             </label>
                         </div>
-                        <hr style={{margin: "0"}}/>
+                        <hr style={{ margin: "0" }} />
                     </div>
                 </div>
             </div>
