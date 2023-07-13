@@ -48,3 +48,14 @@ export interface FormattedScheduleData {
   Subject: string;
   Location: string;
 }
+
+export interface SettingsPopUpProps {
+  trigger: boolean;
+  setTrigger: Function;
+}
+
+export interface SettingsButtonProps {
+  clickEvent: Function;
+  rotation: number;
+  setRotation: Function;
+}

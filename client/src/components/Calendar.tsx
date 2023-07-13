@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Agenda,
   Day,
@@ -14,6 +14,8 @@ import { scheduleDataFormat, setAppointmentColors, calenderSetLightTheme, calend
 import "../styles/Calendar.css";
 import ThemeToggle from "./ThemeToggle";
 import { ScheduleData } from "../global/types";
+import ReactDOMServer from "react-dom/server";
+import SettingsPopUp from "./SettingsPopUp";
 interface Props {
   scheduleData: ScheduleData[];
 }
@@ -25,6 +27,7 @@ function Calendar(this: any, props: Props) {
     allowEditing: false,
     allowDeleting: false,
   };
+  const [popUpVisible, setPopUpVisible] = useState(false);
 
   const onEventRendered = (args: any) => {
     const scheduleObj: any = (document.querySelector(".e-schedule") as any).ej2_instances[0];
@@ -49,14 +52,22 @@ function Calendar(this: any, props: Props) {
   const configureDarkLightMode = () => {
     let rightToolbar = document.getElementsByClassName("e-toolbar-right")[0];
     if (rightToolbar.children[0]?.classList.contains("field")) return;
-    let themeToggle = ThemeToggle();
-    rightToolbar.prepend(themeToggle);
-    let toggleCheckbox = themeToggle.children[0] as HTMLInputElement;
-    toggleConfigureCorrectChecking(toggleCheckbox);
-    toggleConfigureOnClickEvent(themeToggle);
+    let field = document.createElement("div");
+    field.classList.add("field");
+    let btnSettings = document.createElement("button");
+    btnSettings.id = "btn-cogwheel";
+    btnSettings.addEventListener("click", () => {
+      btnSettings.style.transform = "rotate(90deg)";
+      setPopUpVisible(true);
+    });
+    field.appendChild(btnSettings);
+    rightToolbar.prepend(field);
+    // let toggleCheckbox = themeToggle.children[0] as HTMLInputElement;
+    // toggleConfigureCorrectChecking(toggleCheckbox);
+    // toggleConfigureOnClickEvent(themeToggle as HTMLDivElement);
     window.addEventListener("resize", () => {
-      themeToggle.remove();
-      rightToolbar.prepend(themeToggle);
+      field.remove();
+      rightToolbar.prepend(field);
     });
   };
 
@@ -142,6 +153,13 @@ function Calendar(this: any, props: Props) {
         </ViewsDirective>
         <Inject services={[Day, WorkWeek, Month, Agenda]} />
       </ScheduleComponent>
+      <SettingsPopUp
+        trigger={popUpVisible}
+        setTrigger={(bool: boolean) => {
+          setPopUpVisible(bool);
+          if (!bool) document.getElementById("btn-cogwheel")!.style.transform = "rotate(0deg)";
+        }}
+      />
     </>
   );
 }

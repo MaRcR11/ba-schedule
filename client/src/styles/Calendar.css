@@ -32,3 +32,20 @@
 .e-schedule .e-spinner-pane {
   display: none !important;
 }
+
+#btn-cogwheel {
+  background: url("../assets/cogwheel-blue.png");
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  width: 20px;
+  height: 20px;
+  outline: none;
+  border: none;
+  transition: transform 0.3s ease;
+  transform: rotate(0deg);
+  margin-right: 10px;
+}
+
+#btn-cogwheel:hover {
+  cursor: pointer;
+}
