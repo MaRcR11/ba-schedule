@@ -15,7 +15,7 @@ import {
   setAppointmentColors,
   calenderSetLightTheme,
   calenderSetDarkTheme,
-  configureKeyDownEvents
+  configureKeyDownEvents,
 } from "../helpers";
 import "../styles/Calendar.css";
 import ThemeToggle from "./ThemeToggle";
@@ -113,7 +113,6 @@ function Calendar(this: any, props: Props) {
       localStorage.setItem("mode", "dark");
     }
   };
-
 
   return (
     <>

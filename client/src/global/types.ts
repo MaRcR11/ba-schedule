@@ -62,5 +62,5 @@ export interface SettingsButtonProps {
 
 export interface SettingsOptionProps {
   settingName: string;
-  id: string
+  id: string;
 }
