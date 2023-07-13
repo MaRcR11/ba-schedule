@@ -10,7 +10,13 @@ import {
   ViewsDirective,
   ViewDirective,
 } from "@syncfusion/ej2-react-schedule";
-import { scheduleDataFormat, setAppointmentColors, calenderSetLightTheme, calenderSetDarkTheme } from "../helpers";
+import {
+  scheduleDataFormat,
+  setAppointmentColors,
+  calenderSetLightTheme,
+  calenderSetDarkTheme,
+  configureKeyDownEvents
+} from "../helpers";
 import "../styles/Calendar.css";
 import ThemeToggle from "./ThemeToggle";
 import { ScheduleData } from "../global/types";
@@ -45,11 +51,11 @@ function Calendar(this: any, props: Props) {
   };
 
   useEffect(() => {
-    configureDarkLightMode();
+    configureSettingsPopUp();
     configureKeyDownEvents();
   }, [ScheduleComponent]);
 
-  const configureDarkLightMode = () => {
+  const configureSettingsPopUp = () => {
     let rightToolbar = document.getElementsByClassName("e-toolbar-right")[0];
     if (rightToolbar.children[0]?.classList.contains("field")) return;
     let field = document.createElement("div");
@@ -108,29 +114,6 @@ function Calendar(this: any, props: Props) {
     }
   };
 
-  const configureKeyDownEvents = () => {
-    window.addEventListener("keydown", (e) => {
-      const btn1 = document.getElementById("e-tbr-btn_1");
-      const btn0 = document.getElementById("e-tbr-btn_0");
-
-      switch (e.key) {
-        case "Right":
-        case "ArrowRight":
-          e.preventDefault();
-          btn1?.click();
-          btn1?.blur();
-          break;
-        case "Left":
-        case "ArrowLeft":
-          e.preventDefault();
-          btn0?.click();
-          btn0?.blur();
-          break;
-        default:
-          break;
-      }
-    });
-  };
 
   return (
     <>

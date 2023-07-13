@@ -59,3 +59,8 @@ export interface SettingsButtonProps {
   rotation: number;
   setRotation: Function;
 }
+
+export interface SettingsOptionProps {
+  settingName: string;
+  id: string
+}
