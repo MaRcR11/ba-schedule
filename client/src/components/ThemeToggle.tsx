@@ -7,8 +7,7 @@ interface Props {
 function ThemeToggle(props: Props) {
     const [isChecked, setIsChecked] = useState(false);
 
-    const handleToggleChange = (event) => {
-        console.log(event.target)
+    const handleToggleChange = () => {
         setIsChecked(!isChecked);
     };
 

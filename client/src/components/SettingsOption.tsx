@@ -4,7 +4,7 @@ import {SettingsOptionProps} from "../global/types";
 
 function SettingsOption(props: SettingsOptionProps) {
     return (
-        <div className="field is-horizontal mb-3">
+        <div className="field is-horizontal mb-3 is-block">
             <div className="field-body is-block">
                 <div className="field is-narrow is-block">
                     <div className="control">
