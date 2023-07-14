@@ -122,26 +122,26 @@ function Calendar(this: any, props: Props) {
           break;
         case "m":
           switch (scheduleObj.currentView) {
-            case 'Day':
+            case "Day":
               btnWeek?.click();
               btnWeek?.blur();
               break;
-            case 'WorkWeek':
+            case "WorkWeek":
               btnMonth?.click();
               btnMonth?.blur();
               break;
-            case 'Month':
+            case "Month":
               btnAgenda?.click();
               btnAgenda?.blur();
               break;
-            case 'Agenda':
+            case "Agenda":
               btnDay?.click();
               btnDay?.blur();
               break;
             default:
               break;
           }
-        case 't':
+        case "t":
           btnToday?.click();
           btnToday?.blur();
           break;
