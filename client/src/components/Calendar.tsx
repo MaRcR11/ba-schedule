@@ -10,7 +10,13 @@ import {
   ViewsDirective,
   ViewDirective,
 } from "@syncfusion/ej2-react-schedule";
-import { scheduleDataFormat, setAppointmentColors, calenderSetLightTheme, calenderSetDarkTheme, configureKeyDownEvents } from "../helpers";
+import {
+  scheduleDataFormat,
+  setAppointmentColors,
+  calenderSetLightTheme,
+  calenderSetDarkTheme,
+  configureKeyDownEvents,
+} from "../helpers";
 import "../styles/Calendar.css";
 import ThemeToggle from "./ThemeToggle";
 import { ScheduleData } from "../global/types";
