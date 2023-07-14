@@ -47,7 +47,6 @@ function SettingsPopUp(props: SettingsPopUpProps) {
             id="popup-close-btn"
             onClick={() => {
               props.setPopUpVisible(false);
-              document.getElementById("btn-cogwheel")!.style.transform = "rotate(0deg)";
             }}
           />
           <div className="column is-flex is-justify-content-center">
