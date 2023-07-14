@@ -23,7 +23,7 @@ function App() {
               new URLSearchParams({
                 pwd: storePwdRef,
                 userID: loginMode ? "" : `${storeUserIDRef}`,
-              })
+              }),
           )
           .then((res) => {
             setScheduleData(JSON.parse(res.data));
