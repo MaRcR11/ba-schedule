@@ -119,7 +119,8 @@ function UserLogin(props: UserLoginProps) {
                         event.preventDefault();
                         props.changeLoginMode();
                       }
-                    }}>
+                    }}
+                  >
                     General Login
                   </a>{" "}
                   -&nbsp;
