@@ -98,7 +98,16 @@ function GeneralLogin(props: GeneralLoginProps) {
               </div>
               <div className="has-text-centered">
                 <p className="is-size-7">
-                  <a onClick={props.changeLoginMode} className="has-text-link">
+                  <a
+                    tabIndex={0}
+                    onClick={props.changeLoginMode}
+                    className="has-text-link"
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter") {
+                        event.preventDefault();
+                        props.changeLoginMode();
+                      }
+                    }}>
                     User Login
                   </a>
                 </p>
