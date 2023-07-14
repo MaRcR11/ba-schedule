@@ -78,7 +78,13 @@ function Calendar(this: any, props: Props) {
         </ViewsDirective>
         <Inject services={[Day, WorkWeek, Month, Agenda]} />
       </ScheduleComponent>
-      <SettingsPopUp popUpVisible={popUpVisible} setPopUpVisible={setPopUpVisible} />
+      <SettingsPopUp
+        popUpVisible={popUpVisible}
+        setPopUpVisible={(visible: boolean) => {
+          setPopUpVisible(visible);
+          if (!visible) document.getElementById("btn-cogwheel")!.style.transform = "rotate(0deg)";
+        }}
+      />
     </>
   );
 }
