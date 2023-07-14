@@ -50,8 +50,8 @@ export interface FormattedScheduleData {
 }
 
 export interface SettingsPopUpProps {
-  trigger: boolean;
-  setTrigger: Function;
+  popUpVisible: boolean;
+  setPopUpVisible: Function;
 }
 
 export interface SettingsButtonProps {
@@ -63,4 +63,13 @@ export interface SettingsButtonProps {
 export interface SettingsOptionProps {
   settingName: string;
   id: string;
+  checked: boolean;
+  settingFunction: Function;
+  theme: string;
+}
+
+export interface ThemeToggleProps {
+  id: string;
+  checked: boolean;
+  settingFunction: Function;
 }

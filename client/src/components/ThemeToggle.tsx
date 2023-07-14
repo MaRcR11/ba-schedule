@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { ThemeToggleProps } from "../global/types";
 
-interface Props {
-  id: string;
-}
-
-function ThemeToggle(props: Props) {
+function ThemeToggle(props: ThemeToggleProps) {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleToggleChange = () => {
     setIsChecked(!isChecked);
+    props.settingFunction(isChecked);
   };
+
+  useEffect(() => {
+    setIsChecked(props.checked);
+  }, []);
 
   return (
     <div className="field">
       <input
         id={props.id}
         type="checkbox"
-        checked={isChecked}
+        defaultChecked={props.checked}
         onChange={handleToggleChange}
         className="is-rounded switch"
       />

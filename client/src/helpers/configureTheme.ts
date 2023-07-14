@@ -23,4 +23,24 @@ const htmlSetLightTheme = () => {
   htmlElement.classList.remove("dark");
 };
 
-export { calenderSetDarkTheme, calenderSetLightTheme };
+const configureFontColor = (color: string) => {
+  const elements = document.getElementsByClassName("e-appointment");
+  const mode = localStorage.getItem("mode");
+  for (let i = 0; i < elements.length; i++) {
+    const element = elements[i] as HTMLElement;
+    element.style.color = `${!color ? (mode === "light" ? "black" : "white") : color}`;
+  }
+};
+
+const setCorrectCheckingOfThemeToggle = () => {
+  try {
+    let mode: string = localStorage.getItem("mode") as string;
+    if (mode !== "light" && mode !== "dark") throw TypeError("ungültiger Wert im localStorage");
+    return mode !== "light";
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+export { calenderSetDarkTheme, calenderSetLightTheme, configureFontColor, setCorrectCheckingOfThemeToggle };

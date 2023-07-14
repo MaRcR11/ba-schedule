@@ -49,3 +49,8 @@
 #btn-cogwheel:hover {
   cursor: pointer;
 }
+
+.switch[type="checkbox"]:focus + label:after,
+.switch[type="checkbox"]:focus + label:before {
+  outline: none !important;
+}

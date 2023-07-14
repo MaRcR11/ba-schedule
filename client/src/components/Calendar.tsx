@@ -10,17 +10,9 @@ import {
   ViewsDirective,
   ViewDirective,
 } from "@syncfusion/ej2-react-schedule";
-import {
-  scheduleDataFormat,
-  setAppointmentColors,
-  calenderSetLightTheme,
-  calenderSetDarkTheme,
-  configureKeyDownEvents,
-} from "../helpers";
+import { scheduleDataFormat, setAppointmentColors, configureFontColor, configureKeyDownEvents } from "../helpers";
 import "../styles/Calendar.css";
-import ThemeToggle from "./ThemeToggle";
 import { ScheduleData } from "../global/types";
-import ReactDOMServer from "react-dom/server";
 import SettingsPopUp from "./SettingsPopUp";
 interface Props {
   scheduleData: ScheduleData[];
@@ -41,15 +33,6 @@ function Calendar(this: any, props: Props) {
     if (scheduleObj.currentView == "Day") args.element.classList.add("daySelected");
   };
 
-  const onDataBound = (color: string) => {
-    const elements = document.getElementsByClassName("e-appointment");
-    const mode = localStorage.getItem("mode");
-    for (let i = 0; i < elements.length; i++) {
-      const element = elements[i] as HTMLElement;
-      element.style.color = `${!color ? (mode === "light" ? "black" : "white") : color}`;
-    }
-  };
-
   useEffect(() => {
     configureSettingsPopUp();
     configureKeyDownEvents();
@@ -68,50 +51,10 @@ function Calendar(this: any, props: Props) {
     });
     field.appendChild(btnSettings);
     rightToolbar.prepend(field);
-    // let toggleCheckbox = themeToggle.children[0] as HTMLInputElement;
-    // toggleConfigureCorrectChecking(toggleCheckbox);
-    // toggleConfigureOnClickEvent(themeToggle as HTMLDivElement);
     window.addEventListener("resize", () => {
       field.remove();
       rightToolbar.prepend(field);
     });
-  };
-
-  const toggleConfigureCorrectChecking = (toggleCheckbox: HTMLInputElement) => {
-    try {
-      let mode: string = localStorage.getItem("mode") as string;
-      toggleCheckbox.checked = mode !== "light";
-    } catch (error) {
-      console.error("ungültiger Wert im localStorage");
-    }
-  };
-
-  const toggleConfigureOnClickEvent = (themeToggle: HTMLDivElement) => {
-    let openTimerCounter = 0;
-    themeToggle.addEventListener("click", (e: Event) => {
-      e.preventDefault();
-      setThemeForCheckedToggleOption(themeToggle);
-      openTimerCounter++;
-      if (openTimerCounter >= 5) {
-        window.open("https://www.ba-schedule.de/timer", "_blank")?.focus();
-        openTimerCounter = 0;
-      }
-    });
-  };
-
-  const setThemeForCheckedToggleOption = (themeToggle: HTMLDivElement) => {
-    let toggleCheckbox = themeToggle.children[0] as HTMLInputElement;
-    if (toggleCheckbox.checked) {
-      calenderSetLightTheme();
-      toggleCheckbox.checked = false;
-      onDataBound("black");
-      localStorage.setItem("mode", "light");
-    } else {
-      calenderSetDarkTheme();
-      toggleCheckbox.checked = true;
-      onDataBound("white");
-      localStorage.setItem("mode", "dark");
-    }
   };
 
   return (
@@ -125,7 +68,7 @@ function Calendar(this: any, props: Props) {
           end: "21:00",
         }}
         eventRendered={onEventRendered.bind(this)}
-        dataBound={onDataBound.bind(this)}
+        dataBound={configureFontColor.bind(this)}
       >
         <ViewsDirective>
           <ViewDirective option="Day" startHour="08:00" endHour="21:00" />
@@ -135,13 +78,7 @@ function Calendar(this: any, props: Props) {
         </ViewsDirective>
         <Inject services={[Day, WorkWeek, Month, Agenda]} />
       </ScheduleComponent>
-      <SettingsPopUp
-        trigger={popUpVisible}
-        setTrigger={(bool: boolean) => {
-          setPopUpVisible(bool);
-          if (!bool) document.getElementById("btn-cogwheel")!.style.transform = "rotate(0deg)";
-        }}
-      />
+      <SettingsPopUp popUpVisible={popUpVisible} setPopUpVisible={setPopUpVisible} />
     </>
   );
 }

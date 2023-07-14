@@ -13,10 +13,16 @@ function SettingsOption(props: SettingsOptionProps) {
                 {props.settingName}
               </span>
               <label className="switch">
-                <ThemeToggle id={props.id} />
+                <ThemeToggle checked={props.checked} settingFunction={props.settingFunction} id={props.id} />
               </label>
             </div>
-            <hr style={{ margin: "0" }} />
+            <hr
+              style={
+                props.theme === "light"
+                  ? { margin: "0", backgroundColor: "#f5f5f5" }
+                  : { margin: "0", backgroundColor: "#424242" }
+              }
+            />
           </div>
         </div>
       </div>
