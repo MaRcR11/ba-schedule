@@ -1,18 +1,30 @@
-function ThemeToggle() {
-  let toggle = document.createElement("div");
-  toggle.classList.add("field");
-  let input = document.createElement("input");
-  input.id = "switchRoundedDefault";
-  input.type = "checkbox";
-  input.name = "switchRoundedDefault";
-  input.classList.add("is-rounded");
-  input.classList.add("switch");
-  let label = document.createElement("label");
-  label.setAttribute("for", "switchRoundedDefault");
-  toggle.append(input);
-  toggle.append(label);
+import React, { useEffect, useState } from "react";
+import { ThemeToggleProps } from "../global/types";
 
-  return toggle;
+function ThemeToggle(props: ThemeToggleProps) {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleToggleChange = () => {
+    setIsChecked(!isChecked);
+    props.settingFunction(isChecked);
+  };
+
+  useEffect(() => {
+    setIsChecked(props.checked);
+  }, []);
+
+  return (
+    <div className="field">
+      <input
+        id={props.id}
+        type="checkbox"
+        defaultChecked={props.checked}
+        onChange={handleToggleChange}
+        className="is-rounded switch"
+      />
+      <label htmlFor={props.id} />
+    </div>
+  );
 }
 
 export default ThemeToggle;
