@@ -10,17 +10,7 @@ import { SettingsPopUpProps } from "../global/types";
 import SettingsOption from "./SettingsOption";
 
 function SettingsPopUp(props: SettingsPopUpProps) {
-  const [openTimerCounter, setOpenTimerCounter] = useState(0);
   const [theme, setTheme] = useState(localStorage.getItem("mode") as string);
-
-  const themeToggleOnClickEvent = (isChecked: boolean) => {
-    setThemeForCheckedToggleOption(isChecked);
-    setOpenTimerCounter(openTimerCounter + 1);
-    if (openTimerCounter >= 5) {
-      window.open("https://www.ba-schedule.de/timer", "_blank")?.focus();
-      setOpenTimerCounter(0);
-    }
-  };
 
   const setThemeForCheckedToggleOption = (isChecked: boolean) => {
     if (isChecked) {
@@ -66,12 +56,12 @@ function SettingsPopUp(props: SettingsPopUpProps) {
           <div className="column">
             <SettingsOption
               checked={setCorrectCheckingOfThemeToggle()}
-              settingFunction={themeToggleOnClickEvent}
+              settingFunction={setThemeForCheckedToggleOption}
               settingName="Dark/Light-Mode"
               id="darkLightMode"
               theme={theme}
             />
-            <SettingsOption
+            {/* <SettingsOption
               checked={false}
               settingFunction={() => {}}
               settingName="Email notification for upcoming exams"
@@ -84,9 +74,19 @@ function SettingsPopUp(props: SettingsPopUpProps) {
               settingName="Email notification for exam results"
               id="emailNotificationExamResults"
               theme={theme}
-            />
+            /> */}
           </div>
           <div className="column">
+            <button
+              className="button is-primary is-fullwidth"
+              style={{ marginBottom: "10px", height: "2rem" }}
+              type="submit"
+              onClick={() => {
+                window.open("https://www.ba-schedule.de/timer", "_blank")?.focus();
+              }}
+            >
+              Open Timer
+            </button>
             <button className="button is-danger is-fullwidth" type="submit">
               Logout
             </button>
