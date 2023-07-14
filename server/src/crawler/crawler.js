@@ -28,7 +28,7 @@ const crawler = async (userID, userHash) => {
       });
     });
   } catch (err) {
-    throw new Error();
+    console.error(err);
   }
 };
 
