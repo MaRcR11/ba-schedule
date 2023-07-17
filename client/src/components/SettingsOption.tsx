@@ -22,6 +22,7 @@ function SettingsOption(props: SettingsOptionProps) {
                   ? { margin: "0", backgroundColor: "#f5f5f5" }
                   : { margin: "0", backgroundColor: "#424242" }
               }
+              className="unselectable"
             />
           </div>
         </div>

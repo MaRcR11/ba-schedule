@@ -14,7 +14,7 @@ function ThemeToggle(props: ThemeToggleProps) {
   }, []);
 
   return (
-    <div className="field">
+    <>
       <input
         id={props.id}
         type="checkbox"
@@ -22,8 +22,8 @@ function ThemeToggle(props: ThemeToggleProps) {
         onChange={handleToggleChange}
         className="is-rounded switch"
       />
-      <label htmlFor={props.id} />
-    </div>
+      <label className="toggle unselectable" htmlFor={props.id} />
+    </>
   );
 }
 
