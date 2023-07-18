@@ -4,7 +4,7 @@ import Calendar from "./Calendar";
 import LoadingAnim from "./LoadingAnim";
 import Login from "./Login";
 import { ScheduleData } from "../global/types";
-import {useCookies} from "react-cookie";
+import { useCookies } from "react-cookie";
 
 function App() {
   const [fetched, setFetched] = useState<boolean>(false);
@@ -15,7 +15,7 @@ function App() {
   const [loginMode, setLoginMode] = useState<boolean>(Boolean(localStorage.getItem("loginMode")));
   const [storeUserIDRef, setStoreUserIDRef] = useState<string>("");
   const [scheduleData, setScheduleData] = useState<ScheduleData[]>([]);
-    const [cookies, setCookie] = useCookies(['token']);
+  const [cookies, setCookie] = useCookies(["token"]);
 
   useEffect(() => {
     fireRedirect
@@ -37,34 +37,24 @@ function App() {
       : null;
   }, [fireRedirect]);
 
-    useEffect(() => {
-        axios
-            .post("http://localhost:4000/login/", { token: cookies.token})
-            .then((res) => {
-                if(res.data.isValid && res.data.key) {
-                    setFetched(true);
-                    setFireRedirect(true);
-                    setStorePwdRef(res.data.key)
-                }
+  useEffect(() => {
+    axios.post("http://localhost:4000/login/", { token: cookies.token }).then((res) => {
+      if (res.data.isValid && res.data.key) {
+        setFetched(true);
+        setFireRedirect(true);
+        setStorePwdRef(res.data.key);
+      }
+    });
+    axios.post("http://localhost:4000/userLogin/", { token: cookies.token }).then((res) => {
+      if (res.data.isValid && res.data.key) {
+        setFireRedirect(true);
+        setStorePwdRef(res.data.key);
+        setStoreUserIDRef(res.data.userID);
+      }
+    });
+  }, []);
 
-            })
-        axios
-            .post("http://localhost:4000/userLogin/", { token: cookies.token})
-            .then((res) => {
-                if(res.data.isValid && res.data.key) {
-                    setFireRedirect(true);
-                    setStorePwdRef(res.data.key)
-                    setStoreUserIDRef(res.data.userID)
-                }
-
-            })
-
-    }, []);
-
-
-
-
-    return (
+  return (
     <>
       {fireRedirect ? (
         fetched ? (
@@ -81,7 +71,6 @@ function App() {
           loginMode={loginMode}
           setLoginMode={setLoginMode}
         />
-
       )}
     </>
   );

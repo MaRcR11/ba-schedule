@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import vhCheck from "vh-check";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 vhCheck("vh-check");
 import "../styles/Login.css";
 import { BarLoader } from "react-spinners";
@@ -12,8 +12,7 @@ function GeneralLogin(props: GeneralLoginProps) {
   const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
   const [isPwdDisabled, setPwdDisabled] = useState<boolean>(false);
   const [isModeLoaded, setIsModeLoaded] = useState<boolean>(false);
-  const [cookies, setCookie] = useCookies(['token']);
-
+  const [cookies, setCookie] = useCookies(["token"]);
 
   const onSubmitPwd = () => {
     if (!props.pwdRef.current!.value) return;
@@ -25,7 +24,7 @@ function GeneralLogin(props: GeneralLoginProps) {
         props.setStorePwdRef(pwd);
         props.setFireRedirect(true);
         setPwdDisabled(false);
-        setCookie('token', res.data.token);
+        setCookie("token", res.data.token);
       })
       .catch((error) => {
         setPwdDisabled(false);
@@ -39,8 +38,6 @@ function GeneralLogin(props: GeneralLoginProps) {
         }, 0);
       });
   };
-
-
 
   const onEnterPressed = (e: any) => {
     if (e.keyCode === 13) onSubmitPwd();

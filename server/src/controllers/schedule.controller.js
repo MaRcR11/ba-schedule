@@ -5,16 +5,14 @@ async function handleRequest(handler, req, res, next) {
     const result = await handler(req);
     const { status, json } = result;
     if (json?.token) {
-      res.cookie('token', json.token, { httpOnly: true });
+      res.cookie("token", json.token, { httpOnly: true });
     }
     res.status(status).json(json);
-
   } catch (err) {
     console.error(`Error: ${err.message}`);
     next(err);
   }
 }
-
 
 module.exports = {
   getData: async (req, res, next) => await handleRequest(scheduleService.getData, req, res, next),

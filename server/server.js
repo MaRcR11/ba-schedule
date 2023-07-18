@@ -5,7 +5,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 const scheduleRouter = require("./src/routes/schedule.route");
 const rateLimiter = require("./src/middlewares/rateLimit.middleware");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 const app = express();
 const PORT = 4000 || process.env.PORT;
 

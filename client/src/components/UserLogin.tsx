@@ -5,7 +5,7 @@ import "../styles/Login.css";
 import { BarLoader } from "react-spinners";
 import { calenderSetDarkTheme, calenderSetLightTheme } from "../helpers";
 import { UserLoginProps } from "../global/types";
-import {useCookies} from "react-cookie";
+import { useCookies } from "react-cookie";
 vhCheck("vh-check");
 
 function UserLogin(props: UserLoginProps) {
@@ -13,7 +13,7 @@ function UserLogin(props: UserLoginProps) {
   const [isPwdDisabled, setPwdDisabled] = useState(false);
   const [isModeLoaded, setIsModeLoaded] = useState(false);
   const userIDRef = useRef<HTMLInputElement>(null);
-  const [cookies, setCookie] = useCookies(['token']);
+  const [cookies, setCookie] = useCookies(["token"]);
   const onSubmitPwd = () => {
     if (!props.pwdRef.current!.value || !userIDRef.current!.value) return;
     const hash = props.pwdRef.current!.value;
@@ -26,7 +26,7 @@ function UserLogin(props: UserLoginProps) {
         props.setStoreUserIDRef(userID);
         props.setFireRedirect(true);
         setPwdDisabled(false);
-        setCookie('token', res.data.token);
+        setCookie("token", res.data.token);
       })
       .catch((error) => {
         setPwdDisabled(false);
