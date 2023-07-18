@@ -1,22 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import vhCheck from "vh-check";
-vhCheck("vh-check");
 import "../styles/Login.css";
 import { BarLoader } from "react-spinners";
 import { calenderSetDarkTheme, calenderSetLightTheme } from "../helpers";
+import { UserLoginProps } from "../global/types";
+vhCheck("vh-check");
 
-interface Props {
-  setFireRedirect: any;
-  pwdRef: any;
-  setStorePwdRef: any;
-  setLoginMode: any;
-  changeLoginMode: any;
-  setStoreUserIDRef: any;
-  loginErrorMsg: any;
-  setLoginErrorMsg: any;
-}
-function UserLogin(props: Props) {
+function UserLogin(props: UserLoginProps) {
   const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
   const [isPwdDisabled, setPwdDisabled] = useState(false);
   const [isModeLoaded, setIsModeLoaded] = useState(false);
@@ -27,7 +18,7 @@ function UserLogin(props: Props) {
     const userID = userIDRef.current!.value;
     setPwdDisabled(true);
     axios
-      .post("http://localhost:4000/userLogin/", { userID, hash })
+      .post("http://localhost:3000/userLogin/", { userID, hash })
       .then((res) => {
         props.setStorePwdRef(hash);
         props.setStoreUserIDRef(userID);
@@ -36,8 +27,7 @@ function UserLogin(props: Props) {
       })
       .catch((error) => {
         setPwdDisabled(false);
-        if (error.response.status === 429)
-          props.setLoginErrorMsg(error.response.statusText);
+        if (error.response.status === 429) props.setLoginErrorMsg(error.response.statusText);
         else {
           props.setLoginErrorMsg("This password or username is invalid");
         }
@@ -53,8 +43,7 @@ function UserLogin(props: Props) {
   };
 
   const onChangeHideInvalidPwdMsg = () => {
-    if ((invalidPwdMsgRef.current!.style.display = "block"))
-      invalidPwdMsgRef.current!.style.display = "none";
+    if ((invalidPwdMsgRef.current!.style.display = "block")) invalidPwdMsgRef.current!.style.display = "none";
   };
 
   useEffect(() => {
@@ -66,9 +55,7 @@ function UserLogin(props: Props) {
   const configureDarkLightMode = async () => {
     try {
       let mode: string = localStorage.getItem("mode") as string;
-      mode === "light"
-        ? await calenderSetLightTheme()
-        : await calenderSetDarkTheme();
+      mode === "light" ? calenderSetLightTheme() : calenderSetDarkTheme();
       setIsModeLoaded(true);
     } catch (error) {
       console.error("ungültiger Wert im localStorage");
@@ -79,9 +66,7 @@ function UserLogin(props: Props) {
     <>
       {isModeLoaded ? (
         <div className="hero is-fullheight ">
-          {isPwdDisabled ? (
-            <BarLoader id="top-barloader" color={"#00d1b2"} width={"100%"} />
-          ) : null}
+          {isPwdDisabled ? <BarLoader id="top-barloader" color={"#00d1b2"} width={"100%"} /> : null}
           <div className="hero-body  is-justify-content-center is-align-items-center">
             <div className="columns is-half is-flex-direction-column box">
               <div className="column is-flex is-justify-content-center">
@@ -109,11 +94,7 @@ function UserLogin(props: Props) {
                   type="password"
                   placeholder="Hashwert"
                 />
-                <p
-                  ref={invalidPwdMsgRef}
-                  style={{ display: "none" }}
-                  className="help is-danger"
-                >
+                <p ref={invalidPwdMsgRef} style={{ display: "none" }} className="help is-danger">
                   {props.loginErrorMsg}
                 </p>
               </div>
@@ -129,14 +110,21 @@ function UserLogin(props: Props) {
               </div>
               <div className="has-text-centered">
                 <p className="is-size-7">
-                  <a onClick={props.changeLoginMode} className="has-text-link">
+                  <a
+                    tabIndex={0}
+                    onClick={props.changeLoginMode}
+                    className="has-text-link"
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter") {
+                        event.preventDefault();
+                        props.changeLoginMode();
+                      }
+                    }}
+                  >
                     General Login
                   </a>{" "}
                   -&nbsp;
-                  <a
-                    href="https://github.com/MaRcR11/cs21-2-schedule"
-                    className="has-text-danger"
-                  >
+                  <a href="https://github.com/MaRcR11/cs21-2-schedule" className="has-text-danger">
                     Help?
                   </a>
                 </p>

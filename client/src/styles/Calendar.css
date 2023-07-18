@@ -1,9 +1,5 @@
 @media only screen and (max-width: 600px) {
-  .e-schedule
-    .e-vertical-view
-    .e-day-wrapper
-    .e-appointment:not(.daySelected)
-    .e-subject {
+  .e-schedule .e-vertical-view .e-day-wrapper .e-appointment:not(.daySelected) .e-subject {
     font-size: 7px;
     line-height: 1.1;
   }
@@ -11,16 +7,8 @@
     display: flex;
   }
 
-  .e-schedule
-    .e-vertical-view
-    .e-day-wrapper
-    .e-appointment:not(.daySelected)
-    .e-time,
-  .e-schedule
-    .e-vertical-view
-    .e-day-wrapper
-    .e-appointment:not(.daySelected)
-    .e-location {
+  .e-schedule .e-vertical-view .e-day-wrapper .e-appointment:not(.daySelected) .e-time,
+  .e-schedule .e-vertical-view .e-day-wrapper .e-appointment:not(.daySelected) .e-location {
     font-size: 5px;
     white-space: break-spaces;
   }
@@ -39,4 +27,30 @@
 
 .e-work-cells {
   pointer-events: none;
+}
+
+.e-schedule .e-spinner-pane {
+  display: none !important;
+}
+
+#btn-cogwheel {
+  background: url("../assets/cogwheel-blue.png");
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  width: 20px;
+  height: 20px;
+  outline: none;
+  border: none;
+  transition: transform 0.3s ease;
+  transform: rotate(0deg);
+  margin-right: 10px;
+}
+
+#btn-cogwheel:hover {
+  cursor: pointer;
+}
+
+.switch[type="checkbox"]:focus + label:after,
+.switch[type="checkbox"]:focus + label:before {
+  outline: none !important;
 }

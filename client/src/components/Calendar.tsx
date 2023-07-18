@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Agenda,
   Day,
@@ -10,25 +10,12 @@ import {
   ViewsDirective,
   ViewDirective,
 } from "@syncfusion/ej2-react-schedule";
-import {
-  scheduleDataFormat,
-  setAppointmentColors,
-  calenderSetLightTheme,
-  calenderSetDarkTheme,
-} from "../helpers";
+import { scheduleDataFormat, setAppointmentColors, configureFontColor, configureKeyDownEvents } from "../helpers";
 import "../styles/Calendar.css";
-import ThemeToggle from "./ThemeToggle";
-
+import { ScheduleData } from "../global/types";
+import SettingsPopUp from "./SettingsPopUp";
 interface Props {
-  scheduleData: {
-    start: number;
-    end: number;
-    description: string;
-    remarks: string;
-    title: string;
-    instructor: string;
-    sroom: string;
-  }[];
+  scheduleData: ScheduleData[];
 }
 function Calendar(this: any, props: Props) {
   const formattedScheduleData = scheduleDataFormat(props.scheduleData);
@@ -38,87 +25,35 @@ function Calendar(this: any, props: Props) {
     allowEditing: false,
     allowDeleting: false,
   };
+  const [popUpVisible, setPopUpVisible] = useState(false);
 
   const onEventRendered = (args: any) => {
-    var scheduleObj: any = (document.querySelector(".e-schedule") as any)
-      .ej2_instances[0];
+    const scheduleObj: any = (document.querySelector(".e-schedule") as any).ej2_instances[0];
     setAppointmentColors(args, scheduleObj);
-    if (scheduleObj.currentView == "Day")
-      args.element.classList.add("daySelected");
+    if (scheduleObj.currentView == "Day") args.element.classList.add("daySelected");
   };
 
   useEffect(() => {
-    configureDarkLightMode();
+    configureSettingsPopUp();
     configureKeyDownEvents();
   }, [ScheduleComponent]);
 
-  const configureDarkLightMode = () => {
+  const configureSettingsPopUp = () => {
     let rightToolbar = document.getElementsByClassName("e-toolbar-right")[0];
     if (rightToolbar.children[0]?.classList.contains("field")) return;
-    let themeToggle = ThemeToggle();
-    rightToolbar.prepend(themeToggle);
-    let toggleCheckbox = themeToggle.children[0] as HTMLInputElement;
-    toggleConfigureCorrectChecking(toggleCheckbox);
-    toggleConfigureOnClickEvent(themeToggle);
+    let field = document.createElement("div");
+    field.classList.add("field");
+    let btnSettings = document.createElement("button");
+    btnSettings.id = "btn-cogwheel";
+    btnSettings.addEventListener("click", () => {
+      btnSettings.style.transform = "rotate(90deg)";
+      setPopUpVisible(true);
+    });
+    field.appendChild(btnSettings);
+    rightToolbar.prepend(field);
     window.addEventListener("resize", () => {
-      themeToggle.remove();
-      rightToolbar.prepend(themeToggle);
-    });
-  };
-
-  const toggleConfigureCorrectChecking = (toggleCheckbox: HTMLInputElement) => {
-    try {
-      let mode: string = localStorage.getItem("mode") as string;
-      toggleCheckbox.checked = mode !== "light";
-    } catch (error) {
-      console.error("ungültiger Wert im localStorage");
-    }
-  };
-
-  const toggleConfigureOnClickEvent = (themeToggle: HTMLDivElement) => {
-    let openTimerCounter = 0;
-    themeToggle.addEventListener("click", (e: Event) => {
-      e.preventDefault();
-      setThemeForCheckedToggleOption(themeToggle);
-      openTimerCounter++;
-      if (openTimerCounter >= 5) {
-        window.open("https://www.cs21-2-schedule.de/timer", "_blank")?.focus();
-        openTimerCounter = 0;
-      }
-    });
-  };
-
-  const setThemeForCheckedToggleOption = (themeToggle: HTMLDivElement) => {
-    let toggleCheckbox = themeToggle.children[0] as HTMLInputElement;
-    if (toggleCheckbox.checked) {
-      calenderSetLightTheme();
-      toggleCheckbox.checked = false;
-      localStorage.setItem("mode", "light");
-    } else {
-      calenderSetDarkTheme();
-      toggleCheckbox.checked = true;
-      localStorage.setItem("mode", "dark");
-    }
-  };
-
-  const configureKeyDownEvents = () => {
-    window.addEventListener("keydown", (e) => {
-      switch (e.key) {
-        case "Right":
-        case "ArrowRight":
-          e.preventDefault();
-          document.getElementById("e-tbr-btn_1")?.click();
-          document.getElementById("e-tbr-btn_1")?.blur();
-          break;
-        case "Left":
-        case "ArrowLeft":
-          e.preventDefault();
-          document.getElementById("e-tbr-btn_0")?.click();
-          document.getElementById("e-tbr-btn_0")?.blur();
-          break;
-        default:
-          break;
-      }
+      field.remove();
+      rightToolbar.prepend(field);
     });
   };
 
@@ -133,6 +68,7 @@ function Calendar(this: any, props: Props) {
           end: "21:00",
         }}
         eventRendered={onEventRendered.bind(this)}
+        dataBound={configureFontColor.bind(this)}
       >
         <ViewsDirective>
           <ViewDirective option="Day" startHour="08:00" endHour="21:00" />
@@ -142,6 +78,13 @@ function Calendar(this: any, props: Props) {
         </ViewsDirective>
         <Inject services={[Day, WorkWeek, Month, Agenda]} />
       </ScheduleComponent>
+      <SettingsPopUp
+        popUpVisible={popUpVisible}
+        setPopUpVisible={(visible: boolean) => {
+          setPopUpVisible(visible);
+          if (!visible) document.getElementById("btn-cogwheel")!.style.transform = "rotate(0deg)";
+        }}
+      />
     </>
   );
 }

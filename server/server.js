@@ -2,11 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
-const app = express();
-const PORT = 4000 || process.env.PORT;
 const dotenv = require("dotenv");
 const scheduleRouter = require("./src/routes/schedule.route");
 const rateLimiter = require("./src/middlewares/rateLimit.middleware");
+
+const app = express();
+const PORT = 4000 || process.env.PORT;
 
 app.use(rateLimiter);
 app.use(express.json());

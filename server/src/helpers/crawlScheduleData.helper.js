@@ -2,7 +2,7 @@ const crawler = require("../crawler/crawler");
 
 let crawlTriedCounter = 0;
 let data;
-const crawlScheduleData = async (userID, userHash) => {
+const crawlScheduleData = async (userID, userHash = null) => {
   try {
     console.log(`crawling data (${userID ? userID : "general"})...`);
     data = await crawler(userID, userHash);
