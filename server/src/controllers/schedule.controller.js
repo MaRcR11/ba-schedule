@@ -3,12 +3,18 @@ const scheduleService = require("../services/schedule.service");
 async function handleRequest(handler, req, res, next) {
   try {
     const result = await handler(req);
-    res.status(result.status).json(result.json);
+    const { status, json } = result;
+    if (json?.token) {
+      res.cookie('token', json.token, { httpOnly: true });
+    }
+    res.status(status).json(json);
+
   } catch (err) {
     console.error(`Error: ${err.message}`);
     next(err);
   }
 }
+
 
 module.exports = {
   getData: async (req, res, next) => await handleRequest(scheduleService.getData, req, res, next),

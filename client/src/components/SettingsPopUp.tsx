@@ -8,9 +8,17 @@ import {
 } from "../helpers";
 import { SettingsPopUpProps } from "../global/types";
 import SettingsOption from "./SettingsOption";
+import { useCookies } from 'react-cookie';
 
 function SettingsPopUp(props: SettingsPopUpProps) {
   const [theme, setTheme] = useState(localStorage.getItem("mode") as string);
+  const [cookies, setCookie] = useCookies(['token']);
+
+  const handleLogout = () => {
+    setCookie('token', '', { expires: new Date(0) });
+
+    window.location.reload();
+  };
 
   const setThemeForCheckedToggleOption = (isChecked: boolean) => {
     if (isChecked) {
@@ -86,7 +94,7 @@ function SettingsPopUp(props: SettingsPopUpProps) {
             >
               Open Timer
             </button>
-            <button className="button is-danger is-fullwidth" type="submit">
+            <button className="button is-danger is-fullwidth" type="submit" onClick={handleLogout}>
               Logout
             </button>
           </div>
