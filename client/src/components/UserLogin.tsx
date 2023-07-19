@@ -5,6 +5,7 @@ import "../styles/Login.css";
 import { BarLoader } from "react-spinners";
 import { calenderSetDarkTheme, calenderSetLightTheme } from "../helpers";
 import { UserLoginProps } from "../global/types";
+import { useCookies } from "react-cookie";
 vhCheck("vh-check");
 
 function UserLogin(props: UserLoginProps) {
@@ -12,18 +13,20 @@ function UserLogin(props: UserLoginProps) {
   const [isPwdDisabled, setPwdDisabled] = useState(false);
   const [isModeLoaded, setIsModeLoaded] = useState(false);
   const userIDRef = useRef<HTMLInputElement>(null);
+  const [cookies, setCookie] = useCookies(["token"]);
   const onSubmitPwd = () => {
     if (!props.pwdRef.current!.value || !userIDRef.current!.value) return;
     const hash = props.pwdRef.current!.value;
     const userID = userIDRef.current!.value;
     setPwdDisabled(true);
     axios
-      .post("http://localhost:3000/userLogin/", { userID, hash })
+      .post("http://localhost:4000/userLogin/", { userID, hash })
       .then((res) => {
         props.setStorePwdRef(hash);
         props.setStoreUserIDRef(userID);
         props.setFireRedirect(true);
         setPwdDisabled(false);
+        setCookie("token", res.data.token);
       })
       .catch((error) => {
         setPwdDisabled(false);

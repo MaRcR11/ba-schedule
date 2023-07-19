@@ -5,7 +5,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 const scheduleRouter = require("./src/routes/schedule.route");
 const rateLimiter = require("./src/middlewares/rateLimit.middleware");
-
+const cookieParser = require("cookie-parser");
 const app = express();
 const PORT = 4000 || process.env.PORT;
 
@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use(cors());
 app.use("/", scheduleRouter);
+app.use(cookieParser());
 app.set("trust proxy", 1);
 dotenv.config();
 

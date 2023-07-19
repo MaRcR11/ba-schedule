@@ -4,6 +4,7 @@ import Calendar from "./Calendar";
 import LoadingAnim from "./LoadingAnim";
 import Login from "./Login";
 import { ScheduleData } from "../global/types";
+import { useCookies } from "react-cookie";
 
 function App() {
   const [fetched, setFetched] = useState<boolean>(false);
@@ -14,12 +15,13 @@ function App() {
   const [loginMode, setLoginMode] = useState<boolean>(Boolean(localStorage.getItem("loginMode")));
   const [storeUserIDRef, setStoreUserIDRef] = useState<string>("");
   const [scheduleData, setScheduleData] = useState<ScheduleData[]>([]);
+  const [cookies, setCookie] = useCookies(["token"]);
 
   useEffect(() => {
     fireRedirect
       ? axios
           .get(
-            `https://ba-schedule.de/api/getData?` +
+            `http://localhost:4000/api/getData?` +
               new URLSearchParams({
                 pwd: storePwdRef,
                 userID: loginMode ? "" : `${storeUserIDRef}`,
@@ -34,6 +36,31 @@ function App() {
           })
       : null;
   }, [fireRedirect]);
+
+  useEffect(() => {
+    axios.post("http://localhost:4000/login/", { token: cookies.token }).then((res) => {
+      if (res.data.isValid && res.data.key) {
+        setFetched(true);
+        setTimeout(() => {
+          setFireRedirect(true);
+        },0);
+        setStorePwdRef(res.data.key);
+      }
+    }).catch(() => {
+
+    });
+    axios.post("http://localhost:4000/userLogin/", { token: cookies.token }).then((res) => {
+      if (res.data.isValid && res.data.key) {
+        setTimeout(() => {
+          setFireRedirect(true);
+        },0);
+        setStorePwdRef(res.data.key);
+        setStoreUserIDRef(res.data.userID);
+      }
+    }).catch(() => {
+
+    });
+  }, []);
 
   return (
     <>

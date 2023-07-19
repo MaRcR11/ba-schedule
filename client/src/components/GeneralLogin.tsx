@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import vhCheck from "vh-check";
+import { useCookies } from "react-cookie";
 vhCheck("vh-check");
 import "../styles/Login.css";
 import { BarLoader } from "react-spinners";
@@ -11,17 +12,19 @@ function GeneralLogin(props: GeneralLoginProps) {
   const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
   const [isPwdDisabled, setPwdDisabled] = useState<boolean>(false);
   const [isModeLoaded, setIsModeLoaded] = useState<boolean>(false);
+  const [cookies, setCookie] = useCookies(["token"]);
 
   const onSubmitPwd = () => {
     if (!props.pwdRef.current!.value) return;
     const pwd = props.pwdRef.current!.value;
     setPwdDisabled(true);
     axios
-      .post("https://ba-schedule.de/login/", { pwd })
-      .then(() => {
+      .post("http://localhost:4000/login/", { pwd })
+      .then((res) => {
         props.setStorePwdRef(pwd);
         props.setFireRedirect(true);
         setPwdDisabled(false);
+        setCookie("token", res.data.token);
       })
       .catch((error) => {
         setPwdDisabled(false);
