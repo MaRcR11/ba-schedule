@@ -5,7 +5,7 @@ async function handleRequest(handler, req, res, next) {
     const result = await handler(req);
     const { status, json } = result;
     if (json?.token) {
-      res.cookie("token", json.token, { httpOnly: true, secure: true });
+      res.cookie("token", json.token, { httpOnly: false});
     }
     res.status(status).json(json);
   } catch (err) {
