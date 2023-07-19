@@ -63,7 +63,7 @@ async function login(req) {
     return {
       status: isPwdValid ? 200 : 401,
       json: isPwdValid
-        ? { msg: "login success", token: jwt.sign({ pwd }, process.env.TOKEN_SECRET, { expiresIn: 60 * 5 }) }
+        ? { msg: "login success", token: jwt.sign({ pwd }, process.env.TOKEN_SECRET, { expiresIn: "6d" }) }
         : "login failed",
     };
   }
@@ -109,12 +109,15 @@ async function userLogin(req) {
       await updateUserLastLogin(userID);
       return {
         status: 200,
-        json: { msg: "login success", token: jwt.sign({ userHash }, process.env.TOKEN_SECRET, { expiresIn: 60 * 5 }) },
+        json: { msg: "login success", token: jwt.sign({ userHash }, process.env.TOKEN_SECRET, { expiresIn: "6d" }) },
       };
     } catch (error) {
       console.error(error);
       return { status: 500, json: "login failed" };
     }
+
+
+
   } else {
     const hash = await bcrypt.hashSync(userHash);
 
@@ -124,7 +127,7 @@ async function userLogin(req) {
         status: 200,
         json: {
           msg: "registration success",
-          token: jwt.sign({ userHash }, process.env.TOKEN_SECRET, { expiresIn: 60 * 5 }),
+          token: jwt.sign({ userHash }, process.env.TOKEN_SECRET, { expiresIn: "6d" }),
         },
       };
     } catch (error) {

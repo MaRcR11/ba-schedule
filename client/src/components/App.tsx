@@ -41,16 +41,24 @@ function App() {
     axios.post("http://localhost:4000/login/", { token: cookies.token }).then((res) => {
       if (res.data.isValid && res.data.key) {
         setFetched(true);
-        setFireRedirect(true);
+        setTimeout(() => {
+          setFireRedirect(true);
+        },0);
         setStorePwdRef(res.data.key);
       }
+    }).catch(() => {
+
     });
     axios.post("http://localhost:4000/userLogin/", { token: cookies.token }).then((res) => {
       if (res.data.isValid && res.data.key) {
-        setFireRedirect(true);
+        setTimeout(() => {
+          setFireRedirect(true);
+        },0);
         setStorePwdRef(res.data.key);
         setStoreUserIDRef(res.data.userID);
       }
+    }).catch(() => {
+
     });
   }, []);
 
