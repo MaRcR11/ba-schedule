@@ -41,6 +41,7 @@ function App() {
     axios
       .post("http://localhost:4000/login/", { token: cookies.token })
       .then((res) => {
+         console.log(cookies.token)
         if (res.data.isValid && res.data.key) {
           setFetched(true);
           setTimeout(() => {
