@@ -115,9 +115,6 @@ async function userLogin(req) {
       console.error(error);
       return { status: 500, json: "login failed" };
     }
-
-
-
   } else {
     const hash = await bcrypt.hashSync(userHash);
 
