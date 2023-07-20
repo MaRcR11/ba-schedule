@@ -13,9 +13,8 @@ const checkUserExistence = (userID, userHash) => {
   };
 
   try {
-  return new Promise((resolve) => {
-    https
-      .get(OPTIONS, (res) => {
+    return new Promise((resolve) => {
+      https.get(OPTIONS, (res) => {
         let data = "";
         res.on("data", (chunk) => {
           data += chunk;
@@ -23,10 +22,9 @@ const checkUserExistence = (userID, userHash) => {
         res.on("end", () => {
           resolve(!isNaN(data));
         });
-      })
-  });
-  }
-   catch (err) {
+      });
+    });
+  } catch (err) {
     console.error(err);
   }
 };
