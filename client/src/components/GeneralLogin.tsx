@@ -7,6 +7,7 @@ import "../styles/Login.css";
 import { BarLoader } from "react-spinners";
 import { calenderSetDarkTheme, calenderSetLightTheme } from "../helpers";
 import { GeneralLoginProps } from "../global/types";
+import PrivacyPolicyFooter from "./PrivacyPolicyFooter";
 
 function GeneralLogin(props: GeneralLoginProps) {
   const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
@@ -118,6 +119,7 @@ function GeneralLogin(props: GeneralLoginProps) {
               </div>
             </div>
           </div>
+          <PrivacyPolicyFooter />
         </div>
       ) : null}
     </>

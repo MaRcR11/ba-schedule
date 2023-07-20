@@ -6,6 +6,7 @@ import { BarLoader } from "react-spinners";
 import { calenderSetDarkTheme, calenderSetLightTheme } from "../helpers";
 import { UserLoginProps } from "../global/types";
 import { useCookies } from "react-cookie";
+import PrivacyPolicyFooter from "./PrivacyPolicyFooter";
 vhCheck("vh-check");
 
 function UserLogin(props: UserLoginProps) {
@@ -134,6 +135,7 @@ function UserLogin(props: UserLoginProps) {
               </div>
             </div>
           </div>
+          <PrivacyPolicyFooter />
         </div>
       ) : null}
     </>
