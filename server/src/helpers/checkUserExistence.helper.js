@@ -12,6 +12,7 @@ const checkUserExistence = (userID, userHash) => {
     json: true,
   };
 
+  try {
   return new Promise((resolve) => {
     https
       .get(OPTIONS, (res) => {
@@ -23,10 +24,11 @@ const checkUserExistence = (userID, userHash) => {
           resolve(!isNaN(data));
         });
       })
-      .on("error", (error) => {
-        console.error(error);
-      });
   });
+  }
+   catch (err) {
+    console.error(err);
+  }
 };
 
 module.exports = checkUserExistence;
