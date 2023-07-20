@@ -55,7 +55,7 @@ async function login(req) {
   const isValid = verifyToken(token);
 
   if (token) {
-    return { status: 200, json: { ms: "login success", isValid: isValid, key: storePWD } };
+    return { status: 200, json: { isValid: isValid, key: storePWD } };
   }
   const isPwdValid = await checkPwd(pwd ? pwd : "", { checkUserHash: false });
   storePWD = pwd;
@@ -78,7 +78,7 @@ async function userLogin(req) {
 
   const isValid = verifyToken(token);
   if (token) {
-    return { status: 200, json: { msg: "login success", isValid: isValid, key: storeUserHash, userID: storeUserID } };
+    return { status: 200, json: { isValid: isValid, key: storeUserHash, userID: storeUserID } };
   }
   storeUserHash = userHash;
   storeUserID = userID;
