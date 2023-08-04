@@ -11,7 +11,7 @@ const {
   checkPwd,
   getEndTime,
   crawlScheduleData,
-  updateUserToken,
+  updateUserToken, verifyToken,
 } = require("../helpers");
 const Model = require("../models/general.model");
 const userModel = require("../models/user.model");
@@ -28,28 +28,11 @@ async function getData(req) {
   if (!data) return { status: 502, json: "no data" };
   const { pwd, userID } = req.query;
   const isUserRegistered = await checkUserRegistered(userID);
-  if (!userID) {
-    const isPwdValid = await checkPwd(pwd, { checkUserHash: false });
-    return { status: isPwdValid ? 200 : 401, json: isPwdValid ? data.general : "not authorized" };
-  } else if (isUserRegistered) {
-    const isPwdValid = await checkPwd(pwd, {
-      checkUserHash: isUserRegistered.get("hash").trim(),
-    });
-    return { status: isPwdValid ? 200 : 401, json: isPwdValid ? data[userID] : "not authorized" };
-  } else {
-    return { status: 401, json: "not authorized" };
-  }
+  const isPwdValid = await checkPwd(pwd, { checkUserHash: isUserRegistered ? isUserRegistered.get("hash").trim() : false });
+  return { status: userID ? (isPwdValid ? 200 : 401) : (isPwdValid ? 200 : 401), json: isPwdValid ? (userID ? data[userID] : data.general) : "not authorized" };
 }
 
-function verifyToken(token) {
-  try {
-    jwt.verify(token, process.env.TOKEN_SECRET);
 
-    return true;
-  } catch (error) {
-    return false;
-  }
-}
 
 async function login(req) {
   const { pwd } = req.body;
