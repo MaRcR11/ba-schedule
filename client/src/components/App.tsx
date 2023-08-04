@@ -25,11 +25,12 @@ function App() {
               new URLSearchParams({
                 pwd: storePwdRef,
                 userID: loginMode ? "" : `${storeUserIDRef}`,
-              }),
+              })
           )
           .then((res) => {
             setScheduleData(JSON.parse(res.data));
             setFetched(true);
+            localStorage.setItem("privacyPolicyAccepted", "true");
           })
           .catch(() => {
             setApiAvailable(true);
