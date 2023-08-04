@@ -13,6 +13,10 @@ const userModel = new mongoose.Schema({
     required: true,
     type: Number,
   },
+  token: {
+    required: true,
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("user", userModel, "users");
