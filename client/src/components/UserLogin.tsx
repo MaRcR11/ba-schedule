@@ -116,7 +116,7 @@ function UserLogin(props: UserLoginProps) {
                   }}
                 />
                 I agree to the{" "}
-                <a className="policyLink" href="https://ba-schedule.de/privacy-policy">
+                <a className="policyLink" href="https://ba-schedule.de/privacy-policy" target="_blank">
                   privacy policy
                 </a>
               </div>
