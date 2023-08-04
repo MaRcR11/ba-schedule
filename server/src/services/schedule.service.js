@@ -11,7 +11,8 @@ const {
   checkPwd,
   getEndTime,
   crawlScheduleData,
-  updateUserToken, verifyToken,
+  updateUserToken,
+  verifyToken,
 } = require("../helpers");
 const Model = require("../models/general.model");
 const userModel = require("../models/user.model");
@@ -28,17 +29,19 @@ async function getData(req) {
   if (!data) return { status: 502, json: "no data" };
   const { pwd, userID } = req.query;
   const isUserRegistered = await checkUserRegistered(userID);
-  const isPwdValid = await checkPwd(pwd, { checkUserHash: isUserRegistered ? isUserRegistered.get("hash").trim() : false });
-  return { status: userID ? (isPwdValid ? 200 : 401) : (isPwdValid ? 200 : 401), json: isPwdValid ? (userID ? data[userID] : data.general) : "not authorized" };
+  const isPwdValid = await checkPwd(pwd, {
+    checkUserHash: isUserRegistered ? isUserRegistered.get("hash").trim() : false,
+  });
+  return {
+    status: userID ? (isPwdValid ? 200 : 401) : isPwdValid ? 200 : 401,
+    json: isPwdValid ? (userID ? data[userID] : data.general) : "not authorized",
+  };
 }
-
-
 
 async function login(req) {
   const { pwd } = req.body;
   const token = req.body?.token;
   const isValid = verifyToken(token);
-
 
   if (token && !(await userModel.findOne({ token }))) {
     return { status: 200, json: { isValid: isValid, key: (await Model.findOne({}, { pwd: 1 })).pwd } };
@@ -63,7 +66,6 @@ async function userLogin(req) {
   const isValid = verifyToken(token);
   const hash = (await userModel.findOne({ token }))?.hash;
   const id = (await userModel.findOne({ token }))?.userID;
-
 
   if (token) {
     return { status: 200, json: { isValid: isValid, key: hash, userID: id } };

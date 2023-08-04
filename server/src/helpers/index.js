@@ -8,5 +8,5 @@ module.exports = {
   getEndTime: require("../helpers/endTime.helper"),
   crawlScheduleData: require("../helpers/crawlScheduleData.helper"),
   updateUserToken: require("../helpers/updateUserToken.helper"),
-  verifyToken: require("../helpers/verifyToken.helper")
+  verifyToken: require("../helpers/verifyToken.helper"),
 };
