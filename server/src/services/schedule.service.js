@@ -10,7 +10,8 @@ const {
   checkUserExistence,
   checkPwd,
   getEndTime,
-  crawlScheduleData, updateUserToken,
+  crawlScheduleData,
+  updateUserToken,
 } = require("../helpers");
 const Model = require("../models/general.model");
 const userModel = require("../models/user.model");
@@ -50,13 +51,12 @@ function verifyToken(token) {
   }
 }
 
-
 async function login(req) {
   const { pwd } = req.body;
   const token = req.body?.token;
   const isValid = verifyToken(token);
 
-  console.log(await userModel.findOne({ token }), token)
+  console.log(await userModel.findOne({ token }), token);
   if (token && !(await userModel.findOne({ token }))) {
     return { status: 200, json: { isValid: isValid, key: (await Model.findOne({}, { pwd: 1 })).pwd } };
   }
@@ -73,27 +73,22 @@ async function login(req) {
   return { status: 200, json: "login with token failed" };
 }
 
-
 async function userLogin(req) {
   const { userID, hash: userHash } = req.body;
   const token = req.body?.token;
 
   const isValid = verifyToken(token);
-  const hash = (await userModel.findOne({ token }))?.hash
-  const id  = (await userModel.findOne({ token }))?.userID
+  const hash = (await userModel.findOne({ token }))?.hash;
+  const id = (await userModel.findOne({ token }))?.userID;
 
-  console.log(hash, id)
+  console.log(hash, id);
   if (token) {
-    return { status: 200, json: { isValid: isValid, key:hash , userID:id } };
+    return { status: 200, json: { isValid: isValid, key: hash, userID: id } };
   }
-
-
 
   if (!userHash && !token) {
     return { status: 200, json: "login with token failed" };
   }
-
-
 
   const isUserExisting = await checkUserExistence(userID, userHash);
 
@@ -116,10 +111,10 @@ async function userLogin(req) {
 
     try {
       await updateUserLastLogin(userID);
-      await updateUserToken(userID, token)
+      await updateUserToken(userID, token);
       return {
         status: 200,
-        json: { msg: "login success", token: token }
+        json: { msg: "login success", token: token },
       };
     } catch (error) {
       console.error(error);
