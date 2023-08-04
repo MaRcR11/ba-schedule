@@ -6,16 +6,21 @@ import { BarLoader } from "react-spinners";
 import { calenderSetDarkTheme, calenderSetLightTheme } from "../helpers";
 import { UserLoginProps } from "../global/types";
 import { useCookies } from "react-cookie";
-import PrivacyPolicyFooter from "./PrivacyPolicyFooter";
 vhCheck("vh-check");
 
 function UserLogin(props: UserLoginProps) {
   const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
   const [isPwdDisabled, setPwdDisabled] = useState(false);
   const [isModeLoaded, setIsModeLoaded] = useState(false);
+  const [policyAccepted, setPolicyAccepted] = useState<boolean>(Boolean(localStorage.getItem("privacyPolicyAccepted")));
   const userIDRef = useRef<HTMLInputElement>(null);
   const [cookies, setCookie] = useCookies(["token"]);
   const onSubmitPwd = () => {
+    if (!policyAccepted) {
+      props.setLoginErrorMsg("You must agree to the privacy policy!");
+      invalidPwdMsgRef.current!.style.display = "block";
+      return;
+    }
     if (!props.pwdRef.current!.value || !userIDRef.current!.value) return;
     const hash = props.pwdRef.current!.value;
     const userID = userIDRef.current!.value;
@@ -102,6 +107,19 @@ function UserLogin(props: UserLoginProps) {
                   {props.loginErrorMsg}
                 </p>
               </div>
+              <div className="column policy">
+                <input
+                  type="checkbox"
+                  defaultChecked={policyAccepted}
+                  onChange={() => {
+                    setPolicyAccepted(!policyAccepted);
+                  }}
+                />
+                I agree to the{" "}
+                <a className="policyLink" href="https://ba-schedule.de/privacy-policy">
+                  privacy policy
+                </a>
+              </div>
               <div className="column">
                 <button
                   onClick={onSubmitPwd}
@@ -135,7 +153,6 @@ function UserLogin(props: UserLoginProps) {
               </div>
             </div>
           </div>
-          <PrivacyPolicyFooter />
         </div>
       ) : null}
     </>

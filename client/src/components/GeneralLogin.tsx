@@ -7,15 +7,20 @@ import "../styles/Login.css";
 import { BarLoader } from "react-spinners";
 import { calenderSetDarkTheme, calenderSetLightTheme } from "../helpers";
 import { GeneralLoginProps } from "../global/types";
-import PrivacyPolicyFooter from "./PrivacyPolicyFooter";
 
 function GeneralLogin(props: GeneralLoginProps) {
   const invalidPwdMsgRef = useRef<HTMLInputElement>(null);
   const [isPwdDisabled, setPwdDisabled] = useState<boolean>(false);
   const [isModeLoaded, setIsModeLoaded] = useState<boolean>(false);
+  const [policyAccepted, setPolicyAccepted] = useState<boolean>(Boolean(localStorage.getItem("privacyPolicyAccepted")));
   const [cookies, setCookie] = useCookies(["token"]);
 
   const onSubmitPwd = () => {
+    if (!policyAccepted) {
+      props.setLoginErrorMsg("You must agree to the privacy policy!");
+      invalidPwdMsgRef.current!.style.display = "block";
+      return;
+    }
     if (!props.pwdRef.current!.value) return;
     const pwd = props.pwdRef.current!.value;
     setPwdDisabled(true);
@@ -90,6 +95,19 @@ function GeneralLogin(props: GeneralLoginProps) {
                   {props.loginErrorMsg}
                 </p>
               </div>
+              <div className="column policy">
+                <input
+                  type="checkbox"
+                  defaultChecked={policyAccepted}
+                  onChange={() => {
+                    setPolicyAccepted(!policyAccepted);
+                  }}
+                />
+                I agree to the{" "}
+                <a className="policyLink" href="https://ba-schedule.de/privacy-policy">
+                  privacy policy
+                </a>
+              </div>
               <div className="column">
                 <button
                   onClick={onSubmitPwd}
@@ -119,7 +137,6 @@ function GeneralLogin(props: GeneralLoginProps) {
               </div>
             </div>
           </div>
-          <PrivacyPolicyFooter />
         </div>
       ) : null}
     </>
