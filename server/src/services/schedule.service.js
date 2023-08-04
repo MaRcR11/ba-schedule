@@ -56,7 +56,6 @@ async function login(req) {
   const token = req.body?.token;
   const isValid = verifyToken(token);
 
-  console.log(await userModel.findOne({ token }), token);
   if (token && !(await userModel.findOne({ token }))) {
     return { status: 200, json: { isValid: isValid, key: (await Model.findOne({}, { pwd: 1 })).pwd } };
   }
@@ -81,7 +80,6 @@ async function userLogin(req) {
   const hash = (await userModel.findOne({ token }))?.hash;
   const id = (await userModel.findOne({ token }))?.userID;
 
-  console.log(hash, id);
   if (token) {
     return { status: 200, json: { isValid: isValid, key: hash, userID: id } };
   }
