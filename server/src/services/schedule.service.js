@@ -64,8 +64,8 @@ async function userLogin(req) {
   const token = req.body?.token;
 
   const isValid = verifyToken(token);
-  
-  const { hash, userID: id } = await userModel.findOne({ token }) || {};
+
+  const { hash, userID: id } = (await userModel.findOne({ token })) || {};
 
   if (token) {
     return { status: 200, json: { isValid: isValid, key: hash, userID: id } };
