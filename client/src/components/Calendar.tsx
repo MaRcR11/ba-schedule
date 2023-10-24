@@ -60,7 +60,7 @@ function Calendar(this: any, props: Props) {
     });
   };
 
-  const earliestStartTime = Math.min(...formattedScheduleData.map((item) => new Date(item.StartTime).getHours()));
+  //const earliestStartTime = Math.min(...formattedScheduleData.map((item) => new Date(item.StartTime).getHours()));
 
   return (
     <>
@@ -69,15 +69,15 @@ function Calendar(this: any, props: Props) {
         currentView="WorkWeek"
         workHours={{
           highlight: true,
-          start: "06:00",
+          start: "07:00",
           end: "21:00",
         }}
         eventRendered={onEventRendered.bind(this)}
         dataBound={configureFontColor.bind(this)}
       >
         <ViewsDirective>
-          <ViewDirective option="Day" startHour="08:00" endHour="21:00" />
-          <ViewDirective option="WorkWeek" startHour={`${earliestStartTime}:00`} endHour="21:00" />
+          <ViewDirective option="Day" startHour="07:00" endHour="21:00" />
+          <ViewDirective option="WorkWeek" startHour={`7:00`} endHour="21:00" />
           <ViewDirective option="Month" showWeekend={false} />
           <ViewDirective option="Agenda" />
         </ViewsDirective>
