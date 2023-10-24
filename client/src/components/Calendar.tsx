@@ -29,7 +29,8 @@ function Calendar(this: any, props: Props) {
 
   const onEventRendered = (args: any) => {
     const scheduleObj: any = (document.querySelector(".e-schedule") as any).ej2_instances[0];
-    setAppointmentColors(args, scheduleObj);
+
+    formattedScheduleData.find(item => item.Subject === " Lineare Algebra (5CS-MA1LA-10)") ? setAppointmentColors(args, scheduleObj) : null //This is only because there is currently no understanding of how to identify individual courses and therefore as long as the function setAppointmentColors is only possible for computer science at BA Leipzig
     if (scheduleObj.currentView == "Day") args.element.classList.add("daySelected");
   };
 
