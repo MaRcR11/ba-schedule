@@ -3,7 +3,6 @@ const crawlScheduleData = require("./crawlScheduleData.helper");
 
 const createNewCronJobHelper = async (userID, userHash, data) => {
   data[userID] = await crawlScheduleData(userID, userHash);
-
   cron.schedule("*/5 * * * *", async () => {
     data[userID] = await crawlScheduleData(userID, userHash);
   });
