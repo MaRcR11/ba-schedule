@@ -60,7 +60,7 @@ function Calendar(this: any, props: Props) {
     });
   };
 
-  const earliestStartTime = Math.min(...formattedScheduleData.map(item => new Date(item.StartTime).getHours()));
+  const earliestStartTime = Math.min(...formattedScheduleData.map((item) => new Date(item.StartTime).getHours()));
 
   return (
     <>
