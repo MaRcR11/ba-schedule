@@ -29,7 +29,10 @@ function Calendar(this: any, props: Props) {
 
   const onEventRendered = (args: any) => {
     const scheduleObj: any = (document.querySelector(".e-schedule") as any).ej2_instances[0];
-    setAppointmentColors(args, scheduleObj);
+
+    formattedScheduleData.find((item) => item.Subject === " Lineare Algebra (5CS-MA1LA-10)")
+      ? setAppointmentColors(args, scheduleObj)
+      : null; //This is only because there is currently no understanding of how to identify individual courses and therefore as long as the function setAppointmentColors is only possible for computer science at BA Leipzig
     if (scheduleObj.currentView == "Day") args.element.classList.add("daySelected");
   };
 
@@ -57,6 +60,8 @@ function Calendar(this: any, props: Props) {
     });
   };
 
+  //const earliestStartTime = Math.min(...formattedScheduleData.map((item) => new Date(item.StartTime).getHours()));
+
   return (
     <>
       <ScheduleComponent
@@ -64,15 +69,15 @@ function Calendar(this: any, props: Props) {
         currentView="WorkWeek"
         workHours={{
           highlight: true,
-          start: "08:00",
+          start: "07:00",
           end: "21:00",
         }}
         eventRendered={onEventRendered.bind(this)}
         dataBound={configureFontColor.bind(this)}
       >
         <ViewsDirective>
-          <ViewDirective option="Day" startHour="08:00" endHour="21:00" />
-          <ViewDirective option="WorkWeek" startHour="08:00" endHour="21:00" />
+          <ViewDirective option="Day" startHour="07:00" endHour="21:00" />
+          <ViewDirective option="WorkWeek" startHour={`7:00`} endHour="21:00" />
           <ViewDirective option="Month" showWeekend={false} />
           <ViewDirective option="Agenda" />
         </ViewsDirective>

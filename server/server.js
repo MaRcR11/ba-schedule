@@ -24,7 +24,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/timer", (req, res) => {
-  res.sendFile(path.join(__dirname, "/../client/timer.html"));
+  res.sendFile(path.join(__dirname, "/../client/pages/timer.html"));
+});
+
+app.get("/privacy-policy", (req, res) => {
+  res.sendFile(path.join(__dirname, "/../client/pages/info.html"));
 });
 
 app.listen(PORT, () => {

@@ -11,7 +11,11 @@ const {
   checkPwd,
   getEndTime,
   crawlScheduleData,
+  updateUserToken,
+  verifyToken,
 } = require("../helpers");
+const Model = require("../models/general.model");
+const userModel = require("../models/user.model");
 
 let data = {};
 const isJobRunning = {};
@@ -25,40 +29,25 @@ async function getData(req) {
   if (!data) return { status: 502, json: "no data" };
   const { pwd, userID } = req.query;
   const isUserRegistered = await checkUserRegistered(userID);
-  if (!userID) {
-    const isPwdValid = await checkPwd(pwd, { checkUserHash: false });
-    return { status: isPwdValid ? 200 : 401, json: isPwdValid ? data.general : "not authorized" };
-  } else if (isUserRegistered) {
-    const isPwdValid = await checkPwd(pwd, {
-      checkUserHash: isUserRegistered.get("hash").trim(),
-    });
-    return { status: isPwdValid ? 200 : 401, json: isPwdValid ? data[userID] : "not authorized" };
-  } else {
-    return { status: 401, json: "not authorized" };
-  }
+  const isPwdValid = await checkPwd(pwd, {
+    checkUserHash: isUserRegistered ? isUserRegistered.get("hash").trim() : false,
+  });
+  return {
+    status: userID ? (isPwdValid ? 200 : 401) : isPwdValid ? 200 : 401,
+    json: isPwdValid ? (userID ? data[userID] : data.general) : "not authorized",
+  };
 }
 
-function verifyToken(token) {
-  try {
-    jwt.verify(token, process.env.TOKEN_SECRET);
-
-    return true;
-  } catch (error) {
-    return false;
-  }
-}
-
-let storePWD;
 async function login(req) {
   const { pwd } = req.body;
   const token = req.body?.token;
   const isValid = verifyToken(token);
 
-  if (token) {
-    return { status: 200, json: { ms: "login success", isValid: isValid, key: storePWD } };
+  if (token && !(await userModel.findOne({ token }))) {
+    return { status: 200, json: { isValid: isValid, key: (await Model.findOne({}, { pwd: 1 })).pwd } };
   }
   const isPwdValid = await checkPwd(pwd ? pwd : "", { checkUserHash: false });
-  storePWD = pwd;
+
   if (pwd) {
     return {
       status: isPwdValid ? 200 : 401,
@@ -70,18 +59,17 @@ async function login(req) {
   return { status: 200, json: "login with token failed" };
 }
 
-let storeUserHash;
-let storeUserID;
 async function userLogin(req) {
   const { userID, hash: userHash } = req.body;
   const token = req.body?.token;
 
   const isValid = verifyToken(token);
+
+  const { hash, userID: id } = (await userModel.findOne({ token })) || {};
+
   if (token) {
-    return { status: 200, json: { msg: "login success", isValid: isValid, key: storeUserHash, userID: storeUserID } };
+    return { status: 200, json: { isValid: isValid, key: hash, userID: id } };
   }
-  storeUserHash = userHash;
-  storeUserID = userID;
 
   if (!userHash && !token) {
     return { status: 200, json: "login with token failed" };
@@ -104,27 +92,28 @@ async function userLogin(req) {
     });
 
     if (!isHashValid) return { status: 401, json: "login failed" };
+    const token = jwt.sign({ userHash }, process.env.TOKEN_SECRET, { expiresIn: "6d" });
 
     try {
       await updateUserLastLogin(userID);
+      await updateUserToken(userID, token);
       return {
         status: 200,
-        json: { msg: "login success", token: jwt.sign({ userHash }, process.env.TOKEN_SECRET, { expiresIn: "6d" }) },
+        json: { msg: "login success", token: token },
       };
     } catch (error) {
       console.error(error);
       return { status: 500, json: "login failed" };
     }
   } else {
-    const hash = await bcrypt.hashSync(userHash);
-
     try {
-      await createNewUser(userID, hash);
+      const token = jwt.sign({ userHash }, process.env.TOKEN_SECRET, { expiresIn: "6d" });
+      await createNewUser(userID, userHash, token);
       return {
         status: 200,
         json: {
           msg: "registration success",
-          token: jwt.sign({ userHash }, process.env.TOKEN_SECRET, { expiresIn: "6d" }),
+          token: token,
         },
       };
     } catch (error) {

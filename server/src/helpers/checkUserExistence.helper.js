@@ -7,14 +7,14 @@ const path = require("path");
 const checkUserExistence = (userID, userHash) => {
   const OPTIONS = {
     host: "selfservice.campus-dual.de",
-    path: `/dash/getcp?user=${userID}&hash=${userHash}`,
+    path: `/dash/getcp?user=${encodeURIComponent(userID)}&hash=${encodeURIComponent(userHash)}`,
     ca: fs.readFileSync(path.join(__dirname, "..", "crawler", "campusdual-cert-chain.pem")),
     json: true,
   };
 
-  return new Promise((resolve) => {
-    https
-      .get(OPTIONS, (res) => {
+  try {
+    return new Promise((resolve) => {
+      https.get(OPTIONS, (res) => {
         let data = "";
         res.on("data", (chunk) => {
           data += chunk;
@@ -22,11 +22,11 @@ const checkUserExistence = (userID, userHash) => {
         res.on("end", () => {
           resolve(!isNaN(data));
         });
-      })
-      .on("error", (error) => {
-        console.error(error);
       });
-  });
+    });
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 module.exports = checkUserExistence;

@@ -30,6 +30,7 @@ function App() {
           .then((res) => {
             setScheduleData(JSON.parse(res.data));
             setFetched(true);
+            localStorage.setItem("privacyPolicyAccepted", "true");
           })
           .catch(() => {
             setApiAvailable(true);

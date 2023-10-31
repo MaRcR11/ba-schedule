@@ -1,8 +1,8 @@
 {
-  "homepage": "https://marcr11.github.io/cs21-2-schedule",
-  "name": "cs21-2-schedule",
+  "homepage": "https://marcr11.github.io/ba-schedule",
+  "name": "ba-schedule",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.3.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host --port 3000",
