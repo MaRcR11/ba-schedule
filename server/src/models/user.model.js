@@ -9,7 +9,7 @@ const userModel = new mongoose.Schema({
     required: true,
     type: String,
   },
-  ts: {
+  lastLogin: {
     required: true,
     type: Number,
   },
