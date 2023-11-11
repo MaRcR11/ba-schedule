@@ -5,9 +5,10 @@ const scheduleDataFormat = (scheduleData: ScheduleData[]): FormattedScheduleData
     EndTime: new Date(end * 1000),
     StartTime: new Date(start * 1000),
     Subject: description === title ? description.replace("VS", "") : `${description.replace("VS", "")} (${title})`,
-    Location: remarks && !remarks.includes("Gruppe") && !remarks.includes("Prüfung")
-      ? `${remarks} (${instructor})`
-      : `Berufsakademie ${remarks ? `(${remarks})` : ""} (${sroom ? sroom : "Raum unbekannt"}) (${instructor})`,
+    Location:
+      remarks && !remarks.includes("Gruppe") && !remarks.includes("Prüfung")
+        ? `${remarks} (${instructor})`
+        : `Berufsakademie ${remarks ? `(${remarks})` : ""} (${sroom ? sroom : "Raum unbekannt"}) (${instructor})`,
   }));
 
 export default scheduleDataFormat;
