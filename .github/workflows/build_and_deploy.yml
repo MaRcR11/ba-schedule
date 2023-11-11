@@ -12,7 +12,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
@@ -36,7 +35,7 @@ jobs:
           cd ./client
           npm run build
       
-      - name: create build branch and commit    
+      - name: Create build branch and commit    
         uses: EndBug/add-and-commit@v9 
         with:
           new_branch: build
@@ -51,3 +50,6 @@ jobs:
             cd ../var/www/html/ba-schedule.de
             bash setup.sh
 
+      - name: Delete build branch
+        run: |
+          git push origin --delete build
