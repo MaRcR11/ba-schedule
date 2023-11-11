@@ -1,7 +1,7 @@
 const https = require("https");
 const fs = require("fs");
 
-const crawler = async (userID, userHash) => {
+const campusDualFetcher = async (userID, userHash) => {
   const OPTIONS = {
     host: "selfservice.campus-dual.de",
     path: `/room/json?userid=${userID ? userID : 5002080}&hash=${
@@ -31,4 +31,4 @@ const crawler = async (userID, userHash) => {
   }
 };
 
-module.exports = crawler;
+module.exports = campusDualFetcher;

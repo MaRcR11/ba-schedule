@@ -1,6 +1,5 @@
 const cron = require("node-cron");
 const { connectDB } = require("./db.service");
-const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const {
   createNewCronJob,
@@ -10,7 +9,7 @@ const {
   checkUserExistence,
   checkPwd,
   getEndTime,
-  crawlScheduleData,
+  getScheduleData,
   updateUserToken,
   verifyToken,
 } = require("../helpers");
@@ -22,7 +21,7 @@ const isJobRunning = {};
 
 (async () => {
   await connectDB();
-  data = { general: await crawlScheduleData(null) };
+  data = { general: await getScheduleData(null) };
 })();
 
 async function getData(req) {
@@ -129,7 +128,7 @@ async function getEndTimeOfCurrentDay() {
 }
 
 cron.schedule("*/5 * * * *", async () => {
-  data.general = await crawlScheduleData(null);
+  data.general = await getScheduleData(null);
 });
 
 module.exports = {

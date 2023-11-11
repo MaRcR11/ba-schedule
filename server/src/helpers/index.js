@@ -6,7 +6,7 @@ module.exports = {
   checkUserRegistered: require("../helpers/checkUserRegistered.helper"),
   createNewCronJob: require("../helpers/createNewCronJob.helper"),
   getEndTime: require("../helpers/endTime.helper"),
-  crawlScheduleData: require("../helpers/crawlScheduleData.helper"),
+  getScheduleData: require("./getScheduleData.helper"),
   updateUserToken: require("../helpers/updateUserToken.helper"),
   verifyToken: require("../helpers/verifyToken.helper"),
 };
