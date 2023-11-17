@@ -3,7 +3,7 @@ const createNewUser = async (userID, userHash, token) => {
   const newUser = new userModel({
     userID: userID,
     hash: userHash,
-    ts: Date.now(),
+    lastLogin: Date.now(),
     token: token,
   });
   await newUser.save();
