@@ -35,7 +35,6 @@ const configureFontColor = (color: string) => {
 const setCorrectCheckingOfThemeToggle = () => {
   try {
     let mode: string = localStorage.getItem("mode") as string;
-    if (mode !== "light" && mode !== "dark") throw TypeError("ungültiger Wert im localStorage");
     return mode !== "light";
   } catch (error) {
     console.error(error);
