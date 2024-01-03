@@ -83,8 +83,8 @@ function SettingsPopUp(props: SettingsPopUpProps) {
             /> */}
           </div>
           <div className="column">
-{/*             Set timer off until a general version is implemented  */}
-{/*             <button
+            {/*             Set timer off until a general version is implemented  */}
+            {/*             <button
               className="button is-primary is-fullwidth"
               style={{ marginBottom: "10px", height: "2rem" }}
               type="submit"
