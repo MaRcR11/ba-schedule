@@ -33,7 +33,6 @@ function SettingsPopUp(props: SettingsPopUpProps) {
       setTheme("dark");
     }
   };
-
   useEffect(() => {
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
@@ -84,7 +83,8 @@ function SettingsPopUp(props: SettingsPopUpProps) {
             /> */}
           </div>
           <div className="column">
-            <button
+{/*             Set timer off until a general version is implemented  */}
+{/*             <button
               className="button is-primary is-fullwidth"
               style={{ marginBottom: "10px", height: "2rem" }}
               type="submit"
@@ -93,7 +93,7 @@ function SettingsPopUp(props: SettingsPopUpProps) {
               }}
             >
               Open Timer
-            </button>
+            </button> */}
             <button className="button is-danger is-fullwidth" type="submit" onClick={handleLogout}>
               Logout
             </button>
