@@ -166,6 +166,10 @@
   {
     "name": "Integrierte Informationssysteme",
     "color":  "#9C9A40"
+  },
+  {
+    "name": "Zentrales Stundenplanungsmodul",
+    "color":  "#2E4A62"
   }
   
 ]
