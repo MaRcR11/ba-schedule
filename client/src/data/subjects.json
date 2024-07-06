@@ -162,6 +162,10 @@
   {
     "name": "IT-Prozesse des Unternehmens",
     "color":  "#EDD59E"
+  },
+  {
+    "name": "Integrierte Informationssysteme",
+    "color":  "#9C9A40"
   }
-
+  
 ]
